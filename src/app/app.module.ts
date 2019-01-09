@@ -8,6 +8,8 @@ import { CalendarCellDirective } from './directives/calendar-cell';
 import { DefaultCellComponent } from './components/default-cell';
 import { CalendarMonthViewComponent } from './calendar-month-view.component';
 import { DayHeaderCellComponent } from './components/day-cell';
+import { CalendarHeaderComponent } from './components/header.component';
+import { CalendarHeaderButtonsComponent } from './components/header-buttons.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { DayHeaderCellComponent } from './components/day-cell';
     DefaultCellComponent,
     CalendarMonthViewComponent,
     DayHeaderCellComponent,
+    CalendarHeaderComponent,
+    CalendarHeaderButtonsComponent
   ],
   imports: [
     BrowserModule

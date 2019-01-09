@@ -10,7 +10,8 @@ import { CalendarSelection } from './lib/calendar-view/selection/calendar-select
 import { SingleSelectionStrategy } from './lib/calendar-view/selection/strategy/simple-selection.strategy';
 import { RangeSelectionStrategy } from './lib/calendar-view/selection/strategy/range-selection.strategy';
 import { PickSelectionStrategy } from './lib/calendar-view/selection/strategy/pick-selection.strategy';
-import { IMonthViewConfig } from './lib/calendar/config/month-view-config.interface';
+import { CellStyleClasses } from './lib/calendar-view/cell-style-classes.class';
+import { CalendarConfig } from './lib/calendar/config/calendar-config.class';
 
 
 @Component({
@@ -24,18 +25,29 @@ import { IMonthViewConfig } from './lib/calendar/config/month-view-config.interf
         <button (click)="pickSelection()">pick selection</button>
     </div>
 
+    <calendar-header 
+        [linkedMonths]="config.header.linkedMonths" 
+        [monthSelections]="[ selection.calendarMonthView.from, selection.calendarMonthView.to ]"
+        [showTwoMonths]="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed">
+    </calendar-header>
+
     <div class="calendar">
+
         <calendar-month-view 
             [calendar]="calendar"
             [selection]="selection"
+            [config]="config"
             [monthSelection]="selection.calendarMonthView.from"
+            [cellStyleClasses]="cellStyleClasses"
             [getTemplate]="getTemplate.bind(this)">
         </calendar-month-view>
 
         <calendar-month-view 
-            *ngIf="selection.calendarMonthView.needTwoMonthView"
+            *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
             [calendar]="calendar"
+            [config]="config"
             [selection]="selection"
+            [cellStyleClasses]="cellStyleClasses"
             [monthSelection]="selection.calendarMonthView.to"
             [getTemplate]="getTemplate.bind(this)">
         </calendar-month-view>
@@ -64,7 +76,8 @@ export class CalendarComponent implements OnChanges {
     @ContentChild(CalendarCellDirective)
     calendarCell: CalendarCellDirective    
 
-    @Input() config:IMonthViewConfig// = new MonthViewConfig()
+    @Input() config:CalendarConfig// = new CalendarConfig()
+    @Input() cellStyleClasses:CellStyleClasses = new CellStyleClasses()
 
     calendar:Calendar
 
@@ -85,7 +98,6 @@ export class CalendarComponent implements OnChanges {
                 this.dates.forEach(day => {
                     this.calendar.setDay(day.date, new CellData(day.date, day.payload, false))
                 })
-                console.log('change!')
             }
         }
         

@@ -39,18 +39,19 @@ export class Month implements IMonth {
     getCalendarView():IDay[][] {
         let days = this.days.slice()
         const firstDayOfMonth = this.days[0].dayOfWeek
+        const monthConfig = this.calendar.config.month
         
-        if(firstDayOfMonth !== this.calendar.config.firstDay){
+        if(firstDayOfMonth !== monthConfig.firstDay){
             const previousMonth = this.year.previousMonth(this)
             let previousDays = previousMonth.days.slice(
-                previousMonth.days.length - (((firstDayOfMonth - this.calendar.config.firstDay) + 7) % 7), 
+                previousMonth.days.length - (((firstDayOfMonth - monthConfig.firstDay) + 7) % 7), 
                 previousMonth.days.length)
 
 
                 if(this.ofYear === 0){
                     console.log({
                         'firstDayOfMonth': firstDayOfMonth,
-                        'firstDay' : this.calendar.config.firstDay,
+                        'firstDay' : monthConfig.firstDay,
                         'previousDays' : previousDays,
                     })
                 }
@@ -72,11 +73,11 @@ export class Month implements IMonth {
 
         return days.reduce((acc:IDay[][], curr:IDay, i:number) => {
 
-            if(curr.dayOfWeek === this.calendar.config.firstDay || i === 0){
+            if(curr.dayOfWeek === monthConfig.firstDay || i === 0){
                 acc.push([])
             }
 
-            if((!this.calendar.config.hideWeekends || !curr.isWeekend) && acc[acc.length-1]){
+            if((!monthConfig.hideWeekends || !curr.isWeekend) && acc[acc.length-1]){
                 acc[acc.length-1].push(curr)
             }              
 

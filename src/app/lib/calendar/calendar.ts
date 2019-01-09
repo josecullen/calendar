@@ -4,8 +4,7 @@ import { ICalendarFactory } from './factory/factory.interface';
 import { CalendarDefaultFactory } from './factory/default-factory';
 import { IMonth } from './month/month.interface';
 import { IDay } from './day/day.interface';
-import { IMonthViewConfig } from './config/month-view-config.interface';
-import { MonthViewConfig } from './config/month-view-config.class';
+import { CalendarConfig } from './config/calendar-config.class';
 
 export class Calendar {
 
@@ -13,7 +12,7 @@ export class Calendar {
 
     constructor(
         public readonly factory:ICalendarFactory = new CalendarDefaultFactory(),
-        public config:IMonthViewConfig = new MonthViewConfig()
+        public config:CalendarConfig = new CalendarConfig()
     ){}
 
     recalculate(){

@@ -39,8 +39,7 @@ import { CellViewData } from './components/default-cell';
 
     /deep/ .day {
         border: 1px solid #ccc;
-        min-width: 50px !important;
-        min-height: 75px !important;
+        
     }
     
 

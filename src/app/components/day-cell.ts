@@ -3,16 +3,17 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZon
     selector: 'day-header-cell',
     template: `
     <ng-container>
-        {{ daysInWeek[day] }} {{ height }} {{ width}}
+        {{ daysInWeek[day] | slice:0:3 }}
     </ng-container>
 
     `,
     styles: [`
     :host {
-        flex: 1 1 auto;
+        flex: 1;
         position: relative;
         text-align : center;
-    }    
+        padding: 8px 0;
+    }
 
     `]
 })

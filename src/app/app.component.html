@@ -1,26 +1,37 @@
-<calendar #calendar [dates]="dates" [config]="config" (selectionChange)="onSelectionChange($event)">
-  
+<calendar #calendar [dates]="dates" [config]="config" [cellStyleClasses]="cellStyleClasses" (selectionChange)="onSelectionChange($event)">
+
   <ng-container *calendarCell="let cellData;">
-      
-      <calendar-date-item 
-        [cellData]="cellData">
-      </calendar-date-item>
+
+    <calendar-date-item [cellData]="cellData">
+    </calendar-date-item>
 
   </ng-container>
-    
-</calendar>
 
-calendar {{ calendar.calendar.config | json}}
+</calendar>
 
 <div>
   <label>First Day </label>
-  <input type="number" placeholder="first day" [value]="config.firstDay" (change)="onFirstDayChange(firstDay.value)" #firstDay>
-  <hr/>
+  <input type="number" placeholder="first day" [value]="config.month.firstDay" (change)="onFirstDayChange(firstDay.value)"
+    #firstDay>
+  <hr />
   <label>Hide Weekends</label>
-  <input type="checkbox" [checked]="config.hideWeekends" (change)="config.hideWeekends = hideWeekends.checked" #hideWeekends>
-  <hr/>
+  <input type="checkbox" [checked]="config.month.hideWeekends" (change)="config.month.hideWeekends = hideWeekends.checked"
+    #hideWeekends>
+  <hr />
   <label>Hide Days Outside Month</label>
-  <input type="checkbox" [checked]="config.hideDaysOutsideMonth" (change)="config.hideDaysOutsideMonth = hideDaysOutsideMonth.checked" #hideDaysOutsideMonth>
+  <input type="checkbox" [checked]="config.month.hideDaysOutsideMonth" (change)="config.month.hideDaysOutsideMonth = hideDaysOutsideMonth.checked"
+    #hideDaysOutsideMonth>
+
+  <hr />
+  <label>Show two calendar if need</label>
+  <input type="checkbox" [checked]="config.month.showTwoCalendarIfNeed" (change)="config.month.showTwoCalendarIfNeed = showTwoCalendarIfNeed.checked"
+    #showTwoCalendarIfNeed>
+
+  <hr />
+  <label>Linked Months</label>
+  <input type="checkbox" [checked]="config.header.linkedMonths" (change)="config.header.linkedMonths = linkedMonths.checked"
+    #linkedMonths>
+
 </div>
 
 <div class="selection-form" *ngIf="selection">

@@ -2,40 +2,46 @@ import { Component, Input } from "@angular/core";
 import { ICalendarSelection } from './lib/calendar-view/selection/calendar-selection.interface';
 import { CalendarMonthView } from './lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { Calendar } from './lib/calendar/calendar';
+import { CellStyleClasses } from './lib/calendar-view/cell-style-classes.class';
+import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 
+// <div class="month-selection">
+//         <div class="month-selection-buttons">
+//             <span (click)="monthSelection.minusYear()">
+//                 <i class="arrow left"></i>
+//                 <i class="arrow left"></i>
+//             </span>
+
+//             <span (click)="monthSelection.minusMonth()">
+//                 <i class="arrow left"></i>
+//             </span>
+//         </div>
+
+//         {{ monthSelection.label }}
+
+//         <div class="month-selection-buttons">
+//             <span (click)="monthSelection.addMonth()">
+//                 <i class="arrow right"></i>
+//             </span>
+
+//             <span (click)="monthSelection.addYear()">
+//                 <i class="arrow right"></i>
+//                 <i class="arrow right"></i>
+//             </span>
+//         </div>
+//     </div>
+    
 @Component({
     selector: 'calendar-month-view',
     template: `
     
 <div class="container">
-    <div class="month-selection">
-        <div class="month-selection-buttons">
-            <span (click)="monthSelection.minusYear()">
-                <i class="arrow left"></i>
-                <i class="arrow left"></i>
-            </span>
-
-            <span (click)="monthSelection.minusMonth()">
-                <i class="arrow left"></i>
-            </span>
-        </div>
-
-        {{ monthSelection.label }}
-
-        <div class="month-selection-buttons">
-            <span (click)="monthSelection.addMonth()">
-                <i class="arrow right"></i>
-            </span>
-
-            <span (click)="monthSelection.addYear()">
-                <i class="arrow right"></i>
-                <i class="arrow right"></i>
-            </span>
-        </div>
-    </div>
-    
-    
-
+<!--
+    <calendar-header 
+        *ngIf="!config?.header.linkedMonths" 
+        [monthSelections]="[monthSelection]">
+    </calendar-header>
+-->
     <ng-container *ngIf="calendar.getYear(monthSelection.year).months[monthSelection.month].getCalendarView() as calendarView">
         <div class="row">
             <day-header-cell
@@ -49,13 +55,14 @@ import { Calendar } from './lib/calendar/calendar';
             <ng-container *ngFor="let day of week">
                 
                 <ng-container 
-                    *ngTemplateOutlet="getTemplate(); context: { $implicit: { date: day, selection: selection, monthSelection: monthSelection, hideDaysOutsideMonth: calendar.config.hideDaysOutsideMonth }}">
+                    *ngTemplateOutlet="getTemplate(); context: { $implicit: { date: day, selection: selection, monthSelection: monthSelection, hideDaysOutsideMonth: calendar.config.month.hideDaysOutsideMonth, cellStyleClasses: cellStyleClasses }}">
                 </ng-container>
 
             </ng-container>
         </div>
     </ng-container>
 </div>
+
     `,
     styles: [`
 :host {
@@ -71,16 +78,6 @@ import { Calendar } from './lib/calendar/calendar';
 
 
 
-.month-selection {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 30px;
-}
-
-.month-selection-buttons span {
-    cursor: pointer;
-    padding: 0 8px;
-}
     `]
 })
 export class CalendarMonthViewComponent {
@@ -88,6 +85,8 @@ export class CalendarMonthViewComponent {
     @Input() selection:ICalendarSelection
     @Input() monthSelection:CalendarMonthView
     @Input() getTemplate:Function
+    @Input() config:CalendarViewConfig
+    @Input() cellStyleClasses:CellStyleClasses = new CellStyleClasses()
 
     constructor(){
         
