@@ -1,41 +1,14 @@
 import { Component, Input, OnInit, HostBinding } from "@angular/core";
-import { CellData } from '../calendar.component';
-import { CalendarSelection } from '../lib/calendar-view/selection/calendar-selection.class';
-import { CalendarMonthView } from '../lib/calendar-view/selection/strategy/selection-strategy.interface';
+import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
+import { CalendarMonthView } from '../../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { getMonth,  parse, compareDesc, format } from 'date-fns';
-import { CellStyleClasses } from '../lib/calendar-view/cell-style-classes.class';
-import { iif } from 'rxjs';
+import { CellStyleClasses } from '../../lib/calendar-view/cell-style-classes.class';
+import { CellData } from '../../cell-data';
 
-// <p class="date-label">
-//                 <span [ngClass]="styleClassesStatus.number">{{ cellData.date.dayOfMonth }}</span>
-//             </p>
 @Component({
     selector : 'default-cell',
-    template: `
-    <!--
-    <div *ngIf="cellData else cellWithoutData"
-        [ngClass]="styleClassesStatus.cell"
-        class="day" (click)="onClick()">
-
-        -->
-        <ng-container *ngIf="!cellData.hideDaysOutsideMonth || !dateStatus['outside-month']">
-            <div class="overlay" [ngClass]="styleClassesStatus.overlay" (click)="onClick()"></div>
-            <span class="label" [ngClass]="styleClassesStatus.number">{{ cellData.date.dayOfMonth }}</span>
-            <ng-content></ng-content>    
-        </ng-container>
-        <!--
-    </div>
--->
-    <ng-template #cellWithoutData>
-        <div [ngClass]="dateStatus" class="day">
-            <div class="overlay"></div>
-            <ng-content></ng-content>    
-        </div>
-    </ng-template>
-        
-    
-    `,
-    styleUrls: ['./default-cell.scss']
+    templateUrl: './cell.component.html',
+    styleUrls: ['./cell.component.scss']
 })
 export class DefaultCellComponent implements OnInit {
     @Input() cellData:CellViewData;
@@ -49,10 +22,10 @@ export class DefaultCellComponent implements OnInit {
 
     @HostBinding('class') 
     get classes() {
-        let classes = this.styleClassesStatus.host + '  ' + Object.keys(this.styleClassesStatus.cell)
+        let classes = this.styleClassesStatus.host + ' ' + Object.keys(this.styleClassesStatus.cell)
             .filter(k => this.styleClassesStatus.cell[k] === true)
             .join(' ')
-        // console.log(classes)
+
         return classes
     }
 

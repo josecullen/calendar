@@ -1,5 +1,6 @@
 import { Directive, TemplateRef, ViewContainerRef, Input, Output, HostListener, EventEmitter } from "@angular/core";
-import { CellData } from '../calendar.component';
+import { CellData } from '../cell-data';
+
 
 @Directive({
     selector: '[calendarCell]'

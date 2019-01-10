@@ -1,0 +1,20 @@
+.month-selection {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0px;
+}
+
+.month {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 20px;
+}
+
+.label {
+    position: absolute;
+    left: 50%;
+    flex: 0 1 auto;
+    transform: translateX(-50%);
+}

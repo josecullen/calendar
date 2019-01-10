@@ -1,0 +1,27 @@
+<div class="container">
+    
+    <calendar-header 
+        [linkedMonths]="config?.header.linkedMonths"
+        [monthSelections]="[monthSelection]">
+    </calendar-header>
+       
+    <ng-container *ngIf="calendar.getYear(monthSelection.year).months[monthSelection.month].getCalendarView() as calendarView">
+        <!--    
+                <div class="row">
+                    <day-header-cell
+                        *ngFor="let day of [0,1,2,3,4,5,6]"
+                        [day]="day">
+                    </day-header-cell>
+                </div>
+            -->
+        <div class="row" style="display:flex;" *ngFor="let week of calendarView; index as i">
+
+            <ng-container *ngFor="let day of week">
+
+                <ng-container *ngTemplateOutlet="getTemplate(); context: { $implicit: getCellData(day) }">
+                </ng-container>
+
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

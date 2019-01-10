@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add th
 
 import { AppComponent } from './app.component';
 import { CalendarDateItem } from './calendar-date-item.component';
-import { CalendarComponent } from './calendar.component';
 import { CalendarCellDirective } from './directives/calendar-cell';
-import { DefaultCellComponent } from './components/default-cell';
-import { CalendarMonthViewComponent } from './calendar-month-view.component';
 import { DayHeaderCellComponent } from './components/day-cell';
-import { CalendarHeaderComponent } from './components/header.component';
 import { CalendarHeaderButtonsComponent } from './components/header-buttons.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { DefaultCellComponent } from './components/cell/cell.component';
+import { CalendarHeaderComponent } from './components/header/header.component';
+import { CalendarMonthViewComponent } from './components/month/month.component';
 
 
 @NgModule({

@@ -1,35 +1,10 @@
 import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
-import { CellDataPayload } from './app.component';
-import { CellViewData } from './components/default-cell';
-
-
+import { CellViewData } from './components/cell/cell.component';
 
 @Component({
     selector: 'calendar-date-item',
     template: `
-   <default-cell [cellData]="cellData">
-
-    <div *ngIf="currentMealplan" class="prices">
-        <span class="clickeable" (click)="prevMealplan()">
-            <i class="arrow left"></i>
-        </span>
-
-        <div class="current-price">
-            <span class="price"> $ {{ currentMealplan.price }} </span>
-            <span class="mealplan-label"> {{ currentMealplan.type }} </span>
-        </div>
-
-        <span class="clickeable" (click)="nextMealplan()">
-            <i class="arrow right"></i>
-        </span>
-    </div>
-
-    <div class="buttons">
-        <span *ngIf="cellData.date.payload" [ngClass]="{ 'ok': checkIn, 'nook': !checkIn }">ckIn</span>
-        <span *ngFor="let mealplan of mealplans">{{ mealplan.icon }}</span>
-    </div>
-
-   </default-cell>
+   <default-cell [cellData]="cellData"></default-cell>
     `,
     styles: [`
     :host {
@@ -83,3 +58,25 @@ export class CalendarDateItem {
     }
 
 }
+
+
+
+// <div *ngIf="currentMealplan" class="prices">
+//         <span class="clickeable" (click)="prevMealplan()">
+//             <i class="arrow left"></i>
+//         </span>
+
+//         <div class="current-price">
+//             <span class="price"> $ {{ currentMealplan.price }} </span>
+//             <span class="mealplan-label"> {{ currentMealplan.type }} </span>
+//         </div>
+
+//         <span class="clickeable" (click)="nextMealplan()">
+//             <i class="arrow right"></i>
+//         </span>
+//     </div>
+
+//     <div class="buttons">
+//         <span *ngIf="cellData.date.payload" [ngClass]="{ 'ok': checkIn, 'nook': !checkIn }">ckIn</span>
+//         <span *ngFor="let mealplan of mealplans">{{ mealplan.icon }}</span>
+//     </div>
