@@ -17,8 +17,7 @@ export class RangeSelectionStrategy implements ISelectionStrategy {
     isSelected(date: string, selection:ICalendarSelection){
         const index = selection.selectedDates.findIndex(d => d === date)
 
-        return selection.selectedDates.length
-        && (index === 0 || index === selection.selectedDates.length -1)
+        return selection.selectedDates.length && (index === 0 || index === selection.selectedDates.length -1)
         
     }
 

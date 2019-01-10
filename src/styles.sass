@@ -4,6 +4,7 @@
 * 
     font-family: sans-serif
     color: #333333
+    font-size: 14px
 
 .row 
     display: flex
@@ -33,15 +34,76 @@ i
     cursor: pointer
 
 
-.cell-default .day 
-    min-width: 40px
-    min-height: 40px
 
-.cell-alm-selected
-    background: #179ea4
+$selected: rgb(23, 158, 164)
+$selected-color: #fff
+$in-range-color: #d3eceb
+$hover-color: #e4e7e7
+    
+    
+.alm-host
+    font-family: ProximaNova,sans-serif
+    min-width: 38px
+    min-height: 38px
+    text-align: center
+    display: block
+    line-height: 38px
+    align-items: center
+    &.overlay
+        background-color: $hover-color
+    &.alm-cell-past
+        .label
+            color: rgba(0,0,0,0.1)
+    &.alm-cell-in-range
+        &:not(.alm-cell-outside-month) 
+            background-color: $in-range-color
+    &.alm-cell-selected
+        &:not(.alm-cell-outside-month) 
+            .label
+                color: $selected-color
+            background-color: $selected
+            &.alm-cell-from
+                border-top-left-radius: 2px
+                border-bottom-left-radius: 2px
+            &.alm-cell-to
+                border-top-right-radius: 2px
+                border-bottom-right-radius: 2px
+    
 
-.cell-alm-in-range-number
-    background: none
 
-.cell-alm-in-range
-    background: rgba(23, 158, 164, .5)
+
+
+.alm-old-host 
+    min-width: 30px
+    min-height: 30px
+    text-align: center
+    display: block
+    line-height: 30px
+    align-items: center
+    
+    &.alm-old-cell-in-range
+        background-color: rgb(234, 234, 234)
+        &.alm-old-cell-first
+            background-image: linear-gradient(to right, #fff 50%, #fff 50%, rgb(234, 234, 234) 50%)
+        &.alm-old-cell-last
+            background-image: linear-gradient(to left, #fff 50%, #fff 50%, rgb(234, 234, 234) 50%)
+        
+    .overlay:hover
+        background-color: transparent !important
+    .label
+        display: block
+        width: 30px
+        height: 30px
+        margin: auto
+        &.alm-old-number-selected
+            border-radius: 50%
+            background-color: blue
+            color: #fff
+        &.alm-old-number-past
+            color: #ccc
+
+.alm-old-host:hover
+    &:not(.alm-old-cell-past) 
+        text-decoration: underline
+        cursor: pointer
+

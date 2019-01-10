@@ -33,56 +33,7 @@ import { CellViewData } from './components/default-cell';
     `,
     styles: [`
     :host {
-        flex: 1 1 auto;
-        box-sizing: border-box;
-    }
-
-    /deep/ .day {
-        border: 1px solid #ccc;
-        
-    }
-    
-
-    .prices {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        margin: 3px -12px;
-        padding: 0 4px;
-    }
-
-    .current-price {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .mealplan-label {
-        font-size: 10px;
-    }
-
-    .price {
-        font-size: 12px;
-        color: green;
-    }
-
-    .ok {
-        color: green
-    }
-
-    .nook {
-        color: red;
-    }
-
-    .buttons {
-        position: absolute;
-        bottom: 2px;
-        font-size: 10px;
-    }
-
-    .buttons span {
-        padding: 0 4px;
+        flex: 1;
     }
     `,],
     changeDetection: ChangeDetectionStrategy.OnPush

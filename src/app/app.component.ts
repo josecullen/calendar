@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
     month: {
       hideDaysOutsideMonth: true,
       showTwoCalendarIfNeed: true
-    }
+    },
+    selection: 'range'
   })
   cellStyleClasses:CellStyleClasses = new CellStyleClasses()
 
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.cellStyleClasses.prefix = 'alm'
     // this.cellStyleClasses.cell.selected = 'alm-selected'
     // this.cellStyleClasses.cell['in-range'] = 'alm-in-range'
     // this.cellStyleClasses.number['in-range'] = 'alm-in-range-number'

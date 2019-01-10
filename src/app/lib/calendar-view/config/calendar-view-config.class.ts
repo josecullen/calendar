@@ -47,6 +47,7 @@ export class CalendarViewConfig extends CalendarConfig {
 export class ICalendarViewConfig {
     header?:ICalendarHeaderConfig
     month?:IMonthViewConfig
+    selection?:'simple' | 'picked' | 'range'
     styles?:IStyleClassesConfig
 }
 

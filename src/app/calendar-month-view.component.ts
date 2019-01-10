@@ -4,33 +4,9 @@ import { CalendarMonthView } from './lib/calendar-view/selection/strategy/select
 import { Calendar } from './lib/calendar/calendar';
 import { CellStyleClasses } from './lib/calendar-view/cell-style-classes.class';
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
+import { CellData } from './calendar.component';
+import { format, compareDesc, parse, getMonth } from 'date-fns';
 
-// <div class="month-selection">
-//         <div class="month-selection-buttons">
-//             <span (click)="monthSelection.minusYear()">
-//                 <i class="arrow left"></i>
-//                 <i class="arrow left"></i>
-//             </span>
-
-//             <span (click)="monthSelection.minusMonth()">
-//                 <i class="arrow left"></i>
-//             </span>
-//         </div>
-
-//         {{ monthSelection.label }}
-
-//         <div class="month-selection-buttons">
-//             <span (click)="monthSelection.addMonth()">
-//                 <i class="arrow right"></i>
-//             </span>
-
-//             <span (click)="monthSelection.addYear()">
-//                 <i class="arrow right"></i>
-//                 <i class="arrow right"></i>
-//             </span>
-//         </div>
-//     </div>
-    
 @Component({
     selector: 'calendar-month-view',
     template: `
@@ -55,7 +31,7 @@ import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-con
             <ng-container *ngFor="let day of week">
                 
                 <ng-container 
-                    *ngTemplateOutlet="getTemplate(); context: { $implicit: { date: day, selection: selection, monthSelection: monthSelection, hideDaysOutsideMonth: calendar.config.month.hideDaysOutsideMonth, cellStyleClasses: cellStyleClasses }}">
+                    *ngTemplateOutlet="getTemplate(); context: { $implicit: getCellData(day) }">
                 </ng-container>
 
             </ng-container>
@@ -65,30 +41,65 @@ import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-con
 
     `,
     styles: [`
+/**
 :host {
     display: flex;
-    margin : 16px;
-    border : 1px solid #ccc;
+    margin: 8px;
     flex: 1 1 auto;
 }
 
 .container {
     flex: 1 1 auto;
 }
-
+ */
 
 
     `]
 })
 export class CalendarMonthViewComponent {
-    @Input() calendar:Calendar
-    @Input() selection:ICalendarSelection
-    @Input() monthSelection:CalendarMonthView
-    @Input() getTemplate:Function
-    @Input() config:CalendarViewConfig
-    @Input() cellStyleClasses:CellStyleClasses = new CellStyleClasses()
+    @Input() calendar: Calendar
+    @Input() selection: ICalendarSelection
+    @Input() monthSelection: CalendarMonthView
+    @Input() getTemplate: Function
+    @Input() config: CalendarViewConfig
+    @Input() cellStyleClasses: CellStyleClasses = new CellStyleClasses()
 
-    constructor(){
-        
+
+    getCellData(day: CellData) {
+        return {
+            date: day,
+            selection: this.selection,
+            monthSelection: this.monthSelection,
+            hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
+            cellStyleClasses: this.cellStyleClasses
+        }
+    }
+
+    getStyles(cellData:CellData) {
+        const today = new Date()
+        const isToday = cellData.date === format(new Date(), 'YYYY-MM-DD')
+
+        let dateStatus = {
+            'selected': this.selection.isSelected(cellData.date),
+            'from': this.selection.from() === cellData.date,
+            'to': this.selection.to() === cellData.date,
+            'in-range': this.selection.isInRange(cellData.date) || this.selection.isSelected(cellData.date),
+            'past': compareDesc(parse(cellData.date), today) > 0 && !isToday,
+            'outside-month': getMonth(cellData.date) !== this.monthSelection.month,
+            'today': isToday,
+            'host': true
+        }
+
+        // const prefix = this.cellStyleClasses.prefix
+        // this.styleClassesStatus.host = `${prefix}-${this.cellData.cellStyleClasses.host}`
+        // Object.keys(this.cellData.cellStyleClasses.cell).forEach(key => {
+        //     this.styleClassesStatus.cell[`${prefix}-cell-${this.cellData.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
+        //     this.styleClassesStatus.number[`${prefix}-number-${this.cellData.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
+        //     this.styleClassesStatus.overlay[`${prefix}-overlay-${this.cellData.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
+        // })
+    }
+
+    constructor() {
+
     }
 }

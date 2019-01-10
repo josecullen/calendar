@@ -77,6 +77,8 @@ export class CalendarComponent implements OnChanges {
     ngOnInit() {
         this.calendar = new Calendar(new CalendarViewFactory(), this.config)
 
+        this.updateSelection()
+
     }
 
     getTemplate(): TemplateRef<any> {
@@ -115,6 +117,20 @@ export class CalendarComponent implements OnChanges {
             setTimeout(() => { })
 
 
+        }
+    }
+
+    updateSelection(){
+        switch ((this.config as CalendarViewConfig).selection) {
+            case 'simple':
+                this.singleSelection()
+                break
+            case 'range':
+                this.rangeSelection()
+                break
+            case 'picked':
+                this.pickSelection()
+                break
         }
     }
 

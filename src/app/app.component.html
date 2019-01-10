@@ -5,14 +5,15 @@
       [config]="config" 
       [cellStyleClasses]="cellStyleClasses" 
       (selectionChange)="onSelectionChange($event)">
-      
+
       <ng-container *calendarCell="let cellData;">
         <calendar-date-item [cellData]="cellData">
         </calendar-date-item>
       </ng-container>
     </calendar>
   </div>
-  <form style="float: right;">
+  <!-- style="float: right;" -->
+  <form >
     <h3>Selection</h3>
     <select [ngModelOptions]="{standalone: true}" [(ngModel)]="config.selection">
       <option *ngFor="let strategy of selectionOptions" 
