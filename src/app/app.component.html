@@ -1,44 +1,67 @@
-<calendar #calendar [dates]="dates" [config]="config" [cellStyleClasses]="cellStyleClasses" (selectionChange)="onSelectionChange($event)">
+<!-- <div class="flex-row"> -->
+  <div class="calendar">
+    <calendar #calendar 
+      [dates]="dates" 
+      [config]="config" 
+      [cellStyleClasses]="cellStyleClasses" 
+      (selectionChange)="onSelectionChange($event)">
+      
+      <ng-container *calendarCell="let cellData;">
+        <calendar-date-item [cellData]="cellData">
+        </calendar-date-item>
+      </ng-container>
+    </calendar>
+  </div>
+  <form style="float: right;">
+    <h3>Selection</h3>
+    <select [ngModelOptions]="{standalone: true}" [(ngModel)]="config.selection">
+      <option *ngFor="let strategy of selectionOptions" 
+        [value]="strategy"
+        >{{strategy}}</option>
+    </select>
 
-  <ng-container *calendarCell="let cellData;">
+    <h3>Header</h3>
+    <div class="flex-row">
+      <input 
+        type="checkbox" 
+        [(ngModel)]="config.header.linkedMonths"
+        [ngModelOptions]="{standalone: true}"
+        #linkedMonths="ngModel">  
+      <label>Linked Months</label>
+    </div>
 
-    <calendar-date-item [cellData]="cellData">
-    </calendar-date-item>
+    <h3>Month</h3>
+    <div class="flex-row">
+      <div>
+        <label>First Day </label>
+        <input type="number" 
+          [ngModelOptions]="{standalone: true}" 
+          [(ngModel)]="config.month.firstDay" #firstDay>
+      </div>
+      <div>
+        <label>Hide Weekends</label>
+        <input type="checkbox" 
+          [ngModelOptions]="{standalone: true}" 
+          [(ngModel)]="config.month.hideWeekends" #hideWeekends>
+      </div>
+      <div>
+        <label>Hide Days Outside Month</label>
+        <input type="checkbox" 
+          [ngModelOptions]="{standalone: true}" 
+          [(ngModel)]="config.month.hideDaysOutsideMonth" >
+      </div>
+      <div>
+          <label>Show two calendar if need</label>
+          <input type="checkbox" 
+            [ngModelOptions]="{standalone: true}" 
+            [(ngModel)]="config.month.showTwoCalendarIfNeed">
+      </div>
+    </div>
 
-  </ng-container>
+    <button (click)="applyChanges()">Apply</button>
 
-</calendar>
+    <pre>{{config | json}}</pre>
+  </form>
 
-<div>
-  <label>First Day </label>
-  <input type="number" placeholder="first day" [value]="config.month.firstDay" (change)="onFirstDayChange(firstDay.value)"
-    #firstDay>
-  <hr />
-  <label>Hide Weekends</label>
-  <input type="checkbox" [checked]="config.month.hideWeekends" (change)="config.month.hideWeekends = hideWeekends.checked"
-    #hideWeekends>
-  <hr />
-  <label>Hide Days Outside Month</label>
-  <input type="checkbox" [checked]="config.month.hideDaysOutsideMonth" (change)="config.month.hideDaysOutsideMonth = hideDaysOutsideMonth.checked"
-    #hideDaysOutsideMonth>
+<!-- </div> -->
 
-  <hr />
-  <label>Show two calendar if need</label>
-  <input type="checkbox" [checked]="config.month.showTwoCalendarIfNeed" (change)="config.month.showTwoCalendarIfNeed = showTwoCalendarIfNeed.checked"
-    #showTwoCalendarIfNeed>
-
-  <hr />
-  <label>Linked Months</label>
-  <input type="checkbox" [checked]="config.header.linkedMonths" (change)="config.header.linkedMonths = linkedMonths.checked"
-    #linkedMonths>
-
-</div>
-
-<div class="selection-form" *ngIf="selection">
-  <h4>Update price for {{ selection.from() }} - {{ selection.to() }}</h4>
-
-  <label>Price</label>
-  <input type="number" #price>
-  <button (click)="updatePrice(price.value)">Apply new Price</button>
-
-</div>

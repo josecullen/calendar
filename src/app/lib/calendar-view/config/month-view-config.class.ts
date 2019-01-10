@@ -1,4 +1,6 @@
-export class MonthViewConfig {
+import { IMonthViewConfig } from './month-view-config.interface';
+
+export class MonthViewConfig implements IMonthViewConfig {
     
     constructor(
         public hideWeekends:boolean = false,

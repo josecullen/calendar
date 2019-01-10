@@ -9,6 +9,13 @@ export class CellStyleClasses {
     ){}
 }
 
+export interface ICellStyleClasses {
+    prefix?:string
+    host?:string
+    cell?:CellStatusStyleClasses
+    number?:CellStatusStyleClasses
+}
+
 export class CellStatusStyleClasses {
     'host':string = 'default'
     'selected':string =  'default-selected'
@@ -17,3 +24,13 @@ export class CellStatusStyleClasses {
     'outside-month':string = 'default-outside-month'
     'today':string = 'default-today'
 }
+
+export interface ICellStatusStyleClasses {
+    'host'?:string
+    'selected'?:string
+    'in-range'?:string
+    'past'?:string
+    'outside-month'?:string
+    'today'?:string
+}
+

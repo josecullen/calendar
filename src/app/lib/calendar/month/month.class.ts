@@ -47,15 +47,6 @@ export class Month implements IMonth {
                 previousMonth.days.length - (((firstDayOfMonth - monthConfig.firstDay) + 7) % 7), 
                 previousMonth.days.length)
 
-
-                if(this.ofYear === 0){
-                    console.log({
-                        'firstDayOfMonth': firstDayOfMonth,
-                        'firstDay' : monthConfig.firstDay,
-                        'previousDays' : previousDays,
-                    })
-                }
-
             days = previousDays.concat(days)
         }
 

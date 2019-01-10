@@ -12,19 +12,12 @@ import { RangeSelectionStrategy } from './lib/calendar-view/selection/strategy/r
 import { PickSelectionStrategy } from './lib/calendar-view/selection/strategy/pick-selection.strategy';
 import { CellStyleClasses } from './lib/calendar-view/cell-style-classes.class';
 import { CalendarConfig } from './lib/calendar/config/calendar-config.class';
+import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 
 
 @Component({
     selector: 'calendar',
     template: `
-
-
-    <div>
-        <button (click)="singleSelection()">single selection</button>
-        <button (click)="rangeSelection()">range selection</button>
-        <button (click)="pickSelection()">pick selection</button>
-    </div>
-
     <calendar-header 
         [linkedMonths]="config.header.linkedMonths" 
         [monthSelections]="[ selection.calendarMonthView.from, selection.calendarMonthView.to ]"
@@ -53,8 +46,8 @@ import { CalendarConfig } from './lib/calendar/config/calendar-config.class';
         </calendar-month-view>
     </div>
 
-`, 
-styles : [`
+`,
+    styles: [`
 :host {
     display: flex;
     flex-direction: column;
@@ -68,42 +61,64 @@ styles : [`
 `]
 })
 export class CalendarComponent implements OnChanges {
-    selection:CalendarSelection = new CalendarSelection()
+    selection: CalendarSelection = new CalendarSelection()
 
     @Input() dates: CellDataPayload[]
-    @Output() selectionChange:EventEmitter<CalendarSelection> = this.selection.selectionChange
-    
+    @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
+
     @ContentChild(CalendarCellDirective)
-    calendarCell: CalendarCellDirective    
+    calendarCell: CalendarCellDirective
 
-    @Input() config:CalendarConfig// = new CalendarConfig()
-    @Input() cellStyleClasses:CellStyleClasses = new CellStyleClasses()
+    @Input() config: CalendarConfig// = new CalendarConfig()
+    @Input() cellStyleClasses: CellStyleClasses = new CellStyleClasses()
 
-    calendar:Calendar
+    calendar: Calendar
 
-    ngOnInit(){
+    ngOnInit() {
         this.calendar = new Calendar(new CalendarViewFactory(), this.config)
-        
+
     }
 
-    getTemplate():TemplateRef<any> {
+    getTemplate(): TemplateRef<any> {
         return this.calendarCell.template
     }
 
-    ngOnChanges(changes:SimpleChanges){
-        if(this.calendar){
+    ngOnChanges(changes: SimpleChanges) {
+        let configChange = changes['config']
+
+
+        if (this.calendar) {
             let change = changes['dates']
 
-            if(change){
+            if (change) {
                 this.dates.forEach(day => {
                     this.calendar.setDay(day.date, new CellData(day.date, day.payload, false))
                 })
             }
         }
-        
+
+        if (configChange && this.calendar) {
+            console.log('configChange', configChange, configChange.previousValue.selection, configChange.currentValue.selection)
+            this.calendar.config = this.config
+
+            switch ((this.config as CalendarViewConfig).selection) {
+                case 'simple':
+                    this.singleSelection()
+                    break
+                case 'range':
+                    this.rangeSelection()
+                    break
+                case 'picked':
+                    this.pickSelection()
+                    break
+            }
+            setTimeout(() => { })
+
+
+        }
     }
 
-    cellClicked(data:CellData){
+    cellClicked(data: CellData) {
         data.selected = !data.selected
     }
 
@@ -116,15 +131,15 @@ export class CalendarComponent implements OnChanges {
         return this.dates.some(d => d.date === date)
     }
 
-    singleSelection(){
+    singleSelection() {
         this.selection.setStrategy(new SingleSelectionStrategy())
     }
 
-    rangeSelection(){
+    rangeSelection() {
         this.selection.setStrategy(new RangeSelectionStrategy())
     }
 
-    pickSelection(){
+    pickSelection() {
         this.selection.setStrategy(new PickSelectionStrategy())
     }
 
@@ -133,29 +148,29 @@ export class CalendarComponent implements OnChanges {
 
 
 export class DayAdapter implements IDay {
-    private _day:Day
+    private _day: Day
 
-    constructor(private _date:string){
+    constructor(private _date: string) {
         this._day = new Day(parse(_date))
     }
 
-    get date():string{
-       return this._day.date
+    get date(): string {
+        return this._day.date
     }
 
-    get dayOfMonth():number {
+    get dayOfMonth(): number {
         return this._day.dayOfMonth
     }
 
-    get dayOfWeek():number {
+    get dayOfWeek(): number {
         return this._day.dayOfWeek
     }
 
-    get name():string {
+    get name(): string {
         return this._day.name
     }
 
-    get isWeekend():boolean {
+    get isWeekend(): boolean {
         return isWeekend(this._date)
     }
 
@@ -163,12 +178,12 @@ export class DayAdapter implements IDay {
 
 
 export class CellData extends DayAdapter implements IDay {
-    
+
     constructor(
-        date:string,
-        public payload:any,
-        public selected:boolean,
-    ){
+        date: string,
+        public payload: any,
+        public selected: boolean,
+    ) {
         super(date)
     }
 }

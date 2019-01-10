@@ -77,7 +77,7 @@ import { CellStyleClasses } from '../lib/calendar-view/cell-style-classes.class'
     
     .day.cell-default  {
         min-width:50px; 
-        min-height:100px; 
+        min-height:75px; 
         padding: 4px;
         color: #333;
     }
@@ -126,10 +126,6 @@ export class DefaultCellComponent implements OnInit {
         if(this.cellData){
             const today = new Date()
             const isToday = this.cellData.date.date === format(new Date(), 'YYYY-MM-DD')
-    
-            if(isToday){
-                console.log(this.cellData.date.date, format(new Date(), 'YYYY-MM-DD'))
-            }
 
             this.dateStatus = {
                 'selected': this.isSelected(),
@@ -149,7 +145,6 @@ export class DefaultCellComponent implements OnInit {
             Object.keys(this.cellData.cellStyleClasses.number).forEach(key => {
                 this.styleClassesStatus.number[`${prefix}-${this.cellData.cellStyleClasses.number[key]}`] = this.dateStatus[key]
             })
-
 
         }
         

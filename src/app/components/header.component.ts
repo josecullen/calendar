@@ -15,7 +15,6 @@ import { CalendarMonthView } from '../lib/calendar-view/selection/strategy/selec
         </div>
 
         <header-buttons type="forward" (monthClick)="addMonth(0)" (yearClick)="addYear(0)"></header-buttons>
-
     </div>
 </div>
 

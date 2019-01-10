@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Directive, Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add the imports!
 
 import { AppComponent } from './app.component';
 import { CalendarDateItem } from './calendar-date-item.component';
@@ -22,10 +23,13 @@ import { CalendarHeaderButtonsComponent } from './components/header-buttons.comp
     CalendarMonthViewComponent,
     DayHeaderCellComponent,
     CalendarHeaderComponent,
-    CalendarHeaderButtonsComponent
+    CalendarHeaderButtonsComponent,
+    
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   entryComponents: [
     CalendarDateItem

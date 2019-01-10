@@ -4,9 +4,6 @@ import { mock } from './mock';
 
 import { CellStyleClasses } from './lib/calendar-view/cell-style-classes.class';
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
-// import { getMonth, getDaysInMonth, getDay, getYear, getDayOfYear, getDaysInYear, getDate } from 'date-fns'
-// import { Calendar, Day, Year } from './lib/calendar';
-// import { MonthPayloadable } from './lib/calendar-payloadable';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +11,24 @@ import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-con
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
+  selectionOptions= ['simple', 'picked', 'range']
   selection:CalendarSelection
   @Input() dates: CellDataPayload[] = mock
-  config = new CalendarViewConfig()
+  config = CalendarViewConfig.from({
+    month: {
+      hideDaysOutsideMonth: true,
+      showTwoCalendarIfNeed: true
+    }
+  })
   cellStyleClasses:CellStyleClasses = new CellStyleClasses()
 
   onSelectionChange(selection:CalendarSelection){
     console.log('selection change', selection.from(), selection.to())
     this.selection = selection
+  }
+
+  applyChanges(){
+    this.config = CalendarViewConfig.from(this.config)
   }
 
   ngOnInit(){
@@ -30,10 +37,6 @@ export class AppComponent implements OnInit {
     // this.cellStyleClasses.number['in-range'] = 'alm-in-range-number'
     // this.cellStyleClasses.number.today = 'alm-today'
     // this.cellStyleClasses.cell.today = 'alm-today'
-  }
-
-  onFirstDayChange(value:number) {
-    this.config.month.firstDay = Number(value)
   }
 
   updatePrice(price:number){
