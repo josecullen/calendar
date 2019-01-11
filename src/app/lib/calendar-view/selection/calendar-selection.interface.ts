@@ -1,3 +1,5 @@
+import { CalendarMonthViewSelection } from './strategy/selection-strategy.interface';
+
 export interface ICalendarSelection {
     // strategy:ISelectionStrategy
     selectedDates: string[]
@@ -6,7 +8,9 @@ export interface ICalendarSelection {
     isSelected(date:string):boolean
     from():string
     to():string
+    calendarMonthView:CalendarMonthViewSelection
 }
+
 
 export enum SelectionType {
     single = 'single',

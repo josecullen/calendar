@@ -1,30 +1,35 @@
-<!--
-    <calendar-header 
-        [linkedMonths]="config.header.linkedMonths" 
-        [monthSelections]="[ selection.calendarMonthView.from, selection.calendarMonthView.to ]"
-        [showTwoMonths]="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed">
-    </calendar-header>
--->
 
 <div class="calendar">
 
-    <calendar-month-view 
-        [calendar]="calendar"
-        [selection]="selection"
-        [config]="config"
-        [monthSelection]="selection.calendarMonthView.from"
-        [cellStyleClasses]="cellStyleClasses"
-        [getTemplate]="getTemplate.bind(this)">
-    </calendar-month-view>
+    <ng-container *ngIf="calendarMonth else defaultMonths">
+        <ng-container *ngTemplateOutlet="calendarMonth.template; context: getMonthContext(0)">
+        </ng-container>
 
-    <calendar-month-view 
-        *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
-        [calendar]="calendar"
-        [config]="config"
-        [selection]="selection"
-        [cellStyleClasses]="cellStyleClasses"
-        [monthSelection]="selection.calendarMonthView.to"
-        [getTemplate]="getTemplate.bind(this)">
-    </calendar-month-view>
+        <ng-container *ngTemplateOutlet="calendarMonth.template; context: getMonthContext(1)">
+            </ng-container>
+    </ng-container>
+
+    <ng-template #defaultMonths>
+        <calendar-month-view 
+            [index]="0"
+            [calendar]="calendar"
+            [selection]="selection"
+            [config]="config"
+            [monthSelection]="selection.calendarMonthView.from"
+            [cellStyleClasses]="cellStyleClasses">
+        </calendar-month-view> 
+    
+        <calendar-month-view 
+            *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
+            [index]="1"
+            [calendar]="calendar"
+            [config]="config"
+            [selection]="selection"
+            [cellStyleClasses]="cellStyleClasses"
+            [monthSelection]="selection.calendarMonthView.to">
+        </calendar-month-view>
+    </ng-template>
+
+    
 
 </div>

@@ -1,15 +1,25 @@
-.month-selection {
+// .month-selection {
+//     display: flex;
+//     justify-content: space-between;
+//     padding: 8px 0px;
+// }
+
+// .month {
+//     flex: 1 1 auto;
+//     display: flex;
+//     justify-content: space-between;
+//     position: relative;
+//     padding: 0 20px;
+// }
+
+:host {
+    position: relative;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    padding: 8px 0px;
 }
 
-.month {
-    flex: 1 1 auto;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    padding: 0 20px;
+.filler {
+    flex: 1 1 auto
 }
 
 .label {

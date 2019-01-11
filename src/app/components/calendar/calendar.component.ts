@@ -1,6 +1,5 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, TemplateRef, Output, EventEmitter } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter } from "@angular/core";
 import { Calendar } from '../../lib/calendar/calendar';
-import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CellDataPayload } from '../../app.component';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarViewFactory } from '../../calendar-view.factory';
@@ -12,6 +11,7 @@ import { CellStyleClasses } from '../../lib/calendar-view/cell-style-classes.cla
 import { CalendarConfig } from '../../lib/calendar/config/calendar-config.class';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
 import { CellData } from 'src/app/cell-data';
+import { CalendarMonthDirective } from 'src/app/directives/calendar-month.directive';
 
 @Component({
     selector: 'calendar',
@@ -22,13 +22,13 @@ export class CalendarComponent implements OnChanges {
     selection: CalendarSelection = new CalendarSelection()
 
     @Input() dates: CellDataPayload[]
-    @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
-
-    @ContentChild(CalendarCellDirective)
-    calendarCell: CalendarCellDirective
-
     @Input() config: CalendarConfig// = new CalendarConfig()
     @Input() cellStyleClasses: CellStyleClasses = new CellStyleClasses()
+
+    @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
+
+    @ContentChild(CalendarMonthDirective)
+    calendarMonth: CalendarMonthDirective
 
     calendar: Calendar
 
@@ -36,11 +36,6 @@ export class CalendarComponent implements OnChanges {
         this.calendar = new Calendar(new CalendarViewFactory(), this.config)
 
         this.updateSelection()
-
-    }
-
-    getTemplate(): TemplateRef<any> {
-        return this.calendarCell.template
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -61,19 +56,7 @@ export class CalendarComponent implements OnChanges {
             console.log('configChange', configChange, configChange.previousValue.selection, configChange.currentValue.selection)
             this.calendar.config = this.config
 
-            switch ((this.config as CalendarViewConfig).selection) {
-                case 'simple':
-                    this.singleSelection()
-                    break
-                case 'range':
-                    this.rangeSelection()
-                    break
-                case 'picked':
-                    this.pickSelection()
-                    break
-            }
-            setTimeout(() => { })
-
+            this.updateSelection()
 
         }
     }
@@ -117,6 +100,19 @@ export class CalendarComponent implements OnChanges {
         this.selection.setStrategy(new PickSelectionStrategy())
     }
 
+
+    getMonthContext(monthIndex:number){
+        return {
+            $implicit: {
+                index : monthIndex,
+                calendar : this.calendar,
+                selection : this.selection,
+                config : this.config,
+                monthSelection : monthIndex === 0 ? this.selection.calendarMonthView.from : this.selection.calendarMonthView.to,
+                cellStyleClasses : this.cellStyleClasses
+            }
+        }
+    }
 
 }
 

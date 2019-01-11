@@ -1,45 +1,21 @@
-<div class="month-selection" *ngIf="!showTwoMonths">
-    <div class="month">
-        <header-buttons type="back" (monthClick)="minusMonth(0)" (yearClick)="minusYear(0)"></header-buttons>
+<header-buttons 
+    type="back" 
+    *ngIf="!showTwoMonths || monthIndex === 0 || !linkedMonths"
+    (monthClick)="minusMonth(0)" 
+    (yearClick)="minusYear(0)">
+</header-buttons>
 
-        <div class="label">
-            {{ monthSelections[0].label }}
-        </div>
+<span class="filler"></span>
 
-        <header-buttons type="forward" (monthClick)="addMonth(0)" (yearClick)="addYear(0)"></header-buttons>
-    </div>
-</div>
+<span class="label" *ngIf="monthSelections && monthSelections.length">
+    {{ monthSelections[monthIndex].label }}
+</span>
 
-<div class="month-selection" *ngIf="showTwoMonths">
-    <div class="month">
-        <header-buttons type="back" (monthClick)="minusMonth(0)" (yearClick)="minusYear(1)"></header-buttons>
+<span class="filler"></span>
 
-        <div class="label">
-            {{ monthSelections[0].label }}
-        </div>
-
-        <span *ngIf="linkedMonths else forwardButtons">&nbsp;</span>
-
-        <ng-template #forwardButtons>
-            <header-buttons type="forward" (monthClick)="addMonth(0)" (yearClick)="addYear(0)">
-            </header-buttons>
-        </ng-template>
-
-    </div>
-
-    <div class="month">
-        <span *ngIf="linkedMonths else backwardButtons">&nbsp;</span>
-
-        <ng-template #backwardButtons>
-            <header-buttons type="back" (monthClick)="minusMonth(1)" (yearClick)="minusYear(1)">
-            </header-buttons>
-        </ng-template>
-
-        <div *ngIf="showTwoMonths" class="label">
-            {{ monthSelections[1].label }}
-        </div>
-
-        <header-buttons type="forward" (monthClick)="addMonth(1)" (yearClick)="addYear(1)"></header-buttons>
-
-    </div>
-</div>
+<header-buttons 
+    *ngIf="!showTwoMonths || monthIndex === 1  || !linkedMonths"
+    type="forward" 
+    (monthClick)="addMonth(0)" 
+    (yearClick)="addYear(0)">
+</header-buttons>

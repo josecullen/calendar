@@ -1,17 +1,18 @@
 <!-- <div class="flex-row"> -->
   <div class="calendar">
+    
     <calendar #calendar 
       [dates]="dates" 
       [config]="config" 
       [cellStyleClasses]="cellStyleClasses" 
       (selectionChange)="onSelectionChange($event)">
 
-      <ng-container *calendarCell="let cellData;">
-        <calendar-date-item [cellData]="cellData">
-        </calendar-date-item>
-      </ng-container>
-      
+      <!-- <calendar-month-view *calendarMonth="let context;" [context]="context"> -->
+        <!-- <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
+        <calendar-date-item *calendarCell="let cellData;" [cellData]="cellData"></calendar-date-item> -->
+      <!-- </calendar-month-view> -->
     </calendar>
+
   </div>
   <!-- style="float: right;" -->
   <form >

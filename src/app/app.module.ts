@@ -11,6 +11,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { DefaultCellComponent } from './components/cell/cell.component';
 import { CalendarHeaderComponent } from './components/header/header.component';
 import { CalendarMonthViewComponent } from './components/month/month.component';
+import { CalendarHeaderDirective } from './directives/calendar-header.directive';
+import { CalendarMonthDirective } from './directives/calendar-month.directive';
 
 
 @NgModule({
@@ -18,7 +20,11 @@ import { CalendarMonthViewComponent } from './components/month/month.component';
     AppComponent,
     CalendarDateItem,
     CalendarComponent,
+    
     CalendarCellDirective,
+    CalendarHeaderDirective,
+    CalendarMonthDirective,
+
     DefaultCellComponent,
     CalendarMonthViewComponent,
     DayHeaderCellComponent,

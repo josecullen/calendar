@@ -5,7 +5,7 @@ import { Component, Output, Input, EventEmitter } from "@angular/core";
 @Component({
     selector: 'header-buttons',
     template: `
-    <div class="month-selection-buttons" *ngIf="type === 'back'">
+    <ng-container *ngIf="type === 'back'">
         <span (click)="yearClick.emit()">
             <i class="arrow left"></i>
             <i class="arrow left"></i>
@@ -14,9 +14,9 @@ import { Component, Output, Input, EventEmitter } from "@angular/core";
         <span (click)="monthClick.emit()">
             <i class="arrow left"></i>
         </span>
-    </div>
+    </ng-container>
 
-    <div class="month-selection-buttons" *ngIf="type === 'forward'">
+    <ng-container *ngIf="type === 'forward'">
         <span (click)="monthClick.emit()">
             <i class="arrow right"></i>
         </span>
@@ -25,12 +25,12 @@ import { Component, Output, Input, EventEmitter } from "@angular/core";
             <i class="arrow right"></i>
             <i class="arrow right"></i>
         </span>
-    </div>
+    </ng-container>
     `,
     styles: [`
-    .month-selection-buttons span {
+    :host span {
         cursor: pointer;
-        padding: 0 8px;
+        padding: 0 6px;
     }
     `]
 
