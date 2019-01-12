@@ -10,7 +10,7 @@ import { CalendarHeaderDirective } from 'src/app/directives/calendar-header.dire
 
 
 @Component({
-    selector: 'calendar-month-view',
+    selector: 'calendar-month',
     templateUrl: './month.component.html',
     styleUrls: ['./month.component.scss']
 })

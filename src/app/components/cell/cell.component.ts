@@ -4,7 +4,7 @@ import { getMonth,  parse, compareDesc, format } from 'date-fns';
 import { CellViewData } from 'src/app/cell-data-view';
 
 @Component({
-    selector : 'default-cell',
+    selector : 'calendar-cell',
     templateUrl: './cell.component.html',
     styleUrls: ['./cell.component.scss']
 })

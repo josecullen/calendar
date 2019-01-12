@@ -7,12 +7,12 @@
       [cellStyleClasses]="cellStyleClasses" 
       (selectionChange)="onSelectionChange($event)">
 
-      <calendar-month-view *calendarMonth="let context;" [context]="context">
+      <calendar-month *calendarMonth="let context;" [context]="context">
         <!-- <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>-->
-        <default-cell *calendarCell="let cellData;" [cellData]="cellData">
+        <calendar-cell *calendarCell="let cellData;" [cellData]="cellData">
           <span class="my-price" *ngIf="cellData.payload">${{ cellData.payload }}</span>
-        </default-cell> 
-      </calendar-month-view>
+        </calendar-cell> 
+      </calendar-month>
     </calendar>
 
   </div>

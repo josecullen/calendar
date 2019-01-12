@@ -10,14 +10,14 @@
     </ng-container>
 
     <ng-template #defaultMonths>
-        <calendar-month-view 
+        <calendar-month 
             [context]="getMonthContext(0)">
-        </calendar-month-view> 
+        </calendar-month> 
     
-        <calendar-month-view 
+        <calendar-month 
             *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
             [context]="getMonthContext(1)">
-        </calendar-month-view>
+        </calendar-month>
     </ng-template>
 
     
