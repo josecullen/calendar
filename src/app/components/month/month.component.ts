@@ -14,7 +14,7 @@ import { CalendarHeaderDirective } from 'src/app/directives/calendar-header.dire
     templateUrl: './month.component.html',
     styleUrls: ['./month.component.scss']
 })
-export class CalendarMonthViewComponent implements OnChanges {
+export class CalendarMonthComponent implements OnChanges {
     @Input() context: any
     @Input() calendar: Calendar
     @Input() index: number

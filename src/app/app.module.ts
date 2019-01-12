@@ -7,11 +7,11 @@ import { CalendarCellDirective } from './directives/calendar-cell';
 import { DayHeaderCellComponent } from './components/day-cell';
 import { CalendarHeaderButtonsComponent } from './components/header-buttons.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { DefaultCellComponent } from './components/cell/cell.component';
 import { CalendarHeaderComponent } from './components/header/header.component';
-import { CalendarMonthViewComponent } from './components/month/month.component';
+import { CalendarMonthComponent } from './components/month/month.component';
 import { CalendarHeaderDirective } from './directives/calendar-header.directive';
 import { CalendarMonthDirective } from './directives/calendar-month.directive';
+import { CalendarCellComponent } from './components/cell/cell.component';
 
 
 @NgModule({
@@ -23,8 +23,8 @@ import { CalendarMonthDirective } from './directives/calendar-month.directive';
     CalendarHeaderDirective,
     CalendarMonthDirective,
 
-    DefaultCellComponent,
-    CalendarMonthViewComponent,
+    CalendarCellComponent,
+    CalendarMonthComponent,
     DayHeaderCellComponent,
     CalendarHeaderComponent,
     CalendarHeaderButtonsComponent,

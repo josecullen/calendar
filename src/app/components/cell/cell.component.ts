@@ -8,7 +8,7 @@ import { CellViewData } from 'src/app/cell-data-view';
     templateUrl: './cell.component.html',
     styleUrls: ['./cell.component.scss']
 })
-export class DefaultCellComponent implements OnInit {
+export class CalendarCellComponent implements OnInit {
     @Input() cellData:CellViewData<any>;
     dateStatus:any
     styleClassesStatus:any = {
