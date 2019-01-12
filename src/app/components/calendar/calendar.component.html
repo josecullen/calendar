@@ -2,10 +2,10 @@
 <div class="calendar">
 
     <ng-container *ngIf="calendarMonth else defaultMonths">
-        <ng-container *ngTemplateOutlet="calendarMonth.template; context: getMonthContext(0)">
+        <ng-container *ngTemplateOutlet="calendarMonth.template; context: { $implicit : getMonthContext(0) }">
         </ng-container>
 
-        <ng-container *ngTemplateOutlet="calendarMonth.template; context: getMonthContext(1)">
+        <ng-container *ngTemplateOutlet="calendarMonth.template; context: { $implicit : getMonthContext(1) }">
             </ng-container>
     </ng-container>
 

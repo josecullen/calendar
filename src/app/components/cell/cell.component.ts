@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, HostBinding } from "@angular/core";
 import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
 import { getMonth,  parse, compareDesc, format } from 'date-fns';
-import { CellViewData } from 'src/app/cell-data-view';
+import { CellContext } from 'src/app/context/cell-context';
+import { ICalendarSelection } from 'src/app/lib/calendar-view/selection/calendar-selection.interface';
 
 @Component({
     selector : 'calendar-cell',
@@ -9,7 +10,7 @@ import { CellViewData } from 'src/app/cell-data-view';
     styleUrls: ['./cell.component.scss']
 })
 export class CalendarCellComponent implements OnInit {
-    @Input() cellData:CellViewData<any>;
+    @Input() context:CellContext<any>;
     dateStatus:any
     styleClassesStatus:any = {
         host: 'default',
@@ -27,50 +28,50 @@ export class CalendarCellComponent implements OnInit {
         return classes
     }
 
-    get selection():CalendarSelection {
-        return this.cellData.selection
+    get selection():ICalendarSelection {
+        return this.context.selection
     }
 
     ngOnInit(){
-        if(this.cellData){
+        if(this.context){
             const today = new Date()
-            const isToday = this.cellData.date === format(new Date(), 'YYYY-MM-DD')
+            const isToday = this.context.date === format(new Date(), 'YYYY-MM-DD')
             
             this.dateStatus = {
                 'selected': this.isSelected(),
-                'from': this.selection.from() === this.cellData.date,
-                'to' : this.selection.to() === this.cellData.date,
+                'from': this.selection.from() === this.context.date,
+                'to' : this.selection.to() === this.context.date,
                 'in-range': this.isInRange() || this.isSelected(),
-                'past' : compareDesc(parse(this.cellData.date), today) > 0 && !isToday,
-                'outside-month' : getMonth(this.cellData.date) !== this.cellData.monthSelection.month,
+                'past' : compareDesc(parse(this.context.date), today) > 0 && !isToday,
+                'outside-month' : getMonth(this.context.date) !== this.context.monthSelection.month,
                 'today' : isToday,
                 'host' : true
             }
 
-            const prefix = this.cellData.cellStyleClasses.prefix
-            this.styleClassesStatus.host = `${prefix}-${this.cellData.cellStyleClasses.host}`
-            Object.keys(this.cellData.cellStyleClasses.cell).forEach(key => {
-                this.styleClassesStatus.cell[`${prefix}-cell-${this.cellData.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
-                this.styleClassesStatus.number[`${prefix}-number-${this.cellData.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
-                this.styleClassesStatus.overlay[`${prefix}-overlay-${this.cellData.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
+            const prefix = this.context.cellStyleClasses.prefix
+            this.styleClassesStatus.host = `${prefix}-${this.context.cellStyleClasses.host}`
+            Object.keys(this.context.cellStyleClasses.cell).forEach(key => {
+                this.styleClassesStatus.cell[`${prefix}-cell-${this.context.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
+                this.styleClassesStatus.number[`${prefix}-number-${this.context.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
+                this.styleClassesStatus.overlay[`${prefix}-overlay-${this.context.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
             })
 
         }
         
 
-        // console.log(this.cellData.date, format(this.cellData.monthSelection.date, 'YYYY-MM-DD'), this.dateStatus)
+        // console.log(this.context.date, format(this.context.monthSelection.date, 'YYYY-MM-DD'), this.dateStatus)
     }
 
     isSelected():boolean {
-        return this.selection.isSelected(this.cellData.date)
+        return this.selection.isSelected(this.context.date)
     }
 
     isInRange():boolean {
-        return this.selection.isInRange(this.cellData.date)
+        return this.selection.isInRange(this.context.date)
     }
 
     onClick(){
-        this.selection.change(this.cellData.date)
+        this.selection.change(this.context.date)
     }
 }
 

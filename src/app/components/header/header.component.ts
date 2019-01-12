@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges } from "@angular/core";
-import { CalendarMonthView } from 'src/app/lib/calendar-view/selection/strategy/selection-strategy.interface';
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { CalendarMonthView } from '../../lib/calendar-view/selection/strategy/selection-strategy.interface';
+import { HeaderContext } from '../../context/header-context';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { CalendarMonthView } from 'src/app/lib/calendar-view/selection/strategy/
     styleUrls: ['./header.component.scss']
 })
 export class CalendarHeaderComponent implements OnChanges {
-    @Input() context:any
+    @Input() context:HeaderContext
     @Input() monthSelections:CalendarMonthView[] = []
     @Input() showTwoMonths:boolean = false
     @Input() monthIndex:number = 0
@@ -52,7 +53,7 @@ export class CalendarHeaderComponent implements OnChanges {
         let contextChange = changes['context']
         
         if(contextChange){
-            let context = this.context.$implicit
+            let context = this.context
             this.linkedMonths = context.linkedMonths
             this.monthIndex = context.monthIndex
             this.monthSelections = context.monthSelections

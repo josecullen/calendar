@@ -7,6 +7,9 @@ import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view
 import { CellData } from '../../cell-data';
 import { CalendarCellDirective } from 'src/app/directives/calendar-cell';
 import { CalendarHeaderDirective } from 'src/app/directives/calendar-header.directive';
+import { CellContext } from '../../context/cell-context';
+import { HeaderContext } from '../../context/header-context';
+import { MonthContext } from 'src/app/context/month-context';
 
 
 @Component({
@@ -15,7 +18,7 @@ import { CalendarHeaderDirective } from 'src/app/directives/calendar-header.dire
     styleUrls: ['./month.component.scss']
 })
 export class CalendarMonthComponent implements OnChanges {
-    @Input() context: any
+    @Input() context: MonthContext
     @Input() calendar: Calendar
     @Input() index: number
     @Input() selection: ICalendarSelection
@@ -29,31 +32,29 @@ export class CalendarMonthComponent implements OnChanges {
     @ContentChild(CalendarHeaderDirective)
     calendarHeader: CalendarHeaderDirective
 
-    getCellData(day: CellData<any>) {
-        return { ...day , 
+    getCellData(day: CellData<any>): CellContext<any> {
+        return CellContext.from(day, {
             selection: this.selection,
             monthSelection: this.monthSelection,
             hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
             cellStyleClasses: this.cellStyleClasses
-        }
+        })
     }
 
-    getHeaderData(){
+    getHeaderData(): HeaderContext {
         return {
-            $implicit: {
-                monthLabels: this.config.month.monthLabels,
-                monthIndex: this.index,
-                showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
-                linkedMonths: this.config.header.linkedMonths,
-                monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to]
-            }
-        }
+            monthLabels: this.config.month.monthLabels,
+            monthIndex: this.index,
+            showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
+            linkedMonths: this.config.header.linkedMonths,
+            monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to]
+        } as HeaderContext
     }
 
-    ngOnChanges(changes:SimpleChanges){
+    ngOnChanges(changes: SimpleChanges) {
         let contextChange = changes['context']
 
-        if(contextChange){
+        if (contextChange) {
             this.calendar = this.context.calendar
             this.index = this.context.index
             this.selection = this.context.selection

@@ -8,6 +8,7 @@ export interface ICalendarSelection {
     isSelected(date:string):boolean
     from():string
     to():string
+    change(date:string): void
     calendarMonthView:CalendarMonthViewSelection
 }
 
