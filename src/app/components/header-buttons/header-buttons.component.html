@@ -1,0 +1,21 @@
+<ng-container *ngIf="type === 'back'">
+    <span (click)="yearClick.emit()" *ngIf="showChangeYearButton">
+        <i class="arrow left"></i>
+        <i class="arrow left"></i>
+    </span>
+
+    <span (click)="monthClick.emit()" *ngIf="showChangeMonthButton">
+        <i class="arrow left"></i>
+    </span>
+</ng-container>
+
+<ng-container *ngIf="type === 'forward'">
+    <span (click)="monthClick.emit()" *ngIf="showChangeMonthButton">
+        <i class="arrow right"></i>
+    </span>
+
+    <span (click)="yearClick.emit()" *ngIf="showChangeYearButton">
+        <i class="arrow right"></i>
+        <i class="arrow right"></i>
+    </span>
+</ng-container>

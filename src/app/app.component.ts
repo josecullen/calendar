@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
       ],
       dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
       dayLength: 1,
-      // showChangeYearButton: false
+      showChangeYearButton: false
     },
     selection: 'range',
-    stylePrefix: 'alm'
+    // stylePrefix: 'alm'
   })
 
 

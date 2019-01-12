@@ -6,8 +6,7 @@ import { ICalendarSelection } from 'src/app/lib/calendar-view/selection/calendar
 
 @Component({
     selector : 'calendar-cell',
-    templateUrl: './cell.component.html',
-    styleUrls: ['./cell.component.scss']
+    templateUrl: './cell.component.html'
 })
 export class CalendarCellComponent implements OnInit {
     @Input() context:CellContext<any>;

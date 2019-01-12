@@ -10,7 +10,7 @@
 
 <ng-container *ngIf="calendar.getYear(monthSelection.year).months[monthSelection.month].getCalendarView() as calendarView">
     <div [ngClass]="dayLabelsRowClass">
-        <day-header-cell *ngFor="let day of [0,1,2,3,4,5,6]" [day]="day" [daysInWeek]="config.month.dayLabels"
+        <day-header-cell class="day-label" *ngFor="let day of [0,1,2,3,4,5,6]" [day]="day" [daysInWeek]="config.month.dayLabels"
             [dayLength]="config.month.dayLength">
         </day-header-cell>
     </div>

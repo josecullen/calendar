@@ -14,7 +14,7 @@ import { MonthContext } from 'src/app/context/month-context';
 @Component({
     selector: 'calendar-month',
     templateUrl: './month.component.html',
-    styleUrls: ['./month.component.scss']
+    styleUrls: ['../styles.sass','./month.component.scss']
 })
 export class CalendarMonthComponent implements OnChanges {
     @Input() context: MonthContext

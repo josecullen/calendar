@@ -1,4 +1,4 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, ViewEncapsulation } from "@angular/core";
 import { Calendar } from '../../lib/calendar/calendar';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarViewFactory } from '../../calendar-view.factory';
@@ -14,7 +14,8 @@ import { MonthContext } from 'src/app/context/month-context';
 @Component({
     selector: 'calendar',
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss']
+    styleUrls: ['../styles.sass','./calendar.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnChanges {
     selection: CalendarSelection = new CalendarSelection()
