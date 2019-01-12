@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CalendarSelection } from './lib/calendar-view/selection/calendar-selection.class';
-import { mock } from './mock';
 
-import { CellStyleClasses } from './lib/calendar-view/cell-style-classes.class';
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 import { addMonths, addDays, subDays, format } from 'date-fns';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -26,14 +23,15 @@ export class AppComponent implements OnInit {
         'Enero', 'Febrero', 'Marzo', 'Abril', 
         'Mayo', 'Junio', 'Julio', 'Agosto', 
         'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-      ]
+      ],
+      dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+      dayLength: 1
     },
     selection: 'range',
-   
+    stylePrefix: 'alm'
   })
 
 
-  cellStyleClasses:CellStyleClasses = new CellStyleClasses()
 
   onSelectionChange(selection:CalendarSelection){
     console.log('selection change', selection.from(), selection.to())
@@ -48,14 +46,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.cellStyleClasses.prefix = 'alm'
-    // this.cellStyleClasses.cell.selected = 'alm-selected'
-    // this.cellStyleClasses.cell['in-range'] = 'alm-in-range'
-    // this.cellStyleClasses.number['in-range'] = 'alm-in-range-number'
-    // this.cellStyleClasses.number.today = 'alm-today'
-    // this.cellStyleClasses.cell.today = 'alm-today'
-
-    console.log(getRandomDates())
   }
 
   updatePrice(price:number){

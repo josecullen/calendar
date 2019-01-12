@@ -12,20 +12,11 @@ import { ICalendarSelection } from 'src/app/lib/calendar-view/selection/calendar
 export class CalendarCellComponent implements OnInit {
     @Input() context:CellContext<any>;
     dateStatus:any
-    styleClassesStatus:any = {
-        host: 'default',
-        cell : {},
-        number : {},
-        overlay: {}
-    }
+    styles:any = {}
 
     @HostBinding('class') 
     get classes() {
-        let classes = this.styleClassesStatus.host + ' ' + Object.keys(this.styleClassesStatus.cell)
-            .filter(k => this.styleClassesStatus.cell[k] === true)
-            .join(' ')
-
-        return classes
+        return Object.keys(this.styles).filter(key => this.styles[key]).join(' ')
     }
 
     get selection():ICalendarSelection {
@@ -45,17 +36,17 @@ export class CalendarCellComponent implements OnInit {
                 'past' : compareDesc(parse(this.context.date), today) > 0 && !isToday,
                 'outside-month' : getMonth(this.context.date) !== this.context.monthSelection.month,
                 'today' : isToday,
+                'has-payload' : this.context.payload !== undefined,
                 'host' : true
             }
 
-            const prefix = this.context.cellStyleClasses.prefix
-            this.styleClassesStatus.host = `${prefix}-${this.context.cellStyleClasses.host}`
-            Object.keys(this.context.cellStyleClasses.cell).forEach(key => {
-                this.styleClassesStatus.cell[`${prefix}-cell-${this.context.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
-                this.styleClassesStatus.number[`${prefix}-number-${this.context.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
-                this.styleClassesStatus.overlay[`${prefix}-overlay-${this.context.cellStyleClasses.cell[key]}`] = this.dateStatus[key]
-            })
+            const prefix = this.context.stylePrefix
 
+            this.styles[`${prefix}-cell`] = true
+
+            Object.keys(this.dateStatus).forEach(key => {
+                this.styles[`${prefix}-cell-${key}`] = this.dateStatus[key]
+            })
         }
         
 

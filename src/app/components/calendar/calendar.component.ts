@@ -1,14 +1,11 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding } from "@angular/core";
 import { Calendar } from '../../lib/calendar/calendar';
-import { CellDataPayload } from '../../app.component';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarViewFactory } from '../../calendar-view.factory';
 import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
 import { SingleSelectionStrategy } from '../../lib/calendar-view/selection/strategy/simple-selection.strategy';
 import { RangeSelectionStrategy } from '../../lib/calendar-view/selection/strategy/range-selection.strategy';
 import { PickSelectionStrategy } from '../../lib/calendar-view/selection/strategy/pick-selection.strategy';
-import { CellStyleClasses } from '../../lib/calendar-view/cell-style-classes.class';
-import { CalendarConfig } from '../../lib/calendar/config/calendar-config.class';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
 import { CellData } from 'src/app/cell-data';
 import { CalendarMonthDirective } from 'src/app/directives/calendar-month.directive';
@@ -21,10 +18,8 @@ import { MonthContext } from 'src/app/context/month-context';
 })
 export class CalendarComponent implements OnChanges {
     selection: CalendarSelection = new CalendarSelection()
-
     @Input() dates: CellData<any>[] = []
-    @Input() config: CalendarConfig// = new CalendarConfig()
-    @Input() cellStyleClasses: CellStyleClasses = new CellStyleClasses()
+    @Input() config: CalendarViewConfig
 
     @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
 
@@ -32,6 +27,11 @@ export class CalendarComponent implements OnChanges {
     calendarMonth: CalendarMonthDirective
 
     calendar: Calendar
+
+    @HostBinding('class')
+    get classes() {
+        return `${this.config.stylePrefix}-calendar`
+    }
 
     ngOnInit() {
         this.calendar = new Calendar(new CalendarViewFactory(), this.config)
@@ -119,8 +119,7 @@ export class CalendarComponent implements OnChanges {
             calendar: this.calendar,
             selection: this.selection,
             config: this.config,
-            monthSelection: monthIndex === 0 ? this.selection.calendarMonthView.from : this.selection.calendarMonthView.to,
-            cellStyleClasses: this.cellStyleClasses
+            monthSelection: monthIndex === 0 ? this.selection.calendarMonthView.from : this.selection.calendarMonthView.to
         } as MonthContext
     }
 

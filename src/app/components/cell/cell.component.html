@@ -1,5 +1,5 @@
 <ng-container *ngIf="!context.hideDaysOutsideMonth || !dateStatus['outside-month']">
-    <div class="overlay" [ngClass]="styleClassesStatus.overlay" (click)="onClick()"></div>
-    <span class="label" [ngClass]="styleClassesStatus.number">{{ context.dayOfMonth }}</span>
+    <div class="overlay" (click)="onClick()"></div>
+    <span class="label">{{ context.dayOfMonth }}</span>
     <ng-content></ng-content>
 </ng-container>

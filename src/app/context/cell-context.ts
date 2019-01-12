@@ -1,10 +1,9 @@
 import { CellData } from '../cell-data';
-import { CellStyleClasses } from '../lib/calendar-view/cell-style-classes.class';
 import { CalendarMonthView } from '../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { ICalendarSelection } from '../lib/calendar-view/selection/calendar-selection.interface';
 
 export class CellContext<T> extends CellData<T>{
-    cellStyleClasses:CellStyleClasses
+    stylePrefix:string
     selection:ICalendarSelection
     monthSelection:CalendarMonthView
     hideDaysOutsideMonth:boolean

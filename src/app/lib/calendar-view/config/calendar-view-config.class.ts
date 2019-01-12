@@ -2,8 +2,6 @@ import { CalendarHeaderConfig, ICalendarHeaderConfig } from './header-config.cla
 import { CalendarConfig } from '../../calendar/config/calendar-config.class';
 import { MonthViewConfig } from './month-view-config.class';
 import { IMonthViewConfig } from './month-view-config.interface';
-import { ICellStyleClasses, CellStyleClasses } from '../cell-style-classes.class';
-
 
 export class CalendarViewConfig extends CalendarConfig {
 
@@ -11,9 +9,7 @@ export class CalendarViewConfig extends CalendarConfig {
         public header:CalendarHeaderConfig = new CalendarHeaderConfig(),
         public month:MonthViewConfig = new MonthViewConfig(),
         public selection:'simple' | 'picked' | 'range' = 'simple',
-        public styles:{ 
-            cell:ICellStyleClasses
-        } = { cell : new CellStyleClasses() }
+        public stylePrefix:string = 'trb'
     ){
         super(header, month)
     }
@@ -48,9 +44,5 @@ export class ICalendarViewConfig {
     header?:ICalendarHeaderConfig
     month?:IMonthViewConfig
     selection?:'simple' | 'picked' | 'range'
-    styles?:IStyleClassesConfig
-}
-
-export interface IStyleClassesConfig {
-    cell?:ICellStyleClasses
+    stylePrefix?:string
 }

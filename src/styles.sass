@@ -6,9 +6,6 @@
     color: #333333
     font-size: 14px
 
-.row 
-    display: flex
-
 .price 
     color: green
     font-size: 10px
@@ -41,7 +38,22 @@ $in-range-color: #d3eceb
 $hover-color: #e4e7e7
     
     
-.alm-host
+.alm-calendar 
+    display: flex
+    flex-wrap: wrap
+
+.alm-month
+    margin: 0 10px
+
+.alm-row 
+    display: flex
+
+.alm-day-labels
+    padding: 4px 0
+    font-size: 12px
+
+
+.alm-cell
     font-family: ProximaNova,sans-serif
     min-width: 38px
     min-height: 38px
@@ -49,6 +61,8 @@ $hover-color: #e4e7e7
     display: block
     line-height: 30px
     align-items: center
+    &:not(.alm-cell-has-payload)
+        line-height: 38px
     &.overlay
         background-color: $hover-color
     &.alm-cell-past
@@ -115,4 +129,4 @@ $hover-color: #e4e7e7
     line-height: 0
     display: block
     margin-top: -2px
-    font-size: 10px
+    font-size: 9px

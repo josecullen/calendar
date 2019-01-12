@@ -1,8 +1,7 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, HostBinding } from "@angular/core";
 import { ICalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.interface';
 import { CalendarMonthView } from '../../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { Calendar } from '../../lib/calendar/calendar';
-import { CellStyleClasses } from '../../lib/calendar-view/cell-style-classes.class';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
 import { CellData } from '../../cell-data';
 import { CalendarCellDirective } from 'src/app/directives/calendar-cell';
@@ -24,7 +23,14 @@ export class CalendarMonthComponent implements OnChanges {
     @Input() selection: ICalendarSelection
     @Input() monthSelection: CalendarMonthView
     @Input() config: CalendarViewConfig
-    @Input() cellStyleClasses: CellStyleClasses = new CellStyleClasses()
+
+    @HostBinding('class')
+    get classes() {
+        return `${this.config.stylePrefix}-month`
+    }
+
+    dayLabelsRowClass:any
+    rowClass:any
 
     @ContentChild(CalendarCellDirective)
     calendarCell: CalendarCellDirective
@@ -37,7 +43,7 @@ export class CalendarMonthComponent implements OnChanges {
             selection: this.selection,
             monthSelection: this.monthSelection,
             hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
-            cellStyleClasses: this.cellStyleClasses
+            stylePrefix: this.config.stylePrefix
         })
     }
 
@@ -47,7 +53,8 @@ export class CalendarMonthComponent implements OnChanges {
             monthIndex: this.index,
             showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
             linkedMonths: this.config.header.linkedMonths,
-            monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to]
+            monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to],
+            stylePrefix:this.config.stylePrefix
         } as HeaderContext
     }
 
@@ -60,9 +67,14 @@ export class CalendarMonthComponent implements OnChanges {
             this.selection = this.context.selection
             this.monthSelection = this.context.monthSelection
             this.config = this.context.config
-            this.cellStyleClasses = this.context.cellStyleClasses
         }
 
+        this.dayLabelsRowClass = {}
+        this.rowClass = {}
+
+        this.dayLabelsRowClass[`${this.config.stylePrefix}-row`] = true
+        this.dayLabelsRowClass[`${this.config.stylePrefix}-day-labels`] = true
+        this.rowClass[`${this.config.stylePrefix}-row`] = true
     }
 
 }

@@ -3,7 +3,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZon
     selector: 'day-header-cell',
     template: `
     <ng-container>
-        {{ daysInWeek[day] | slice:0:3 }}
+        {{ daysInWeek[day] | slice:0:dayLength }}
     </ng-container>
 
     `,
@@ -19,8 +19,10 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZon
 })
 export class DayHeaderCellComponent {
     @Input() day: number;
+    @Input() daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    @Input() dayLength:number = 3
+
     dateStatus: any
-    daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     
     @HostBinding('style.height.px')
     width:number

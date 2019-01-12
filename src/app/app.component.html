@@ -1,72 +1,52 @@
-<!-- <div class="flex-row"> -->
-  <div class="calendar">
-    
-    <calendar #calendar 
-      [dates]="dates" 
-      [config]="config" 
-      [cellStyleClasses]="cellStyleClasses" 
-      (selectionChange)="onSelectionChange($event)">
+<div class="calendar">
 
-      <calendar-month *calendarMonth="let context;" [context]="context"> -->
-        <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
-        <calendar-cell *calendarCell="let context;" [context]="context">
-          <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
-        </calendar-cell> 
-      </calendar-month>
-    </calendar>
+  <calendar #calendar [dates]="dates" [config]="config" (selectionChange)="onSelectionChange($event)">
 
+    <calendar-month *calendarMonth="let context;" [context]="context"> -->
+      <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
+      <calendar-cell *calendarCell="let context;" [context]="context">
+        <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
+      </calendar-cell>
+    </calendar-month>
+  </calendar>
+
+</div>
+
+
+<!-- <form>
+  <h3>Selection</h3>
+  <select [ngModelOptions]="{standalone: true}" [(ngModel)]="config.selection">
+    <option *ngFor="let strategy of selectionOptions" [value]="strategy">{{strategy}}</option>
+  </select>
+
+  <h3>Header</h3>
+  <div class="flex-row">
+    <input type="checkbox" [(ngModel)]="config.header.linkedMonths" [ngModelOptions]="{standalone: true}" #linkedMonths="ngModel">
+    <label>Linked Months</label>
   </div>
-  <!-- style="float: right;" -->
-  <form >
-    <h3>Selection</h3>
-    <select [ngModelOptions]="{standalone: true}" [(ngModel)]="config.selection">
-      <option *ngFor="let strategy of selectionOptions" 
-        [value]="strategy"
-        >{{strategy}}</option>
-    </select>
 
-    <h3>Header</h3>
-    <div class="flex-row">
-      <input 
-        type="checkbox" 
-        [(ngModel)]="config.header.linkedMonths"
-        [ngModelOptions]="{standalone: true}"
-        #linkedMonths="ngModel">  
-      <label>Linked Months</label>
+  <h3>Month</h3>
+  <div class="flex-row">
+    <div>
+      <label>First Day </label>
+      <input type="number" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.firstDay" #firstDay>
     </div>
-
-    <h3>Month</h3>
-    <div class="flex-row">
-      <div>
-        <label>First Day </label>
-        <input type="number" 
-          [ngModelOptions]="{standalone: true}" 
-          [(ngModel)]="config.month.firstDay" #firstDay>
-      </div>
-      <div>
-        <label>Hide Weekends</label>
-        <input type="checkbox" 
-          [ngModelOptions]="{standalone: true}" 
-          [(ngModel)]="config.month.hideWeekends" #hideWeekends>
-      </div>
-      <div>
-        <label>Hide Days Outside Month</label>
-        <input type="checkbox" 
-          [ngModelOptions]="{standalone: true}" 
-          [(ngModel)]="config.month.hideDaysOutsideMonth" >
-      </div>
-      <div>
-          <label>Show two calendar if need</label>
-          <input type="checkbox" 
-            [ngModelOptions]="{standalone: true}" 
-            [(ngModel)]="config.month.showTwoCalendarIfNeed">
-      </div>
+    <div>
+      <label>Hide Weekends</label>
+      <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.hideWeekends"
+        #hideWeekends>
     </div>
+    <div>
+      <label>Hide Days Outside Month</label>
+      <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.hideDaysOutsideMonth">
+    </div>
+    <div>
+      <label>Show two calendar if need</label>
+      <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.showTwoCalendarIfNeed">
+    </div>
+  </div>
 
-    <button (click)="applyChanges()">Apply</button>
+  <button (click)="applyChanges()">Apply</button>
 
-    <pre>{{config | json}}</pre>
-  </form>
-
-<!-- </div> -->
-
+  <pre>{{config | json}}</pre>
+</form> -->
