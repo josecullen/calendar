@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Directive, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add the imports!
 
 import { AppComponent } from './app.component';
-import { CalendarDateItem } from './calendar-date-item.component';
 import { CalendarCellDirective } from './directives/calendar-cell';
 import { DayHeaderCellComponent } from './components/day-cell';
 import { CalendarHeaderButtonsComponent } from './components/header-buttons.component';
@@ -18,7 +17,6 @@ import { CalendarMonthDirective } from './directives/calendar-month.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    CalendarDateItem,
     CalendarComponent,
     
     CalendarCellDirective,
@@ -36,9 +34,6 @@ import { CalendarMonthDirective } from './directives/calendar-month.directive';
     BrowserModule,
     FormsModule, 
     ReactiveFormsModule
-  ],
-  entryComponents: [
-    CalendarDateItem
   ],
   providers: [],
   bootstrap: [AppComponent]

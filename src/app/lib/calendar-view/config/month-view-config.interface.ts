@@ -3,4 +3,5 @@ export interface IMonthViewConfig {
     hideDaysOutsideMonth?:boolean
     showTwoCalendarIfNeed?:boolean
     firstDay?:number
+    monthLabels?:string[]
 }

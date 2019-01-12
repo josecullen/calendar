@@ -47,7 +47,7 @@ $hover-color: #e4e7e7
     min-height: 38px
     text-align: center
     display: block
-    line-height: 38px
+    line-height: 30px
     align-items: center
     &.overlay
         background-color: $hover-color
@@ -60,6 +60,8 @@ $hover-color: #e4e7e7
     &.alm-cell-selected
         &:not(.alm-cell-outside-month) 
             .label
+                color: $selected-color
+            .my-price
                 color: $selected-color
             background-color: $selected
             &.alm-cell-from
@@ -107,3 +109,10 @@ $hover-color: #e4e7e7
         text-decoration: underline
         cursor: pointer
 
+
+.my-price
+    color: green
+    line-height: 0
+    display: block
+    margin-top: -2px
+    font-size: 10px

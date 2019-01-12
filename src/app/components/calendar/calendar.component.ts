@@ -21,7 +21,7 @@ import { CalendarMonthDirective } from 'src/app/directives/calendar-month.direct
 export class CalendarComponent implements OnChanges {
     selection: CalendarSelection = new CalendarSelection()
 
-    @Input() dates: CellDataPayload[]
+    @Input() dates: CellDataPayload[] = []
     @Input() config: CalendarConfig// = new CalendarConfig()
     @Input() cellStyleClasses: CellStyleClasses = new CellStyleClasses()
 
@@ -43,22 +43,28 @@ export class CalendarComponent implements OnChanges {
 
 
         if (this.calendar) {
-            let change = changes['dates']
+            // let change = changes['dates']
 
-            if (change) {
+            // if (change) {
+                
+                // setTimeout(() => {
+                    // this.calendar.setDaysPayload(this.dates)
+                // })
+                this.calendar.recalculate()
                 this.dates.forEach(day => {
                     this.calendar.setDay(day.date, new CellData(day.date, day.payload, false))
                 })
+            // }
+            
+            if (configChange) {
+                console.log('configChange', configChange, configChange.previousValue.selection, configChange.currentValue.selection)
+                this.calendar.config = this.config
+    
+                this.updateSelection()
             }
         }
 
-        if (configChange && this.calendar) {
-            console.log('configChange', configChange, configChange.previousValue.selection, configChange.currentValue.selection)
-            this.calendar.config = this.config
-
-            this.updateSelection()
-
-        }
+        
     }
 
     updateSelection(){
@@ -73,9 +79,14 @@ export class CalendarComponent implements OnChanges {
                 this.pickSelection()
                 break
         }
+
+        this.calendar.recalculate()
+        this.dates.forEach(day => {
+            this.calendar.setDay(day.date, new CellData(day.date, day.payload, false))
+        })
     }
 
-    cellClicked(data: CellData) {
+    cellClicked(data: CellData<any>) {
         data.selected = !data.selected
     }
 

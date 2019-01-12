@@ -29,9 +29,8 @@ export class CalendarMonthViewComponent implements OnChanges {
     @ContentChild(CalendarHeaderDirective)
     calendarHeader: CalendarHeaderDirective
 
-    getCellData(day: CellData) {
-        return {
-            date: day,
+    getCellData(day: CellData<any>) {
+        return { ...day , 
             selection: this.selection,
             monthSelection: this.monthSelection,
             hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
@@ -42,6 +41,7 @@ export class CalendarMonthViewComponent implements OnChanges {
     getHeaderData(){
         return {
             $implicit: {
+                monthLabels: this.config.month.monthLabels,
                 monthIndex: this.index,
                 showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
                 linkedMonths: this.config.header.linkedMonths,

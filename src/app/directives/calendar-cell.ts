@@ -14,7 +14,7 @@ export class CalendarCellDirective {
     }
 
     @Input()
-    set calendarCell(content:CellData) {
+    set calendarCell(content:CellData<any>) {
         if(content){
             let ref = this.viewContainer
             .createEmbeddedView(this.template, { $implicit: content })

@@ -11,22 +11,12 @@
 
     <ng-template #defaultMonths>
         <calendar-month-view 
-            [index]="0"
-            [calendar]="calendar"
-            [selection]="selection"
-            [config]="config"
-            [monthSelection]="selection.calendarMonthView.from"
-            [cellStyleClasses]="cellStyleClasses">
+            [context]="getMonthContext(0)">
         </calendar-month-view> 
     
         <calendar-month-view 
             *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
-            [index]="1"
-            [calendar]="calendar"
-            [config]="config"
-            [selection]="selection"
-            [cellStyleClasses]="cellStyleClasses"
-            [monthSelection]="selection.calendarMonthView.to">
+            [context]="getMonthContext(1)">
         </calendar-month-view>
     </ng-template>
 

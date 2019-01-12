@@ -13,6 +13,7 @@ export class CalendarHeaderComponent implements OnChanges {
     @Input() showTwoMonths:boolean = false
     @Input() monthIndex:number = 0
     @Input() linkedMonths:boolean = true
+    @Input() monthLabels:string[]
 
     minusYear(index:number){
         if(this.linkedMonths){
@@ -56,7 +57,8 @@ export class CalendarHeaderComponent implements OnChanges {
             this.monthIndex = context.monthIndex
             this.monthSelections = context.monthSelections
             this.showTwoMonths = context.showTwoMonths
-            console.log('context change', context, this.monthSelections)
+            this.monthLabels = context.monthLabels
+            // console.log('context change', context, this.monthSelections)
         }
     }
 }

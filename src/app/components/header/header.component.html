@@ -8,7 +8,7 @@
 <span class="filler"></span>
 
 <span class="label" *ngIf="monthSelections && monthSelections.length">
-    {{ monthSelections[monthIndex].label }}
+    {{ monthSelections[monthIndex].labelWithConfig(monthLabels) }}
 </span>
 
 <span class="filler"></span>

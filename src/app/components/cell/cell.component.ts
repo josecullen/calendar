@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, HostBinding } from "@angular/core";
 import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
-import { CalendarMonthView } from '../../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { getMonth,  parse, compareDesc, format } from 'date-fns';
-import { CellStyleClasses } from '../../lib/calendar-view/cell-style-classes.class';
-import { CellData } from '../../cell-data';
+import { CellViewData } from 'src/app/cell-data-view';
 
 @Component({
     selector : 'default-cell',
@@ -11,7 +9,7 @@ import { CellData } from '../../cell-data';
     styleUrls: ['./cell.component.scss']
 })
 export class DefaultCellComponent implements OnInit {
-    @Input() cellData:CellViewData;
+    @Input() cellData:CellViewData<any>;
     dateStatus:any
     styleClassesStatus:any = {
         host: 'default',
@@ -36,15 +34,15 @@ export class DefaultCellComponent implements OnInit {
     ngOnInit(){
         if(this.cellData){
             const today = new Date()
-            const isToday = this.cellData.date.date === format(new Date(), 'YYYY-MM-DD')
+            const isToday = this.cellData.date === format(new Date(), 'YYYY-MM-DD')
             
             this.dateStatus = {
                 'selected': this.isSelected(),
-                'from': this.selection.from() === this.cellData.date.date,
-                'to' : this.selection.to() === this.cellData.date.date,
+                'from': this.selection.from() === this.cellData.date,
+                'to' : this.selection.to() === this.cellData.date,
                 'in-range': this.isInRange() || this.isSelected(),
-                'past' : compareDesc(parse(this.cellData.date.date), today) > 0 && !isToday,
-                'outside-month' : getMonth(this.cellData.date.date) !== this.cellData.monthSelection.month,
+                'past' : compareDesc(parse(this.cellData.date), today) > 0 && !isToday,
+                'outside-month' : getMonth(this.cellData.date) !== this.cellData.monthSelection.month,
                 'today' : isToday,
                 'host' : true
             }
@@ -60,27 +58,19 @@ export class DefaultCellComponent implements OnInit {
         }
         
 
-        // console.log(this.cellData.date.date, format(this.cellData.monthSelection.date, 'YYYY-MM-DD'), this.dateStatus)
+        // console.log(this.cellData.date, format(this.cellData.monthSelection.date, 'YYYY-MM-DD'), this.dateStatus)
     }
 
     isSelected():boolean {
-        return this.selection.isSelected(this.cellData.date.date)
+        return this.selection.isSelected(this.cellData.date)
     }
 
     isInRange():boolean {
-        return this.selection.isInRange(this.cellData.date.date)
+        return this.selection.isInRange(this.cellData.date)
     }
 
     onClick(){
-        this.selection.change(this.cellData.date.date)
+        this.selection.change(this.cellData.date)
     }
 }
 
-export class CellViewData {
-    date:CellData
-    cellStyleClasses:CellStyleClasses
-    click:Function
-    selection:CalendarSelection
-    monthSelection:CalendarMonthView
-    hideDaysOutsideMonth:boolean
-}

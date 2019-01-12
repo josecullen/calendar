@@ -2,7 +2,7 @@ import { CellDataPayload } from './app.component';
 
 export const mock: CellDataPayload[] = [
     {
-        date: '2019-01-01',
+        date: '2019-01-21',
         payload: {
             checkIn: true,
             mealplans: [

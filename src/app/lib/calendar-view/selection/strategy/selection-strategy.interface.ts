@@ -24,29 +24,36 @@ export class CalendarMonthView {
         return format(this.date, 'MMMM YYYY')
     }
 
+    labelWithConfig(months:string[]):string {
+        return months ? `${months[getMonth(this.date)]} ${getYear(this.date)}` : this.label
+    }
+
     addMonth(){
+        let previousDate = this.date
         this.date = addMonths(this.date, 1)
-        this.update()
-        
+        this.update(previousDate)
     }
 
     addYear(){
+        let previousDate = this.date
         this.date = addYears(this.date, 1)
-        this.update()
+        this.update(previousDate)
     }
 
     minusMonth(){
+        let previousDate = this.date
         this.date = subMonths(this.date, 1)
-        this.update()
+        this.update(previousDate)
     }
 
     minusYear(){
+        let previousDate = this.date
         this.date = subYears(this.date, 1)
-        this.update()
+        this.update(previousDate)
     }
 
 
-    private update(){
+    private update(previousDate){
         this.year = getYear(this.date)
         this.month = getMonth(this.date)
         console.log(format(this.date, 'YYYY-MM'),this.year, this.month)

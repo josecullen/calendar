@@ -6,7 +6,8 @@ export class MonthViewConfig implements IMonthViewConfig {
         public hideWeekends:boolean = false,
         public hideDaysOutsideMonth:boolean = true,
         public showTwoCalendarIfNeed:boolean = false,
-        public firstDay:number = 0
+        public firstDay:number = 0,
+        public monthLabels:string[] = []
     ){}
     
 }

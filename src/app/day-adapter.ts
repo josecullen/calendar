@@ -2,31 +2,28 @@ import { parse, isWeekend } from 'date-fns';
 import { Day } from './lib/calendar/day/day.class';
 import { IDay } from './lib/calendar/day/day.interface';
 
-export class DayAdapter implements IDay {
-    private _day: Day
+export class DayAdapter extends Day implements IDay {
+    // private _day: Day
 
-    constructor(private _date: string) {
-        this._day = new Day(parse(_date))
+    constructor(_date: string) {
+        super(parse(_date))
+        // this._day = new Day(parse(_date))
     }
 
     get date(): string {
-        return this._day.date
+        return this.date
     }
 
     get dayOfMonth(): number {
-        return this._day.dayOfMonth
+        return this.dayOfMonth
     }
 
     get dayOfWeek(): number {
-        return this._day.dayOfWeek
+        return this.dayOfWeek
     }
 
     get name(): string {
-        return this._day.name
-    }
-
-    get isWeekend(): boolean {
-        return isWeekend(this._date)
+        return this.name
     }
 
 }

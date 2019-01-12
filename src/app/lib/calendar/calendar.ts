@@ -5,6 +5,8 @@ import { CalendarDefaultFactory } from './factory/default-factory';
 import { IMonth } from './month/month.interface';
 import { IDay } from './day/day.interface';
 import { CalendarConfig } from './config/calendar-config.class';
+import { CellDataPayload } from 'src/app/app.component';
+import { CellData } from 'src/app/cell-data';
 
 export class Calendar {
 
@@ -19,18 +21,22 @@ export class Calendar {
         let _years = this.years.slice()
 
         this.years = []
-
+        // debugger
         _years.map(year => this.getYear(year.value))
     }
 
+    setDaysPayload(payloads: { date:string, payload:IDay }[]){
+        // this.recalculate()
+        payloads.forEach(payload => this.setDay(payload.date, payload.payload))
+    }
+
     setDay(dateString:string, day:IDay){
-        let date = new Date()
+        let date = new Date(dateString)
         let year = fns.getYear(date)
         let month = fns.getMonth(date)
 
         let selectedYear = this.getYear(year)
         let selectedMonth = selectedYear.getMonth(month)
-
         selectedMonth.setDay(day)
     }
 

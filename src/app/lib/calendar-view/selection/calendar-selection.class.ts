@@ -9,7 +9,8 @@ export class CalendarSelection implements ICalendarSelection, ISelectionStrategy
         private strategy:ISelectionStrategy = new SingleSelectionStrategy(),
         public selectedDates: string[] = [],
         public status: SelectionStatus = SelectionStatus.unset,
-        public selectionChange:EventEmitter<CalendarSelection> = new EventEmitter()
+        public selectionChange:EventEmitter<CalendarSelection> = new EventEmitter(),
+        public monthSelectionChange:EventEmitter<{ previous: string, current: string}> = new EventEmitter()
     ){
     }
 
@@ -35,6 +36,10 @@ export class CalendarSelection implements ICalendarSelection, ISelectionStrategy
 
         this.selectionChange.emit(this)
     }
+
+    // selectedMonthChange(){
+    //     this.monthSelectionChange.emit(this)
+    // }
 
     from():string {
         return this.selectedDates.length 

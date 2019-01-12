@@ -7,10 +7,12 @@
       [cellStyleClasses]="cellStyleClasses" 
       (selectionChange)="onSelectionChange($event)">
 
-      <!-- <calendar-month-view *calendarMonth="let context;" [context]="context"> -->
-        <!-- <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
-        <calendar-date-item *calendarCell="let cellData;" [cellData]="cellData"></calendar-date-item> -->
-      <!-- </calendar-month-view> -->
+      <calendar-month-view *calendarMonth="let context;" [context]="context">
+        <!-- <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>-->
+        <default-cell *calendarCell="let cellData;" [cellData]="cellData">
+          <span class="my-price" *ngIf="cellData.payload">${{ cellData.payload }}</span>
+        </default-cell> 
+      </calendar-month-view>
     </calendar>
 
   </div>
