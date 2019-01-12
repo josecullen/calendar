@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges, HostBinding } from "@angular/core";
 import { CalendarMonthView } from '../../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { HeaderContext } from '../../context/header-context';
 
@@ -15,6 +15,16 @@ export class CalendarHeaderComponent implements OnChanges {
     @Input() monthIndex:number = 0
     @Input() linkedMonths:boolean = true
     @Input() monthLabels:string[]
+
+    @HostBinding('class')
+    get classes(){
+        return `${this.context.stylePrefix}-calendar-header`
+    }
+
+    get buttonClasses(){
+        return `${this.classes}-buttons`
+    }
+
 
     minusYear(index:number){
         if(this.linkedMonths){

@@ -26,7 +26,7 @@ export class CalendarMonthComponent implements OnChanges {
 
     @HostBinding('class')
     get classes() {
-        return `${this.config.stylePrefix}-month`
+        return `${this.config.stylePrefix}-calendar-month`
     }
 
     dayLabelsRowClass:any
@@ -54,7 +54,9 @@ export class CalendarMonthComponent implements OnChanges {
             showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
             linkedMonths: this.config.header.linkedMonths,
             monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to],
-            stylePrefix:this.config.stylePrefix
+            stylePrefix:this.config.stylePrefix,
+            showChangeMonthButton: this.config.month.showChangeMonthButton,
+            showChangeYearButton: this.config.month.showChangeYearButton
         } as HeaderContext
     }
 
@@ -72,9 +74,9 @@ export class CalendarMonthComponent implements OnChanges {
         this.dayLabelsRowClass = {}
         this.rowClass = {}
 
-        this.dayLabelsRowClass[`${this.config.stylePrefix}-row`] = true
-        this.dayLabelsRowClass[`${this.config.stylePrefix}-day-labels`] = true
-        this.rowClass[`${this.config.stylePrefix}-row`] = true
+        this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-row`] = true
+        this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-day-labels`] = true
+        this.rowClass[`${this.config.stylePrefix}-calendar-row`] = true
     }
 
 }

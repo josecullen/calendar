@@ -1,5 +1,5 @@
 :host {
-    flex: 1 1 auto;
+    // flex: 1 1 auto;
     position: relative;
 }
 
@@ -17,55 +17,45 @@
     background: #666;
 }
 
-.date-label {
-    background: none;
-    margin: 0;
-}
-
-.date-label span {
-    background: none
-}
-
-// .date-label .cell-default-today {
-//     border-radius: 50%;
-//     border: 1px solid #39f;
-//     padding: 2px;
-//     width: 24px;
-//     height: 24px;
-//     line-height: 24px;
-//     display: inline-block;
+// .date-label {
+//     background: none;
+//     margin: 0;
 // }
 
-.day {
-    box-sizing: border-box;
-    text-align: center;
-    position: relative;
-}
+// .date-label span {
+//     background: none
+// }
 
-.day.cell-default  {
-    min-width:31px; 
-    min-height:31px; 
-    padding: 4px;
-    color: #333;
-}
+// .day {
+//     box-sizing: border-box;
+//     text-align: center;
+//     position: relative;
+// }
 
-.cell-default-selected {
-    background: #999;
-}
+// .day.cell-default  {
+//     min-width:31px; 
+//     min-height:31px; 
+//     padding: 4px;
+//     color: #333;
+// }
 
-.cell-default-in-range {
-    background: #ccc;
-}
+// .cell-default-selected {
+//     background: #999;
+// }
 
-.cell-default-past {
-    background: #eee;
-}
+// .cell-default-in-range {
+//     background: #ccc;
+// }
 
-.cell-default-outside-month {
-    background: transparent;
-    border: none;
-}
+// .cell-default-past {
+//     background: #eee;
+// }
 
-.overlay:hover {
-    opacity: .2;
-}
+// .cell-default-outside-month {
+//     background: transparent;
+//     border: none;
+// }
+
+// .overlay:hover {
+//     opacity: .2;
+// }

@@ -42,10 +42,10 @@ export class CalendarCellComponent implements OnInit {
 
             const prefix = this.context.stylePrefix
 
-            this.styles[`${prefix}-cell`] = true
+            this.styles[`${prefix}-calendar-cell`] = true
 
             Object.keys(this.dateStatus).forEach(key => {
-                this.styles[`${prefix}-cell-${key}`] = this.dateStatus[key]
+                this.styles[`${prefix}-calendar-cell-${key}`] = this.dateStatus[key]
             })
         }
         
