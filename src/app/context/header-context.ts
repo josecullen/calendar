@@ -7,4 +7,7 @@ export class HeaderContext {
     showTwoMonths: boolean
     linkedMonths: boolean
     monthSelections: CalendarMonthView[]
+    showChangeYearButton: boolean
+    showChangeMonthButton: boolean
+    stylePrefix:string
 }

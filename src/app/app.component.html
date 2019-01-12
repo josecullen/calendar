@@ -2,7 +2,7 @@
 
   <calendar #calendar [dates]="dates" [config]="config" (selectionChange)="onSelectionChange($event)">
 
-    <calendar-month *calendarMonth="let context;" [context]="context"> -->
+    <calendar-month *calendarMonth="let context;" [context]="context">
       <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
       <calendar-cell *calendarCell="let context;" [context]="context">
         <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>

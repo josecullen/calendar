@@ -6,4 +6,6 @@ export interface IMonthViewConfig {
     monthLabels?: string[]
     dayLabels?: string[]
     dayLength?: number
+    showChangeYearButton?: boolean
+    showChangeMonthButton?: boolean
 }

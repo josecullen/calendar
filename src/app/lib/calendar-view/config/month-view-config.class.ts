@@ -9,7 +9,9 @@ export class MonthViewConfig implements IMonthViewConfig {
         public firstDay:number = 0,
         public monthLabels:string[] = [],
         public dayLabels:string[] = [],
-        public dayLength:number = 3
+        public dayLength:number = 3,
+        public showChangeYearButton: boolean = true,
+        public showChangeMonthButton: boolean = true
 
     ){}
     
