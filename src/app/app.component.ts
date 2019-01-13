@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { CalendarSelection } from './lib/calendar-view/selection/calendar-selection.class';
 
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 import { addMonths, addDays, subDays, format } from 'date-fns';
+import { PickerService } from './modules/picker/picker.service';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { DatepickerComponent, DatepickerData } from './components/datepicker/datepicker.component';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +13,8 @@ import { addMonths, addDays, subDays, format } from 'date-fns';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  selectionOptions= ['simple', 'picked', 'range']
-  selection:CalendarSelection
+  selectionOptions = ['simple', 'picked', 'range']
+  selection: CalendarSelection
 
   @Input() dates: CellDataPayload[] = getRandomDates()//mock
 
@@ -32,31 +35,50 @@ export class AppComponent implements OnInit {
     // stylePrefix: 'alm'
   })
 
+  constructor(private pickerService: PickerService) {
 
-  onMonthSelectionChange(a:any){
+  }
+
+  openPicker(elementRef: ElementRef) {
+
+    this.pickerService.open({
+      data: {
+        calendarConfig: {
+          selection: 'picked'
+        },
+        datesSelected: ['2019-02-01', '2019-02-10', '2019-02-15', '2019-01-10']
+      } as DatepickerData
+    }, elementRef, DatepickerComponent)
+      .subscribe(result => {
+        console.log(result)
+      })
+  }
+
+
+  onMonthSelectionChange(a: any) {
     // console.log(a)
   }
 
-  onSelectionChange(selection:CalendarSelection){
+  onSelectionChange(selection: CalendarSelection) {
     // console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
-    if(!selection.to()){
+    if (!selection.to()) {
       this.dates = getRandomDates()
     }
     this.selection = selection
   }
 
-  applyChanges(){
+  applyChanges() {
     this.config = CalendarViewConfig.from(this.config)
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
-  updatePrice(price:number){
+  updatePrice(price: number) {
     this.selection.selectedDates.forEach(date => {
       let currentDate = this.dates.find(d => d.date === date)
 
-      if(currentDate){
+      if (currentDate) {
         currentDate.payload.price = price
       } else {
         this.dates.push({
@@ -76,31 +98,31 @@ export class AppComponent implements OnInit {
 }
 
 export class CellDataPayload {
-  public date:string
-  public payload:any
+  public date: string
+  public payload: any
 }
 
 
-function getRandomDates(){
+function getRandomDates() {
   let values = []
   let randomValues = 30
   let randomMonths = 3
   let randomPrice = { min: 50, max: 900 }
 
-  for(let v = 0; v < randomValues; v++){
+  for (let v = 0; v < randomValues; v++) {
     let date = new Date()
     date = addMonths(date, randomInt(randomMonths))
     date = addDays(date, randomInt(30))
     date = subDays(date, randomInt(30))
     values.push({
       date: format(date, 'YYYY-MM-DD'),
-      payload : randomInt(randomPrice.max - randomPrice.min) + randomPrice.min
+      payload: randomInt(randomPrice.max - randomPrice.min) + randomPrice.min
     })
   }
 
   return values
 }
 
-function randomInt(max){
+function randomInt(max) {
   return Math.floor(Math.random() * max)
 }

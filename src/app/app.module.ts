@@ -12,6 +12,8 @@ import { CalendarMonthDirective } from './directives/calendar-month.directive';
 import { CalendarCellComponent } from './components/cell/cell.component';
 import { DayHeaderCellComponent } from './components/cell-day/day-cell';
 import { CalendarHeaderButtonsComponent } from './components/header-buttons/header-buttons.component';
+import { PickerModule } from './modules/picker/picker.module';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 
 @NgModule({
@@ -28,12 +30,17 @@ import { CalendarHeaderButtonsComponent } from './components/header-buttons/head
     DayHeaderCellComponent,
     CalendarHeaderComponent,
     CalendarHeaderButtonsComponent,
-    
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PickerModule
+  ],
+  entryComponents: [
+    CalendarComponent,
+    DatepickerComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

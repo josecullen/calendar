@@ -30,6 +30,10 @@ export class CalendarSelection implements ICalendarSelection, ISelectionStrategy
         this.strategy.calendarMonthView.monthSelectionChange = this.monthSelectionChange
     }
 
+    getStrategy():ISelectionStrategy {
+        return this.strategy
+    }
+
     isInRange(date:string):boolean {
         return this.strategy.isInRange(date, this)
     }
