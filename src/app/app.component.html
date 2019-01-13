@@ -22,7 +22,14 @@
       </calendar-month> -->
   <!-- </calendar> -->
 
-  <button #mybutton (click)="openPicker(mybutton, monthRef)">open</button>
+  <button #mybutton 
+    [picker-toggle]="monthRef" 
+    [config]="datepickerConfig"
+    [dates]="dates"
+    (close)="onClose($event)"
+    (selectionChange)="onSelectionChange($event)"
+    (click)="openPicker(mybutton, monthRef)">open
+  </button>
 
 </div>
 

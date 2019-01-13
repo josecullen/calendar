@@ -2,8 +2,8 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZon
 @Component({
     selector: 'day-header-cell',
     template: `
-    <ng-container *ngIf="dayLabels.length else defaultDays">
-        {{ dayLabels[day] | slice:0:dayLength }}a
+    <ng-container *ngIf="dayLabels.length > 0 else defaultDays">
+        {{ dayLabels[day] | slice:0:dayLength }}
     </ng-container>
 
     <ng-template #defaultDays>

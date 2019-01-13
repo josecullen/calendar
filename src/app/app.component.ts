@@ -19,37 +19,43 @@ export class AppComponent implements OnInit {
   @Input() dates: CellDataPayload[] = getRandomDates()//mock
 
   config = CalendarViewConfig.from({
-    // month: {
+    month: {
     //   hideDaysOutsideMonth: true,
-    //   showTwoCalendarIfNeed: true,
-    //   monthLabels : [
-    //     'Enero', 'Febrero', 'Marzo', 'Abril', 
-    //     'Mayo', 'Junio', 'Julio', 'Agosto', 
-    //     'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-    //   ],
-    //   dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-    //   dayLength: 1,
-    //   showChangeYearButton: false
-    // },
+      showTwoCalendarIfNeed: true,
+      monthLabels : [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 
+        'Mayo', 'Junio', 'Julio', 'Agosto', 
+        'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+      ],
+      dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+      dayLength: 1,
+      showChangeYearButton: false
+    },
     selection: 'range',
     // stylePrefix: 'alm'
   })
 
-  constructor(private pickerService: PickerService) {
+  datepickerConfig:DatepickerData = {
+    calendarConfig: this.config,
+    datesSelected: ['2019-02-01', '2019-02-10'],
+    dates: getRandomDates()
+  }
 
+  constructor(private pickerService: PickerService) {
+    console.log('this.datepickerConfig', this.datepickerConfig)
   }
 
   openPicker(elementRef: ElementRef, calendar:TemplateRef<any>) {
     console.log(calendar)
-    this.pickerService.open({
-      data: {
-        datesSelected: ['2019-02-01', '2019-02-10'],
-        dates: getRandomDates()
-      } as DatepickerData
-    }, elementRef, DatepickerComponent, calendar)
-      .subscribe(result => {
-        console.log(result)
-      })
+    // this.pickerService.open({
+    //   data: {
+    //     datesSelected: ['2019-02-01', '2019-02-10'],
+    //     dates: getRandomDates()
+    //   } as DatepickerData
+    // }, elementRef, DatepickerComponent, calendar)
+    //   .subscribe(result => {
+    //     console.log(result)
+    //   })
   }
 
 
@@ -58,12 +64,16 @@ export class AppComponent implements OnInit {
   }
 
   onSelectionChange(selection: CalendarSelection) {
-    console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
+    // console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
     if (!selection.to()) {
       this.dates = getRandomDates()
-      console.log(this.dates)
+      // console.log(this.dates)
     }
     this.selection = selection
+  }
+
+  onClose(data){
+    console.log('on close', data)
   }
 
   applyChanges() {

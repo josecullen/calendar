@@ -38,7 +38,6 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     }
 
     ngDoCheck(){
-        console.log(this.dates)
         // console.log('calendar do check')
     }
 
@@ -67,7 +66,7 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
             // }
 
             if (configChange) {
-                console.log('configChange', configChange, configChange.previousValue.selection, configChange.currentValue.selection)
+                
                 this.calendar.config = this.config
 
                 this.updateSelection()

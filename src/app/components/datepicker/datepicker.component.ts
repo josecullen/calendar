@@ -21,9 +21,7 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
     private preventClose = false
 
     onSelectionChange(selection: CalendarSelection) {
-        console.log(!!selection.to(), this.preventClose)
         if (!!selection.to() && !this.preventClose) {
-            console.log('close')
             setTimeout(() => {
                 this.pickerRef.close({
                     from: selection.from(),
@@ -50,15 +48,17 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
     }
 
     constructor(
-        private pickerRef: PickerOverlayRef,
-        @Inject(PICKER_DATA) private data: DatepickerData,
+        private pickerRef: PickerOverlayRef<DatepickerComponent>,
+        @Inject(PICKER_DATA) public data: DatepickerData,
         public calendarRef: TemplateRef<any>
     ) {
+        console.log(this.data.calendarConfig.month)
+        this.data.calendarConfig = Object.assign(DEFAULT_DATEPICKER_DATA.calendarConfig, data.calendarConfig)
+        // { ...DEFAULT_DATEPICKER_DATA.calendarConfig, ...data.calendarConfig }
 
-        this.data.calendarConfig = { ...DEFAULT_DATEPICKER_DATA.calendarConfig, ...data.calendarConfig }
+        console.log(this.data)
         this.data.dates = data.dates || DEFAULT_DATEPICKER_DATA.dates
         this.data.datesSelected = data.datesSelected || DEFAULT_DATEPICKER_DATA.datesSelected
-        console.log(calendarRef)
 
     }
 }
@@ -73,12 +73,6 @@ export interface DatepickerData {
 
 export const DEFAULT_DATEPICKER_DATA: DatepickerData = {
     calendarConfig: CalendarViewConfig.from({
-        month: {
-            showTwoCalendarIfNeed: true,
-            dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-            dayLength: 1,
-            showChangeYearButton: false
-        },
         selection: 'range'
     }),
     datesSelected: [],

@@ -1,3 +1,4 @@
+
 <ng-container *ngIf="calendarHeader else defaultHeader">
     <ng-container *ngTemplateOutlet="calendarHeader.template; context: { $implicit: getHeaderData()}">
     </ng-container>

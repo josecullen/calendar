@@ -14,6 +14,7 @@ import { DayHeaderCellComponent } from './components/cell-day/day-cell';
 import { CalendarHeaderButtonsComponent } from './components/header-buttons/header-buttons.component';
 import { PickerModule } from './modules/picker/picker.module';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { PickerToggleDirective } from './directives/picker-toggle.directive';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     DayHeaderCellComponent,
     CalendarHeaderComponent,
     CalendarHeaderButtonsComponent,
-    DatepickerComponent
+    DatepickerComponent,
+
+    PickerToggleDirective
   ],
   imports: [
     BrowserModule,

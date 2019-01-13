@@ -15,12 +15,14 @@ export class CalendarViewConfig extends CalendarConfig {
     }
 
     static from(config:ICalendarViewConfig): CalendarViewConfig {
+        console.log('dateessssss', config.month ? config.month.monthLabels : '')
         const conf = this.copyObject(config, new CalendarViewConfig())
-
+        console.log('dateessssss', conf.month.dayLabels)
         return conf
     }
 
     private static copyObject(from:any, to:any):CalendarViewConfig {
+        
         to = Object.assign({}, to)
 
         Object.keys(from).forEach(key => {
@@ -31,7 +33,9 @@ export class CalendarViewConfig extends CalendarConfig {
     }
 
     private static assign(value, target, key){
-        if(value instanceof Object){
+        if(value instanceof Array){
+            target[key] = value    
+        } else if(value instanceof Object){
             target[key] = this.copyObject(value, target[key])
         } else {
             target[key] = value

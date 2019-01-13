@@ -25,16 +25,18 @@ export class PickerService {
     // Inject overlay service
     constructor(private injector: Injector, private overlay: Overlay) { }
 
-    open(config: PickerDialogConfig = {}, elementRef:ElementRef, 
-        component:ComponentType<any> | TemplateRef<any>, templateRef?:TemplateRef<any>): PickerOverlayRef {
+    open<T>(config: PickerDialogConfig = {}, elementRef:ElementRef, 
+        component:ComponentType<T>, templateRef?:TemplateRef<any>): PickerOverlayRef<T> {
         // Override default configuration
         const dialogConfig = { ...DEFAULT_CONFIG, ...config };
 
         const overlayRef = this.createOverlay(dialogConfig, elementRef);
 
-        const pickerRef = new PickerOverlayRef(overlayRef)
+        const pickerRef = new PickerOverlayRef<T>(overlayRef)
 
         const overlayComponent = this.attachDialogContainer(overlayRef, dialogConfig, pickerRef, component, templateRef);
+
+        pickerRef.instance = overlayComponent
 
         overlayRef.backdropClick().subscribe(_ => pickerRef.close());
 
@@ -72,29 +74,22 @@ export class PickerService {
         return overlayConfig;
     }
 
-    private attachDialogContainer(
+    private attachDialogContainer<T>(
         overlayRef: OverlayRef, 
         config: PickerDialogConfig, 
-        dialogRef: PickerOverlayRef,
-        component:ComponentType<any> | TemplateRef<any>,
-        templateRef?: TemplateRef<any>) {
+        dialogRef: PickerOverlayRef<T>,
+        component:ComponentType<T>,
+        templateRef?: TemplateRef<any>):T {
         const injector = this.createInjector(config, dialogRef, templateRef);
-        
-        if(component instanceof TemplateRef){
-            const a:TemplateRef<any> = null
-            const templatePortal = new TemplatePortal(a, null, config.data)
-            const embeddedViewRef = overlayRef.attach(templatePortal)
-            console.log('component instanceof TemplateRef',component instanceof TemplateRef)
-            return embeddedViewRef
-        } else {
-            const containerPortal = new ComponentPortal(component, null, injector);
-            const containerRef: ComponentRef<any> = overlayRef.attach(containerPortal);
-    
-            return containerRef.instance;
-        }
+
+        const containerPortal = new ComponentPortal(component, null, injector);
+        const containerRef: ComponentRef<any> = overlayRef.attach(containerPortal);
+
+        return containerRef.instance;
+
     }
 
-    private createInjector(config: PickerDialogConfig, dialogRef: PickerOverlayRef, template:TemplateRef<any> = null): PortalInjector {
+    private createInjector(config: PickerDialogConfig, dialogRef: PickerOverlayRef<any>, template:TemplateRef<any> = null): PortalInjector {
         // Instantiate new WeakMap for our custom injection tokens
         const injectionTokens = new WeakMap();
 
