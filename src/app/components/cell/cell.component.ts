@@ -71,7 +71,9 @@ export class CalendarCellComponent implements OnInit {
     }
 
     onClick(){
-        this.selection.change(this.context.date)
+        if(!this.context.disabled){
+            this.selection.change(this.context.date)
+        }
     }
 }
 
