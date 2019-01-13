@@ -8,6 +8,7 @@ export class CellData<T> extends Day implements IDay {
         date: string,
         public payload: T,
         public selected: boolean = false,
+        public disabled: boolean = false
     ) {
         super(parse(date))
     }

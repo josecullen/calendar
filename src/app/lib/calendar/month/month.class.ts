@@ -34,6 +34,7 @@ export class Month implements IMonth {
         if(dayIndex >= 0){
             this.days.splice(dayIndex, 1, day)
         }
+        console.log(day.disabled)
     }
 
     getCalendarView():IDay[][] {

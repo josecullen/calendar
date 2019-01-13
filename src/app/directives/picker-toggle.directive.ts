@@ -41,7 +41,7 @@ export class PickerToggleDirective {
         ref.instance.calendar.selectionChange.subscribe(data => this.selectionChange.emit(data))
         ref.instance.calendar.monthSelectionChange.subscribe(data => this.monthSelectionChange.emit(data))
         
-        this.monthSelectionChange = ref.instance.calendar.monthSelectionChange
+        // this.monthSelectionChange = ref.instance.calendar.monthSelectionChange
         
         ref.subscribe(result => {
             this.close.emit(result)

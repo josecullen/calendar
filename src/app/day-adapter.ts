@@ -26,4 +26,6 @@ export class DayAdapter extends Day implements IDay {
         return this.name
     }
 
+    
+
 }

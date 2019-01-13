@@ -11,7 +11,7 @@ export class Day implements IDay {
         return fns.isWeekend(this._date)
     }
 
-    constructor(private _date:Date){
+    constructor(private _date:Date, public disabled:boolean = false){
         this.date = fns.format(_date, 'YYYY-MM-DD'),
         this.name = fns.format(_date, 'dddd'),
         this.dayOfMonth = fns.getDate(_date)

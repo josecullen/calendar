@@ -8,12 +8,12 @@ export class CellContext<T> extends CellData<T>{
     monthSelection:MonthSelection
     hideDaysOutsideMonth:boolean
 
-    constructor(date:string, payload:T, selected?:boolean){
-        super(date, payload, selected)
+    constructor(date:string, payload:T, selected?:boolean, disabled?:boolean){
+        super(date, payload, selected, disabled)
     }
 
     static from<T>(cellData:CellData<T>, fields:any):CellContext<T> {
-        let context = new CellContext(cellData.date, cellData.payload, cellData.selected)
+        let context = new CellContext(cellData.date, cellData.payload, cellData.selected, cellData.disabled)
 
         Object.keys(fields).forEach(key => {
             context[key] = fields[key]

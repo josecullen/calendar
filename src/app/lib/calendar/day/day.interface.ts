@@ -1,4 +1,3 @@
-import { isWeekend } from 'date-fns';
 
 export interface IDay {
     date: string
@@ -6,4 +5,5 @@ export interface IDay {
     dayOfMonth: number
     dayOfWeek: number
     isWeekend:boolean
+    disabled:boolean
 }

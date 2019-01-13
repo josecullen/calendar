@@ -61,8 +61,9 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
             // })
             this.calendar.recalculate()
             this.dates.forEach(day => {
-                this.calendar.setDay(day.date, new CellData(day.date, day.payload, false))
+                this.calendar.setDay(day.date, new CellData(day.date, day.payload, day.selected, day.disabled))
             })
+
             // }
 
             if (configChange) {
@@ -91,8 +92,10 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
 
         this.calendar.recalculate()
         this.dates.forEach(day => {
-            this.calendar.setDay(day.date, new CellData(day.date, day.payload, false))
+            this.calendar.setDay(day.date, new CellData(day.date, day.payload, day.selected, day.disabled))
         })
+
+        // console.log(this.calendar.getYear(2019).getMonth(0).days.map(day => day.disabled))
     }
 
     cellClicked(data: CellData<any>) {

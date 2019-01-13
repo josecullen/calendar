@@ -4,8 +4,8 @@ import { CalendarSelection } from './lib/calendar-view/selection/calendar-select
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 import { addMonths, addDays, subDays, format } from 'date-fns';
 import { PickerService } from './modules/picker/picker.service';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { DatepickerComponent, DatepickerData } from './components/datepicker/datepicker.component';
+import { CellData } from './cell-data';
+import { DatepickerData } from './components/datepicker/datepicker.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   selectionOptions = ['simple', 'picked', 'range']
   selection: CalendarSelection
 
-  @Input() dates: CellDataPayload[] = getRandomDates()//mock
+  @Input() dates: CellData<number>[] = getRandomDates()//mock
 
   config = CalendarViewConfig.from({
     month: {
@@ -83,26 +83,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
-  updatePrice(price: number) {
-    this.selection.selectedDates.forEach(date => {
-      let currentDate = this.dates.find(d => d.date === date)
-
-      if (currentDate) {
-        currentDate.payload.price = price
-      } else {
-        this.dates.push({
-          date,
-          payload: {
-            price
-          }
-        })
-      }
-
-    })
-
-    this.dates = this.dates.slice()
-  }
-
 
 }
 
@@ -112,8 +92,8 @@ export class CellDataPayload {
 }
 
 
-function getRandomDates() {
-  let values = []
+function getRandomDates():CellData<number>[] {
+  let values:CellData<number>[] = []
   let randomValues = 30
   let randomMonths = 3
   let randomPrice = { min: 50, max: 900 }
@@ -123,11 +103,12 @@ function getRandomDates() {
     date = addMonths(date, randomInt(randomMonths))
     date = addDays(date, randomInt(30))
     date = subDays(date, randomInt(30))
-    values.push({
-      date: format(date, 'YYYY-MM-DD'),
-      payload: randomInt(randomPrice.max - randomPrice.min) + randomPrice.min
-    })
+    values.push(
+      new CellData(format(date, 'YYYY-MM-DD'), randomInt(randomPrice.max - randomPrice.min) + randomPrice.min, false, false)
+    )
   }
+
+
 
   return values
 }
