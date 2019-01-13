@@ -1,5 +1,6 @@
 import { ICalendarSelection } from '../calendar-selection.interface';
 import { getYear,  getMonth, addMonths, format, addYears, subMonths, subYears } from 'date-fns';
+import { getTypeNameForDebugging } from '@angular/common/src/directives/ng_for_of';
 
 export interface ISelectionStrategy {
     calendarMonthView:CalendarMonthViewSelection
@@ -9,6 +10,8 @@ export interface ISelectionStrategy {
     isSelected(date:string, selection?:ICalendarSelection): boolean
 
     isInRange(date:string, selection?:ICalendarSelection): boolean
+
+    name: string
     
 }
 

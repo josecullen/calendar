@@ -16,18 +16,18 @@ export class AppComponent implements OnInit {
   @Input() dates: CellDataPayload[] = getRandomDates()//mock
 
   config = CalendarViewConfig.from({
-    month: {
-      hideDaysOutsideMonth: true,
-      showTwoCalendarIfNeed: true,
-      monthLabels : [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 
-        'Mayo', 'Junio', 'Julio', 'Agosto', 
-        'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-      ],
-      dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-      dayLength: 1,
-      showChangeYearButton: false
-    },
+    // month: {
+    //   hideDaysOutsideMonth: true,
+    //   showTwoCalendarIfNeed: true,
+    //   monthLabels : [
+    //     'Enero', 'Febrero', 'Marzo', 'Abril', 
+    //     'Mayo', 'Junio', 'Julio', 'Agosto', 
+    //     'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    //   ],
+    //   dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+    //   dayLength: 1,
+    //   showChangeYearButton: false
+    // },
     selection: 'range',
     // stylePrefix: 'alm'
   })

@@ -10,6 +10,7 @@ import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view
 import { CellData } from 'src/app/cell-data';
 import { CalendarMonthDirective } from 'src/app/directives/calendar-month.directive';
 import { MonthContext } from 'src/app/context/month-context';
+import { CalendarConfig } from 'src/app/lib/calendar/config/calendar-config.class';
 
 @Component({
     selector: 'calendar',
@@ -20,7 +21,7 @@ import { MonthContext } from 'src/app/context/month-context';
 export class CalendarComponent implements OnChanges {
     selection: CalendarSelection = new CalendarSelection()
     @Input() dates: CellData<any>[] = []
-    @Input() config: CalendarViewConfig
+    @Input() config: CalendarViewConfig = new CalendarViewConfig()
 
     @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
 

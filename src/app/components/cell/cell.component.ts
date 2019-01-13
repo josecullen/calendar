@@ -36,7 +36,10 @@ export class CalendarCellComponent implements OnInit {
                 'outside-month' : getMonth(this.context.date) !== this.context.monthSelection.month,
                 'today' : isToday,
                 'has-payload' : this.context.payload !== undefined,
-                'host' : true
+                'host' : true,
+                'selection-simple' : this.context.selection.name === 'simple',
+                'selection-range' : this.context.selection.name === 'range',
+                'selection-pick' : this.context.selection.name === 'pick'
             }
 
             const prefix = this.context.stylePrefix

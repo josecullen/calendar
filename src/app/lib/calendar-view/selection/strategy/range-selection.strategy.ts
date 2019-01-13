@@ -5,8 +5,7 @@ import { parse, compareDesc, addDays, format } from 'date-fns';
 
 export class RangeSelectionStrategy implements ISelectionStrategy {
     calendarMonthView = new CalendarMonthViewSelection(true)
-    
-    constructor(){}
+    readonly name = 'range'
 
     isInRange(date: string, selection:ICalendarSelection) {
         const index = selection.selectedDates.findIndex(d => d === date)

@@ -3,6 +3,7 @@ import { ICalendarSelection } from '../calendar-selection.interface';
 
 export class SingleSelectionStrategy implements ISelectionStrategy {
     calendarMonthView = new CalendarMonthViewSelection(false)
+    readonly name = 'simple'
     
     constructor(){}
 

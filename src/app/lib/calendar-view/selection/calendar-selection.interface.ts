@@ -2,6 +2,7 @@ import { CalendarMonthViewSelection } from './strategy/selection-strategy.interf
 
 export interface ICalendarSelection {
     // strategy:ISelectionStrategy
+    name:string
     selectedDates: string[]
     status: SelectionStatus
     isInRange(date:string):boolean

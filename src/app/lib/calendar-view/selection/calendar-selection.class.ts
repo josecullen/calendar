@@ -18,6 +18,10 @@ export class CalendarSelection implements ICalendarSelection, ISelectionStrategy
         return this.strategy.calendarMonthView
     }
 
+    get name() {
+        return this.strategy.name
+    }
+
     setStrategy(strategy :ISelectionStrategy){
         this.strategy = strategy
         this.selectedDates = []

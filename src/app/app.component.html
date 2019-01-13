@@ -1,13 +1,14 @@
 <div class="calendar">
 
-  <calendar #calendar [dates]="dates" [config]="config" (selectionChange)="onSelectionChange($event)">
-
-    <calendar-month *calendarMonth="let context;" [context]="context">
+  <calendar #calendar [config]="config" (selectionChange)="onSelectionChange($event)">
+      
+    <!-- [dates]="dates" -->
+    <!-- <calendar-month *calendarMonth="let context;" [context]="context">
       <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
       <calendar-cell *calendarCell="let context;" [context]="context">
         <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
       </calendar-cell>
-    </calendar-month>
+    </calendar-month> -->
   </calendar>
 
 </div>

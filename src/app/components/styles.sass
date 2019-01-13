@@ -2,6 +2,7 @@ $selected: #17a45f
 $selected-color: #fff
 $in-range-color: #d3ecd3
 $hover-color: #e4e7e7
+$range-radious: 8px
     
 .trb-calendar 
     display: flex
@@ -57,12 +58,13 @@ $hover-color: #e4e7e7
                 .my-price
                     color: $selected-color
                 background-color: $selected
-                &.trb-calendar-cell-from
-                    border-top-left-radius: 2px
-                    border-bottom-left-radius: 2px
-                &.trb-calendar-cell-to
-                    border-top-right-radius: 2px
-                    border-bottom-right-radius: 2px
+                &.trb-calendar-cell-selection-range
+                    &.trb-calendar-cell-from
+                        border-top-left-radius: $range-radious
+                        border-bottom-left-radius: $range-radious
+                    &.trb-calendar-cell-to
+                        border-top-right-radius: $range-radious
+                        border-bottom-right-radius: $range-radious
     &:not(.trb-calendar-cell-has-payload)
         line-height: 38px
     &.trb-calendar-cell-past

@@ -4,6 +4,7 @@ import { CalendarSelection } from '../calendar-selection.class';
 
 export class PickSelectionStrategy implements ISelectionStrategy {
     calendarMonthView = new CalendarMonthViewSelection(true)
+    readonly name = 'pick'
     
     isInRange(date: string, selection:ICalendarSelection) {
         return false
@@ -12,8 +13,6 @@ export class PickSelectionStrategy implements ISelectionStrategy {
     isSelected(date: string, selection:ICalendarSelection){
         return selection.selectedDates.some(d => d === date)
     }
-
-    
 
     change(date: string, selection:CalendarSelection) {
         let index = selection.selectedDates.findIndex(d => d === date)

@@ -2,13 +2,18 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZon
 @Component({
     selector: 'day-header-cell',
     template: `
-    <ng-container>
-        {{ daysInWeek[day] | slice:0:dayLength }}
+    <ng-container *ngIf="dayLabels.length else defaultDays">
+        {{ dayLabels[day] | slice:0:dayLength }}a
     </ng-container>
+
+    <ng-template #defaultDays>
+        {{ daysInWeek[day] | slice:0:dayLength }}
+    </ng-template>
     `
 })
 export class DayHeaderCellComponent {
     @Input() day: number;
-    @Input() daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    @Input() dayLabels: string[]
     @Input() dayLength:number = 3
+    daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }
