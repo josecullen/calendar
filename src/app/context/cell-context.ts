@@ -1,11 +1,11 @@
 import { CellData } from '../cell-data';
-import { CalendarMonthView } from '../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { ICalendarSelection } from '../lib/calendar-view/selection/calendar-selection.interface';
+import { MonthSelection } from '../lib/calendar-view/calendar-month-selection.class';
 
 export class CellContext<T> extends CellData<T>{
     stylePrefix:string
     selection:ICalendarSelection
-    monthSelection:CalendarMonthView
+    monthSelection:MonthSelection
     hideDaysOutsideMonth:boolean
 
     constructor(date:string, payload:T, selected?:boolean){

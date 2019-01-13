@@ -1,7 +1,8 @@
 import { ICalendarSelection, SelectionStatus } from './calendar-selection.interface';
-import { ISelectionStrategy, CalendarMonthViewSelection } from './strategy/selection-strategy.interface';
+import { ISelectionStrategy } from './strategy/selection-strategy.interface';
 import { SingleSelectionStrategy } from './strategy/simple-selection.strategy';
 import { EventEmitter } from '@angular/core';
+import { CalendarMonthSelection } from '../calendar-month-selection.class';
 
 export class CalendarSelection implements ICalendarSelection, ISelectionStrategy {
     
@@ -10,11 +11,12 @@ export class CalendarSelection implements ICalendarSelection, ISelectionStrategy
         public selectedDates: string[] = [],
         public status: SelectionStatus = SelectionStatus.unset,
         public selectionChange:EventEmitter<CalendarSelection> = new EventEmitter(),
-        public monthSelectionChange:EventEmitter<{ previous: string, current: string}> = new EventEmitter()
+        public monthSelectionChange:EventEmitter<{ previous: Date, current: Date }> = new EventEmitter()
     ){
+        this.strategy.calendarMonthView.monthSelectionChange = this.monthSelectionChange
     }
 
-    get calendarMonthView():CalendarMonthViewSelection {
+    get calendarMonthView():CalendarMonthSelection {
         return this.strategy.calendarMonthView
     }
 
@@ -25,6 +27,7 @@ export class CalendarSelection implements ICalendarSelection, ISelectionStrategy
     setStrategy(strategy :ISelectionStrategy){
         this.strategy = strategy
         this.selectedDates = []
+        this.strategy.calendarMonthView.monthSelectionChange = this.monthSelectionChange
     }
 
     isInRange(date:string):boolean {

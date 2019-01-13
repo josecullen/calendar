@@ -33,9 +33,12 @@ export class AppComponent implements OnInit {
   })
 
 
+  onMonthSelectionChange(a:any){
+    // console.log(a)
+  }
 
   onSelectionChange(selection:CalendarSelection){
-    console.log('selection change', selection.from(), selection.to())
+    // console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
     if(!selection.to()){
       this.dates = getRandomDates()
     }

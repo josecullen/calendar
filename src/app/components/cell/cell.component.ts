@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, HostBinding } from "@angular/core";
-import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
 import { getMonth,  parse, compareDesc, format } from 'date-fns';
 import { CellContext } from 'src/app/context/cell-context';
 import { ICalendarSelection } from 'src/app/lib/calendar-view/selection/calendar-selection.interface';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector : 'calendar-cell',
@@ -22,7 +22,13 @@ export class CalendarCellComponent implements OnInit {
         return this.context.selection
     }
 
+    ngDoCheck(){
+        // console.log('cell do check')
+    }
+
+
     ngOnInit(){
+        // console.log('cell init')
         if(this.context){
             const today = new Date()
             const isToday = this.context.date === format(new Date(), 'YYYY-MM-DD')

@@ -1,6 +1,6 @@
 <div class="calendar">
 
-  <calendar #calendar [config]="config" (selectionChange)="onSelectionChange($event)">
+  <calendar #calendar [config]="config" (selectionChange)="onSelectionChange($event)" (monthSelectionChange)="onMonthSelectionChange($event)">
       
     <!-- [dates]="dates" -->
     <!-- <calendar-month *calendarMonth="let context;" [context]="context">

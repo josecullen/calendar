@@ -1,8 +1,10 @@
-import { ISelectionStrategy, CalendarMonthViewSelection } from './selection-strategy.interface';
+import { ISelectionStrategy } from './selection-strategy.interface';
 import { ICalendarSelection } from '../calendar-selection.interface';
+import { CalendarMonthSelection } from '../../calendar-month-selection.class';
+
 
 export class SingleSelectionStrategy implements ISelectionStrategy {
-    calendarMonthView = new CalendarMonthViewSelection(false)
+    calendarMonthView = new CalendarMonthSelection(false)
     readonly name = 'simple'
     
     constructor(){}

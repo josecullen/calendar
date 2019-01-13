@@ -1,4 +1,4 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, ViewEncapsulation } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit } from "@angular/core";
 import { Calendar } from '../../lib/calendar/calendar';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarViewFactory } from '../../calendar-view.factory';
@@ -10,7 +10,6 @@ import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view
 import { CellData } from 'src/app/cell-data';
 import { CalendarMonthDirective } from 'src/app/directives/calendar-month.directive';
 import { MonthContext } from 'src/app/context/month-context';
-import { CalendarConfig } from 'src/app/lib/calendar/config/calendar-config.class';
 
 @Component({
     selector: 'calendar',
@@ -18,12 +17,13 @@ import { CalendarConfig } from 'src/app/lib/calendar/config/calendar-config.clas
     styleUrls: ['../styles.sass','./calendar.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class CalendarComponent implements OnChanges {
+export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     selection: CalendarSelection = new CalendarSelection()
     @Input() dates: CellData<any>[] = []
     @Input() config: CalendarViewConfig = new CalendarViewConfig()
 
     @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
+    @Output() monthSelectionChange: EventEmitter<{ previous: Date, current: Date }> = this.selection.monthSelectionChange
 
     @ContentChild(CalendarMonthDirective)
     calendarMonth: CalendarMonthDirective
@@ -35,7 +35,12 @@ export class CalendarComponent implements OnChanges {
         return `${this.config.stylePrefix}-calendar`
     }
 
+    ngDoCheck(){
+        // console.log('calendar do check')
+    }
+
     ngOnInit() {
+        // console.log('calendar init')
         this.calendar = new Calendar(new CalendarViewFactory(), this.config)
 
         this.updateSelection()

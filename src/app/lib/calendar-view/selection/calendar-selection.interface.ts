@@ -1,4 +1,4 @@
-import { CalendarMonthViewSelection } from './strategy/selection-strategy.interface';
+import { CalendarMonthSelection } from '../calendar-month-selection.class';
 
 export interface ICalendarSelection {
     // strategy:ISelectionStrategy
@@ -10,7 +10,7 @@ export interface ICalendarSelection {
     from():string
     to():string
     change(date:string): void
-    calendarMonthView:CalendarMonthViewSelection
+    calendarMonthView:CalendarMonthSelection
 }
 
 

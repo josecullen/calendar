@@ -1,10 +1,11 @@
-import { ISelectionStrategy, CalendarMonthViewSelection } from './selection-strategy.interface';
+import { ISelectionStrategy } from './selection-strategy.interface';
 import { ICalendarSelection, SelectionStatus } from '../calendar-selection.interface';
 import { CalendarSelection } from '../calendar-selection.class';
 import { parse, compareDesc, addDays, format } from 'date-fns';
+import { CalendarMonthSelection } from '../../calendar-month-selection.class';
 
 export class RangeSelectionStrategy implements ISelectionStrategy {
-    calendarMonthView = new CalendarMonthViewSelection(true)
+    calendarMonthView = new CalendarMonthSelection(true)
     readonly name = 'range'
 
     isInRange(date: string, selection:ICalendarSelection) {

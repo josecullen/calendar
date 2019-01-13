@@ -1,6 +1,5 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, HostBinding } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, HostBinding, DoCheck, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ICalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.interface';
-import { CalendarMonthView } from '../../lib/calendar-view/selection/strategy/selection-strategy.interface';
 import { Calendar } from '../../lib/calendar/calendar';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
 import { CellData } from '../../cell-data';
@@ -9,6 +8,7 @@ import { CalendarHeaderDirective } from 'src/app/directives/calendar-header.dire
 import { CellContext } from '../../context/cell-context';
 import { HeaderContext } from '../../context/header-context';
 import { MonthContext } from 'src/app/context/month-context';
+import { MonthSelection } from 'src/app/lib/calendar-view/calendar-month-selection.class';
 
 
 @Component({
@@ -16,17 +16,25 @@ import { MonthContext } from 'src/app/context/month-context';
     templateUrl: './month.component.html',
     styleUrls: ['../styles.sass','./month.component.scss']
 })
-export class CalendarMonthComponent implements OnChanges {
+export class CalendarMonthComponent implements OnChanges, DoCheck, OnInit {
     @Input() context: MonthContext
     @Input() calendar: Calendar
     @Input() index: number
     @Input() selection: ICalendarSelection
-    @Input() monthSelection: CalendarMonthView
+    @Input() monthSelection: MonthSelection
     @Input() config: CalendarViewConfig
 
     @HostBinding('class')
     get classes() {
         return `${this.config.stylePrefix}-calendar-month`
+    }
+
+    ngDoCheck(){
+        // console.log('month do check')
+    }
+
+    ngOnInit() {
+        // console.log('month init')
     }
 
     dayLabelsRowClass:any
