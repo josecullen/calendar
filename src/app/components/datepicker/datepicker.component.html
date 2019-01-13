@@ -1,5 +1,9 @@
-<calendar
-    [config]="data.calendarConfig" 
-    (selectionChange)="onSelectionChange($event)" 
-    (monthSelectionChange)="onMonthSelectionChange($event)">
-</calendar>
+
+    <calendar
+        #calendar
+        [dates]="data.dates"
+        [config]="data.calendarConfig" 
+        (selectionChange)="onSelectionChange($event)" 
+        [monthTemplate]="calendarRef">
+        
+    </calendar>

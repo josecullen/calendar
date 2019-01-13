@@ -1,8 +1,8 @@
-<ng-container *ngIf="calendarMonth else defaultMonths">
-    <ng-container *ngTemplateOutlet="calendarMonth.template; context: { $implicit : getMonthContext(0) }">
+<ng-container *ngIf="monthTemplate || calendarMonth else defaultMonths">
+    <ng-container *ngTemplateOutlet="monthTemplate || calendarMonth; context: { $implicit : getMonthContext(0) }">
     </ng-container>
 
-    <ng-container *ngTemplateOutlet="calendarMonth.template; context: { $implicit : getMonthContext(1) }">
+    <ng-container *ngTemplateOutlet="monthTemplate || calendarMonth; context: { $implicit : getMonthContext(1) }">
     </ng-container>
 </ng-container>
 

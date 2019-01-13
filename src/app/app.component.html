@@ -1,17 +1,28 @@
 <div class="calendar">
-
-  <calendar #calendar [config]="config" (selectionChange)="onSelectionChange($event)" (monthSelectionChange)="onMonthSelectionChange($event)">
-      
-    <!-- [dates]="dates" -->
-    <!-- <calendar-month *calendarMonth="let context;" [context]="context">
+  <ng-template #monthRef calendarMonth let-context>
+    <calendar-month [context]="context">
       <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
       <calendar-cell *calendarCell="let context;" [context]="context">
         <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
       </calendar-cell>
-    </calendar-month> -->
-  </calendar>
+    </calendar-month>
+  </ng-template>
 
-  <button #mybutton (click)="openPicker(mybutton)">open</button>
+  <!-- <calendar  
+    [monthTemplate]="monthRef"
+    [dates]="dates" 
+    [config]="config" 
+    (selectionChange)="onSelectionChange($event)" 
+    (monthSelectionChange)="onMonthSelectionChange($event)"> -->
+      <!-- <calendar-month *calendarMonth="let context;" [context]="context">
+        <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
+        <calendar-cell *calendarCell="let context;" [context]="context">
+          <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
+        </calendar-cell>
+      </calendar-month> -->
+  <!-- </calendar> -->
+
+  <button #mybutton (click)="openPicker(mybutton, monthRef)">open</button>
 
 </div>
 

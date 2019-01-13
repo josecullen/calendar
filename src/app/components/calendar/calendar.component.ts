@@ -1,4 +1,4 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit } from "@angular/core";
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit, TemplateRef } from "@angular/core";
 import { Calendar } from '../../lib/calendar/calendar';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarViewFactory } from '../../calendar-view.factory';
@@ -25,7 +25,9 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     @Output() selectionChange: EventEmitter<CalendarSelection> = this.selection.selectionChange
     @Output() monthSelectionChange: EventEmitter<{ previous: Date, current: Date }> = this.selection.monthSelectionChange
 
-    @ContentChild(CalendarMonthDirective)
+    @Input() monthTemplate:any
+
+    @ContentChild(CalendarMonthDirective, { read: TemplateRef})
     calendarMonth: CalendarMonthDirective
 
     calendar: Calendar
@@ -36,6 +38,7 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     }
 
     ngDoCheck(){
+        console.log(this.dates)
         // console.log('calendar do check')
     }
 
@@ -48,7 +51,6 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         let configChange = changes['config']
-
 
         if (this.calendar) {
             // let change = changes['dates']

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, TemplateRef } from '@angular/core';
 import { CalendarSelection } from './lib/calendar-view/selection/calendar-selection.class';
 
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
@@ -39,16 +39,14 @@ export class AppComponent implements OnInit {
 
   }
 
-  openPicker(elementRef: ElementRef) {
-
+  openPicker(elementRef: ElementRef, calendar:TemplateRef<any>) {
+    console.log(calendar)
     this.pickerService.open({
       data: {
-        calendarConfig: {
-          selection: 'picked'
-        },
-        datesSelected: ['2019-02-01', '2019-02-10', '2019-02-15', '2019-01-10']
+        datesSelected: ['2019-02-01', '2019-02-10'],
+        dates: getRandomDates()
       } as DatepickerData
-    }, elementRef, DatepickerComponent)
+    }, elementRef, DatepickerComponent, calendar)
       .subscribe(result => {
         console.log(result)
       })
@@ -60,9 +58,10 @@ export class AppComponent implements OnInit {
   }
 
   onSelectionChange(selection: CalendarSelection) {
-    // console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
+    console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
     if (!selection.to()) {
       this.dates = getRandomDates()
+      console.log(this.dates)
     }
     this.selection = selection
   }
