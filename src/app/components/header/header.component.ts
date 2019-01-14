@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, HostBinding } from "@angular/core";
 import { HeaderContext } from '../../context/header-context';
 import { MonthSelection } from 'src/app/lib/calendar-view/calendar-month-selection.class';
+import { getMonth, getYear } from 'date-fns';
 
 
 @Component({
@@ -25,6 +26,15 @@ export class CalendarHeaderComponent implements OnChanges {
         return `${this.classes}-buttons`
     }
 
+    showPastMonth():boolean {
+        return this.context.pastMonths || !this.isCurrentMonth
+    }
+
+    isCurrentMonth():boolean {
+        const today = new Date()
+        return getMonth(today) === this.context.monthSelections[this.context.monthIndex].month
+        && getYear(today) === this.context.monthSelections[this.context.monthIndex].year
+    }
 
     minusYear(index:number){
         if(this.linkedMonths){

@@ -5,8 +5,7 @@ import { CalendarViewConfig } from 'src/app/lib/calendar-view/config/calendar-vi
 import { CalendarSelection } from 'src/app/lib/calendar-view/selection/calendar-selection.class';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { CellDataPayload } from 'src/app/app.component';
-
-
+import { parse, addMonths } from 'date-fns';
 
 @Component({
     selector: 'datepicker',
@@ -44,7 +43,16 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
     ngAfterViewInit() {
         // setTimeout(() => {
         this.preventClose = true
+
         this.data.datesSelected.forEach(date => this.calendar.selection.change(date))
+
+        if(this.data.datesSelected.length){
+            setTimeout(() => {
+                const from = parse(this.data.datesSelected[0])
+                this.calendar.selection.calendarMonthView.from.setMonthAndYear(from)
+                this.calendar.selection.calendarMonthView.to.setMonthAndYear(addMonths(from, 1))
+            })
+        }
         
         setTimeout(() => {
             this.preventClose = false

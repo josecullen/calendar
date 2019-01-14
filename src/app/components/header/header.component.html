@@ -4,7 +4,7 @@
     *ngIf="!showTwoMonths || monthIndex === 0 || !linkedMonths"
     (monthClick)="minusMonth(0)" 
     (yearClick)="minusYear(0)"
-    [showChangeMonthButton]="context.showChangeMonthButton"
+    [showChangeMonthButton]="context.showChangeMonthButton && showPastMonth()"
     [showChangeYearButton]="context.showChangeYearButton">
 </header-buttons>
 

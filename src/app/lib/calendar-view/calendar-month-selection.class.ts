@@ -1,7 +1,5 @@
 import { EventEmitter } from '@angular/core'
-import { format, getMonth, getYear, addMonths, addYears, subMonths, subYears } from 'date-fns';
-
-import { CalendarSelection } from './selection/calendar-selection.class';
+import { format, getMonth, getYear, addMonths, addYears, subMonths, subYears, setMonth, setYear } from 'date-fns';
 
 export class MonthSelection {
     
@@ -41,6 +39,15 @@ export class MonthSelection {
     minusYear(){
         let previousDate = this.date
         this.date = subYears(this.date, 1)
+        this.update(previousDate)
+    }
+
+    setMonthAndYear(date:Date){
+        const month = getMonth(date)
+        const year = getYear(date)
+        let previousDate = this.date
+        this.date = setMonth(this.date, month)
+        this.date = setYear(this.date, year)
         this.update(previousDate)
     }
 

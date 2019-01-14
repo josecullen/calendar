@@ -5,6 +5,7 @@ export class HeaderContext {
     monthIndex: number
     showTwoMonths: boolean
     linkedMonths: boolean
+    pastMonths:boolean
     monthSelections: MonthSelection[]
     showChangeYearButton: boolean
     showChangeMonthButton: boolean

@@ -59,6 +59,7 @@ export class CalendarMonthComponent implements OnChanges, DoCheck, OnInit {
         return {
             monthLabels: this.config.month.monthLabels,
             monthIndex: this.index,
+            pastMonths: this.config.header.pastMonths,
             showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
             linkedMonths: this.config.header.linkedMonths,
             monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to],

@@ -19,6 +19,9 @@ export class AppComponent implements OnInit {
   @Input() dates: CellData<number>[] = getRandomDates()//mock
 
   config = CalendarViewConfig.from({
+    header: {
+      pastMonths: false
+    },
     month: {
     //   hideDaysOutsideMonth: true,
       showTwoCalendarIfNeed: true,
@@ -37,7 +40,7 @@ export class AppComponent implements OnInit {
 
   datepickerConfig:DatepickerData = {
     calendarConfig: this.config,
-    datesSelected: ['2019-02-01', '2019-02-10'],
+    datesSelected: ['2019-01-01', '2019-01-10'],
     dates: getRandomDates()
   }
 
