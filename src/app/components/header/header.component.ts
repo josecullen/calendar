@@ -5,7 +5,7 @@ import { getMonth, getYear } from 'date-fns';
 
 
 @Component({
-    selector: 'calendar-header',
+    selector: 'trb-calendar-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })

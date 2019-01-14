@@ -8,7 +8,7 @@ import { CellDataPayload } from 'src/app/app.component';
 import { parse, addMonths } from 'date-fns';
 
 @Component({
-    selector: 'datepicker',
+    selector: 'trb-datepicker',
     templateUrl: './datepicker.component.html',
     styleUrls: ['./datepicker.component.scss'],
     encapsulation: ViewEncapsulation.None

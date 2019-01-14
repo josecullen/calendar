@@ -5,7 +5,7 @@ import { ICalendarSelection } from 'src/app/lib/calendar-view/selection/calendar
 import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector : 'calendar-cell',
+    selector : 'trb-calendar-cell',
     templateUrl: './cell.component.html'
 })
 export class CalendarCellComponent implements OnInit {

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZone, HostBinding } from "@angular/core";
 @Component({
-    selector: 'day-header-cell',
+    selector: 'trb-calendar-day-header-cell',
     template: `
     <ng-container *ngIf="dayLabels.length > 0 else defaultDays">
         {{ dayLabels[day] | slice:0:dayLength }}

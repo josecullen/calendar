@@ -1,9 +1,8 @@
-import { Directive, TemplateRef, ViewContainerRef, Input, Output, HostListener, EventEmitter } from "@angular/core";
-import { CellData } from '../cell-data';
+import { Directive, TemplateRef, ViewContainerRef } from "@angular/core";
 
 
 @Directive({
-    selector: '[calendarMonth]'
+    selector: '[trbCalendarMonth]'
 })
 export class CalendarMonthDirective {
     constructor(public template: TemplateRef<any>,

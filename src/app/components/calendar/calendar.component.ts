@@ -12,7 +12,7 @@ import { CalendarMonthDirective } from 'src/app/directives/calendar-month.direct
 import { MonthContext } from 'src/app/context/month-context';
 
 @Component({
-    selector: 'calendar',
+    selector: 'trb-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['../styles.sass','./calendar.component.scss'],
     encapsulation: ViewEncapsulation.None

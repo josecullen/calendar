@@ -7,10 +7,10 @@
 </ng-container>
 
 <ng-template #defaultMonths>
-    <calendar-month [context]="getMonthContext(0)">
-    </calendar-month>
+    <trb-calendar-month [context]="getMonthContext(0)">
+    </trb-calendar-month>
 
-    <calendar-month *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
+    <trb-calendar-month *ngIf="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
         [context]="getMonthContext(1)">
-    </calendar-month>
+    </trb-calendar-month>
 </ng-template>

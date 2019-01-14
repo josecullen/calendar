@@ -7,12 +7,12 @@ import { CellData } from '../cell-data';
 
 
 @Directive({
-    selector: '[picker-toggle]'
+    selector: '[trb-datepicker-toggle]'
 })
 export class PickerToggleDirective {
     private datepicker:DatepickerComponent
 
-    @Input('picker-toggle')
+    @Input('trb-datepicker-toggle')
     monthRef: TemplateRef<any>
 
     @Input()

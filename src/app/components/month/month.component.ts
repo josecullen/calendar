@@ -12,7 +12,7 @@ import { MonthSelection } from 'src/app/lib/calendar-view/calendar-month-selecti
 
 
 @Component({
-    selector: 'calendar-month',
+    selector: 'trb-calendar-month',
     templateUrl: './month.component.html',
     styleUrls: ['../styles.sass','./month.component.scss']
 })

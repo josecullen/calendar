@@ -3,7 +3,7 @@ import { Component, Output, Input, EventEmitter } from "@angular/core";
 
 
 @Component({
-    selector: 'header-buttons',
+    selector: 'trb-calendar-header-buttons',
     templateUrl: './header-buttons.component.html',
     styles: [`
     :host span {

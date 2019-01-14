@@ -3,7 +3,7 @@ import { CellData } from '../cell-data';
 
 
 @Directive({
-    selector: '[calendarCell]'
+    selector: '[trbCalendarCell]'
 })
 export class CalendarCellDirective {
     constructor(public template: TemplateRef<any>,
@@ -14,7 +14,7 @@ export class CalendarCellDirective {
     }
 
     @Input()
-    set calendarCell(content:CellData<any>) {
+    set trbCalendarCell(content:CellData<any>) {
         if(content){
             let ref = this.viewContainer
             .createEmbeddedView(this.template, { $implicit: content })
@@ -25,7 +25,6 @@ export class CalendarCellDirective {
 
     @HostListener('click', ['$event'])
     onClick(event:MouseEvent) {
-        console.log('calendarCell click')
         this.click.emit(event)
     }
 }

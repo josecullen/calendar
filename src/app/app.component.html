@@ -1,29 +1,29 @@
 <div class="calendar">
   <ng-template #monthRef calendarMonth let-context>
-    <calendar-month [context]="context">
-      <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
-      <calendar-cell *calendarCell="let context;" [context]="context">
+    <trb-calendar-month [context]="context">
+      <trb-calendar-header *trbCalendarHeader="let context;" [context]="context"></trb-calendar-header>
+      <trb-calendar-cell *trbCalendarCell="let context;" [context]="context">
         <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
-      </calendar-cell>
-    </calendar-month>
+      </trb-calendar-cell>
+    </trb-calendar-month>
   </ng-template>
 
-  <!-- <calendar  
+  <trb-calendar  
     [monthTemplate]="monthRef"
     [dates]="dates" 
     [config]="config" 
     (selectionChange)="onSelectionChange($event)" 
-    (monthSelectionChange)="onMonthSelectionChange($event)"> -->
-      <!-- <calendar-month *calendarMonth="let context;" [context]="context">
-        <calendar-header *calendarHeader="let context;" [context]="context"></calendar-header>
-        <calendar-cell *calendarCell="let context;" [context]="context">
+    (monthSelectionChange)="onMonthSelectionChange($event)">
+      <trb-calendar-month *trbCalendarMonth="let context;" [context]="context">
+        <trb-calendar-header *trbCalendarHeader="let context;" [context]="context"></trb-calendar-header>
+        <trb-calendar-cell *trbCalendarCell="let context;" [context]="context">
           <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
-        </calendar-cell>
-      </calendar-month> -->
-  <!-- </calendar> -->
+        </trb-calendar-cell>
+      </trb-calendar-month>
+  </trb-calendar>
 
   <button #mybutton 
-    [picker-toggle]="monthRef" 
+    [trb-datepicker-toggle]="monthRef" 
     [config]="datepickerConfig"
     [dates]="dates"
     (close)="onClose($event)"
@@ -32,7 +32,7 @@
   </button>
 
   <button #mybutton 
-    picker-toggle>open default
+  trb-datepicker-toggle>open default
   </button>
 
 </div>
