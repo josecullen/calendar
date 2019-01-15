@@ -3,7 +3,6 @@ import { CalendarSelection } from './lib/calendar-view/selection/calendar-select
 
 import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 import { addMonths, addDays, subDays, format } from 'date-fns';
-import { PickerService } from './modules/picker/picker.service';
 import { CellData } from './cell-data';
 import { DatepickerData } from './components/datepicker/datepicker.component';
 
@@ -13,10 +12,10 @@ import { DatepickerData } from './components/datepicker/datepicker.component';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  selectionOptions = ['simple', 'picked', 'range']
-  selection: CalendarSelection
+  selectionOptions = ['simple', 'picked', 'range'];
+  selection: CalendarSelection;
 
-  @Input() dates: CellData<number>[] = getRandomDates()//mock
+  @Input() dates: CellData<number>[] = getRandomDates();
 
   config = CalendarViewConfig.from({
     header: {
@@ -26,8 +25,8 @@ export class AppComponent implements OnInit {
     //   hideDaysOutsideMonth: true,
       showTwoCalendarIfNeed: true,
       monthLabels : [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 
-        'Mayo', 'Junio', 'Julio', 'Agosto', 
+        'Enero', 'Febrero', 'Marzo', 'Abril',
+        'Mayo', 'Junio', 'Julio', 'Agosto',
         'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
       ],
       dayLabels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
@@ -36,20 +35,20 @@ export class AppComponent implements OnInit {
     },
     selection: 'range',
     // stylePrefix: 'alm'
-  })
+  });
 
-  datepickerConfig:DatepickerData = {
+  datepickerConfig: DatepickerData = {
     calendarConfig: this.config,
     datesSelected: ['2019-01-01', '2019-01-10'],
     dates: getRandomDates()
+  };
+
+  constructor() {
+    console.log('this.datepickerConfig', this.datepickerConfig);
   }
 
-  constructor(private pickerService: PickerService) {
-    console.log('this.datepickerConfig', this.datepickerConfig)
-  }
-
-  openPicker(elementRef: ElementRef, calendar:TemplateRef<any>) {
-    console.log(calendar)
+  openPicker(elementRef: ElementRef, calendar: TemplateRef<any>) {
+    console.log(calendar);
     // this.pickerService.open({
     //   data: {
     //     datesSelected: ['2019-02-01', '2019-02-10'],
@@ -69,18 +68,18 @@ export class AppComponent implements OnInit {
   onSelectionChange(selection: CalendarSelection) {
     // console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
     if (!selection.to()) {
-      this.dates = getRandomDates()
+      this.dates = getRandomDates();
       // console.log(this.dates)
     }
-    this.selection = selection
+    this.selection = selection;
   }
 
-  onClose(data){
-    console.log('on close', data)
+  onClose(data) {
+    console.log('on close', data);
   }
 
   applyChanges() {
-    this.config = CalendarViewConfig.from(this.config)
+    this.config = CalendarViewConfig.from(this.config);
   }
 
   ngOnInit() {
@@ -90,32 +89,32 @@ export class AppComponent implements OnInit {
 }
 
 export class CellDataPayload {
-  public date: string
-  public payload: any
+  public date: string;
+  public payload: any;
 }
 
 
-function getRandomDates():CellData<number>[] {
-  let values:CellData<number>[] = []
-  let randomValues = 30
-  let randomMonths = 3
-  let randomPrice = { min: 50, max: 900 }
+function getRandomDates(): CellData<number>[] {
+  const values: CellData<number>[] = [];
+  const randomValues = 30;
+  const randomMonths = 3;
+  const randomPrice = { min: 50, max: 900 };
 
   for (let v = 0; v < randomValues; v++) {
-    let date = new Date()
-    date = addMonths(date, randomInt(randomMonths))
-    date = addDays(date, randomInt(30))
-    date = subDays(date, randomInt(30))
+    let date = new Date();
+    date = addMonths(date, randomInt(randomMonths));
+    date = addDays(date, randomInt(30));
+    date = subDays(date, randomInt(30));
     values.push(
       new CellData(format(date, 'YYYY-MM-DD'), randomInt(randomPrice.max - randomPrice.min) + randomPrice.min, false, false)
-    )
+    );
   }
 
 
 
-  return values
+  return values;
 }
 
 function randomInt(max) {
-  return Math.floor(Math.random() * max)
+  return Math.floor(Math.random() * max);
 }

@@ -1,0 +1,26 @@
+{
+  "name": "trb-calendar",
+  "version": "0.0.1",
+  "author": "José Cullen <josecullen8@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "date-fns": "^1.30.1",
+    "@angular/cdk": "^7.2.0",
+    "@angular/common": "~7.1.0",
+    "@angular/compiler": "~7.1.0",
+    "@angular/core": "~7.1.0"
+  },
+  "main": "bundles/trb-calendar.umd.js",
+  "module": "fesm5/trb-calendar.js",
+  "es2015": "fesm2015/trb-calendar.js",
+  "esm5": "esm5/trb-calendar.js",
+  "esm2015": "esm2015/trb-calendar.js",
+  "fesm5": "fesm5/trb-calendar.js",
+  "fesm2015": "fesm2015/trb-calendar.js",
+  "typings": "trb-calendar.d.ts",
+  "metadata": "trb-calendar.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

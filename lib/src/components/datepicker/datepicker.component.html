@@ -1,0 +1,7 @@
+    <trb-calendar
+        #calendar
+        [dates]="data.dates"
+        [config]="data.calendarConfig" 
+        (selectionChange)="onSelectionChange($event)" 
+        [monthTemplate]="calendarRef">
+    </trb-calendar>

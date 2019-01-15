@@ -1,5 +1,5 @@
 <div class="calendar">
-  <ng-template #monthRef calendarMonth let-context>
+  <!-- <ng-template #monthRef calendarMonth let-context>
     <trb-calendar-month [context]="context">
       <trb-calendar-header *trbCalendarHeader="let context;" [context]="context"></trb-calendar-header>
       <trb-calendar-cell *trbCalendarCell="let context;" [context]="context">
@@ -7,23 +7,23 @@
       </trb-calendar-cell>
     </trb-calendar-month>
   </ng-template>
-
-  <trb-calendar  
+-->
+  <trb-calendar
     [monthTemplate]="monthRef"
-    [dates]="dates" 
-    [config]="config" 
-    (selectionChange)="onSelectionChange($event)" 
+    [dates]="dates"
+    [config]="config"
+    (selectionChange)="onSelectionChange($event)"
     (monthSelectionChange)="onMonthSelectionChange($event)">
-      <trb-calendar-month *trbCalendarMonth="let context;" [context]="context">
+      <!-- <trb-calendar-month *trbCalendarMonth="let context;" [context]="context">
         <trb-calendar-header *trbCalendarHeader="let context;" [context]="context"></trb-calendar-header>
         <trb-calendar-cell *trbCalendarCell="let context;" [context]="context">
           <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
         </trb-calendar-cell>
-      </trb-calendar-month>
+      </trb-calendar-month> -->
   </trb-calendar>
 
-  <button #mybutton 
-    [trb-datepicker-toggle]="monthRef" 
+  <button #mybutton
+    [trb-datepicker-toggle]="monthRef"
     [config]="datepickerConfig"
     [dates]="dates"
     (close)="onClose($event)"
@@ -31,47 +31,8 @@
     (click)="openPicker(mybutton, monthRef)">open
   </button>
 
-  <button #mybutton 
+  <button #mybutton
   trb-datepicker-toggle>open default
   </button>
 
 </div>
-
-
-<!-- <form>
-  <h3>Selection</h3>
-  <select [ngModelOptions]="{standalone: true}" [(ngModel)]="config.selection">
-    <option *ngFor="let strategy of selectionOptions" [value]="strategy">{{strategy}}</option>
-  </select>
-
-  <h3>Header</h3>
-  <div class="flex-row">
-    <input type="checkbox" [(ngModel)]="config.header.linkedMonths" [ngModelOptions]="{standalone: true}" #linkedMonths="ngModel">
-    <label>Linked Months</label>
-  </div>
-
-  <h3>Month</h3>
-  <div class="flex-row">
-    <div>
-      <label>First Day </label>
-      <input type="number" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.firstDay" #firstDay>
-    </div>
-    <div>
-      <label>Hide Weekends</label>
-      <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.hideWeekends"
-        #hideWeekends>
-    </div>
-    <div>
-      <label>Hide Days Outside Month</label>
-      <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.hideDaysOutsideMonth">
-    </div>
-    <div>
-      <label>Show two calendar if need</label>
-      <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.month.showTwoCalendarIfNeed">
-    </div>
-  </div>
-
-  <button (click)="applyChanges()">Apply</button>
-
-  <pre>{{config | json}}</pre>
-</form> -->

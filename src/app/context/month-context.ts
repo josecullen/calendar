@@ -4,9 +4,9 @@ import { CalendarViewConfig } from '../lib/calendar-view/config/calendar-view-co
 import { MonthSelection } from '../lib/calendar-view/calendar-month-selection.class';
 
 export class MonthContext {
-    index: number
-    calendar: Calendar
-    selection: CalendarSelection
-    config: CalendarViewConfig
-    monthSelection: MonthSelection
+  index: number;
+  calendar: Calendar;
+  selection: CalendarSelection;
+  config: CalendarViewConfig;
+  monthSelection: MonthSelection;
 }
