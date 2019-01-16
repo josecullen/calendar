@@ -1,5 +1,5 @@
 <div class="calendar">
-  <!-- <ng-template #monthRef calendarMonth let-context>
+ <ng-template #monthRef calendarMonth let-context>
     <trb-calendar-month [context]="context">
       <trb-calendar-header *trbCalendarHeader="let context;" [context]="context"></trb-calendar-header>
       <trb-calendar-cell *trbCalendarCell="let context;" [context]="context">
@@ -7,19 +7,19 @@
       </trb-calendar-cell>
     </trb-calendar-month>
   </ng-template>
--->
+
   <trb-calendar
     [monthTemplate]="monthRef"
     [dates]="dates"
     [config]="config"
     (selectionChange)="onSelectionChange($event)"
     (monthSelectionChange)="onMonthSelectionChange($event)">
-      <!-- <trb-calendar-month *trbCalendarMonth="let context;" [context]="context">
+      <trb-calendar-month *trbCalendarMonth="let context;" [context]="context">
         <trb-calendar-header *trbCalendarHeader="let context;" [context]="context"></trb-calendar-header>
         <trb-calendar-cell *trbCalendarCell="let context;" [context]="context">
           <span class="my-price" *ngIf="context.payload">${{ context.payload }}</span>
         </trb-calendar-cell>
-      </trb-calendar-month> -->
+      </trb-calendar-month>
   </trb-calendar>
 
   <button #mybutton

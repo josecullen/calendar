@@ -22,7 +22,6 @@ export class CalendarCellComponent implements OnInit {
     }
 
     ngOnInit() {
-        // console.log('cell init')
         if (this.context) {
             const today = new Date();
             const isToday = this.context.date === format(new Date(), 'YYYY-MM-DD');
@@ -52,8 +51,6 @@ export class CalendarCellComponent implements OnInit {
             });
         }
 
-
-        // console.log(this.context.date, format(this.context.monthSelection.date, 'YYYY-MM-DD'), this.dateStatus)
     }
 
     isSelected(): boolean {

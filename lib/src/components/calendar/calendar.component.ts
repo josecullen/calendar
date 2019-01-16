@@ -39,11 +39,9 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     }
 
     ngDoCheck() {
-        // console.log('calendar do check')
     }
 
     ngOnInit() {
-        // console.log('calendar init')
         this.calendar = new Calendar(new CalendarViewFactory(), this.config);
 
         this.updateSelection();
@@ -95,8 +93,6 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
         this.dates.forEach(day => {
             this.calendar.setDay(day.date, new CellData(day.date, day.payload, day.selected, day.disabled));
         });
-
-        // console.log(this.calendar.getYear(2019).getMonth(0).days.map(day => day.disabled))
     }
 
     cellClicked(data: CellData<any>) {

@@ -1,10 +1,8 @@
 import { Component, Input, OnInit, ElementRef, TemplateRef } from '@angular/core';
-import { CalendarSelection } from './lib/calendar-view/selection/calendar-selection.class';
-
-import { CalendarViewConfig } from './lib/calendar-view/config/calendar-view-config.class';
 import { addMonths, addDays, subDays, format } from 'date-fns';
-import { CellData } from './cell-data';
-import { DatepickerData } from './components/datepicker/datepicker.component';
+import { CalendarSelection, CalendarViewConfig } from 'lib/public_api';
+import { CellData } from 'lib/src/cell-data';
+import { DatepickerData } from 'lib/public_api';
 
 @Component({
   selector: 'app-root',

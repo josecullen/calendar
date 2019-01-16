@@ -5,81 +5,80 @@ import { MonthSelection } from '../../lib/calendar-view/calendar-month-selection
 
 
 @Component({
-    selector: 'trb-calendar-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+  selector: 'trb-calendar-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class CalendarHeaderComponent implements OnChanges {
-    @Input() context: HeaderContext;
-    @Input() monthSelections: MonthSelection[] = [];
-    @Input() showTwoMonths = false;
-    @Input() monthIndex = 0;
-    @Input() linkedMonths = true;
-    @Input() monthLabels: string[];
+  @Input() context: HeaderContext;
+  @Input() monthSelections: MonthSelection[] = [];
+  @Input() showTwoMonths = false;
+  @Input() monthIndex = 0;
+  @Input() linkedMonths = true;
+  @Input() monthLabels: string[];
 
-    @HostBinding('class')
-    get classes() {
-        return `${this.context.stylePrefix}-calendar-header`;
+  @HostBinding('class')
+  get classes() {
+    return `${this.context.stylePrefix}-calendar-header`;
+  }
+
+  get buttonClasses() {
+    return `${this.classes}-buttons`;
+  }
+
+  showPastMonth(): boolean {
+    return this.context.pastMonths || !this.isCurrentMonth();
+  }
+
+  isCurrentMonth(): boolean {
+    const today = new Date();
+    return getMonth(today) === this.context.monthSelections[this.context.monthIndex].month
+      && getYear(today) === this.context.monthSelections[this.context.monthIndex].year;
+  }
+
+  minusYear(index: number) {
+    if (this.linkedMonths) {
+      this.monthSelections.forEach(monthSelection => monthSelection.minusYear());
+    } else {
+      this.monthSelections[index].minusYear();
     }
+  }
 
-    get buttonClasses() {
-        return `${this.classes}-buttons`;
+  minusMonth(index: number) {
+    if (this.linkedMonths) {
+
+      this.monthSelections.forEach(monthSelection => monthSelection.minusMonth());
+    } else {
+      this.monthSelections[index].minusMonth();
     }
+  }
 
-    showPastMonth(): boolean {
-        return this.context.pastMonths || !this.isCurrentMonth;
+  addYear(index: number) {
+    if (this.linkedMonths) {
+      this.monthSelections.forEach(monthSelection => monthSelection.addYear());
+    } else {
+      this.monthSelections[index].addYear();
     }
+  }
 
-    isCurrentMonth(): boolean {
-        const today = new Date();
-        return getMonth(today) === this.context.monthSelections[this.context.monthIndex].month
-        && getYear(today) === this.context.monthSelections[this.context.monthIndex].year;
+  addMonth(index: number) {
+    if (this.linkedMonths) {
+      this.monthSelections.forEach(monthSelection => monthSelection.addMonth());
+    } else {
+      this.monthSelections[index].addMonth();
     }
+  }
 
-    minusYear(index: number) {
-        if (this.linkedMonths) {
-            this.monthSelections.forEach(monthSelection => monthSelection.minusYear());
-        } else {
-            this.monthSelections[index].minusYear();
-        }
+  ngOnChanges(changes: SimpleChanges) {
+    const contextChange = changes['context'];
+
+    if (contextChange) {
+      const context = this.context;
+      this.linkedMonths = context.linkedMonths;
+      this.monthIndex = context.monthIndex;
+      this.monthSelections = context.monthSelections;
+      this.showTwoMonths = context.showTwoMonths;
+      this.monthLabels = context.monthLabels;
     }
-
-    minusMonth(index: number) {
-        if (this.linkedMonths) {
-
-            this.monthSelections.forEach(monthSelection => monthSelection.minusMonth());
-        } else {
-            this.monthSelections[index].minusMonth();
-        }
-    }
-
-    addYear(index: number) {
-        if (this.linkedMonths) {
-            this.monthSelections.forEach(monthSelection => monthSelection.addYear());
-        } else {
-            this.monthSelections[index].addYear();
-        }
-    }
-
-    addMonth(index: number) {
-        if (this.linkedMonths) {
-            this.monthSelections.forEach(monthSelection => monthSelection.addMonth());
-        } else {
-            this.monthSelections[index].addMonth();
-        }
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        const contextChange = changes['context'];
-
-        if (contextChange) {
-            const context = this.context;
-            this.linkedMonths = context.linkedMonths;
-            this.monthIndex = context.monthIndex;
-            this.monthSelections = context.monthSelections;
-            this.showTwoMonths = context.showTwoMonths;
-            this.monthLabels = context.monthLabels;
-            // console.log('context change', context, this.monthSelections)
-        }
-    }
+  }
 }

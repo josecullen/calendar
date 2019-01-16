@@ -11,3 +11,6 @@ export * from './src/directives/calendar-cell';
 export * from './src/directives/calendar-header.directive';
 export * from './src/directives/calendar-month.directive';
 export * from './src/directives/picker-toggle.directive';
+
+export * from './src/lib/calendar-view';
+// export * from './src/lib/calendar';

@@ -3,12 +3,12 @@ export interface ICalendarSelection {
     name: string;
     selectedDates: string[];
     status: SelectionStatus;
+    calendarMonthView: CalendarMonthSelection;
     isInRange(date: string): boolean;
     isSelected(date: string): boolean;
     from(): string;
     to(): string;
     change(date: string): void;
-    calendarMonthView: CalendarMonthSelection;
 }
 export declare enum SelectionType {
     single = "single",

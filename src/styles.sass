@@ -1,133 +1,133 @@
 
 @import '~@angular/cdk/overlay-prebuilt.css'
-/* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
 
-* 
-    font-family: sans-serif
-    color: #333333
-    font-size: 14px
+// *
+//     font-family: sans-serif
+//     color: #333333
+//     font-size: 14px
 
-.price 
-    color: green
-    font-size: 10px
+// .price
+//     color: green
+//     font-size: 10px
 
-i 
-    border: solid #666
-    border-width: 0 2px 2px 0
-    display: inline-block
-    padding: 4px
-
-    
-.right 
-    transform: rotate(-45deg)
-    -webkit-transform: rotate(-45deg)
-
-    
-.left 
-    transform: rotate(135deg)
-    -webkit-transform: rotate(135deg)
+// i
+//     border: solid #666
+//     border-width: 0 2px 2px 0
+//     display: inline-block
+//     padding: 4px
 
 
-.clickeable 
-    cursor: pointer
+// .right
+//     transform: rotate(-45deg)
+//     -webkit-transform: rotate(-45deg)
 
 
+// .left
+//     transform: rotate(135deg)
+//     -webkit-transform: rotate(135deg)
 
-$selected: rgb(23, 158, 164)
-$selected-color: #fff
-$in-range-color: #d3eceb
-$hover-color: #e4e7e7
-    
-    
-.alm-calendar 
-    display: flex
-    flex-wrap: wrap
 
-.alm-calendar-month
-    margin: 0 10px
-
-.alm-calendar-header
-    .alm-calendar-header-buttons
-        padding: 0 12px
-
-.alm-calendar-row 
-    display: flex
-
-.alm-calendar-day-labels
-    padding: 4px 0
-    font-size: 12px
+// .clickeable
+//     cursor: pointer
 
 
 
-.alm-calendar-cell
-    font-family: ProximaNova,sans-serif
-    min-width: 38px
-    min-height: 38px
-    text-align: center
-    display: block
-    line-height: 30px
-    align-items: center
-    &:not(.alm-calendar-cell-has-payload)
-        line-height: 38px
-    &.overlay
-        background-color: $hover-color
-    &.alm-calendar-cell-past
-        .label
-            color: rgba(0,0,0,0.1)
-    &.alm-calendar-cell-in-range
-        &:not(.alm-calendar-cell-outside-month) 
-            background-color: $in-range-color
-    &.alm-calendar-cell-selected
-        &:not(.alm-calendar-cell-outside-month) 
-            .label
-                color: $selected-color
-            .my-price
-                color: $selected-color
-            background-color: $selected
-            &.alm-calendar-cell-from
-                border-top-left-radius: 2px
-                border-bottom-left-radius: 2px
-            &.alm-calendar-cell-to
-                border-top-right-radius: 2px
-                border-bottom-right-radius: 2px
-    
+// $selected: rgb(23, 158, 164)
+// $selected-color: #fff
+// $in-range-color: #d3eceb
+// $hover-color: #e4e7e7
+
+
+// .alm-calendar
+//     display: flex
+//     flex-wrap: wrap
+
+// .alm-calendar-month
+//     margin: 0 10px
+
+// .alm-calendar-header
+//     .alm-calendar-header-buttons
+//         padding: 0 12px
+
+// .alm-calendar-row
+//     display: flex
+
+// .alm-calendar-day-labels
+//     padding: 4px 0
+//     font-size: 12px
+
+
+
+// .alm-calendar-cell
+//     font-family: ProximaNova,sans-serif
+//     min-width: 38px
+//     min-height: 38px
+//     text-align: center
+//     display: block
+//     line-height: 30px
+//     align-items: center
+//     &:not(.alm-calendar-cell-has-payload)
+//         line-height: 38px
+//     &.overlay
+//         background-color: $hover-color
+//     &.alm-calendar-cell-past
+//         .label
+//             color: rgba(0,0,0,0.1)
+//     &.alm-calendar-cell-in-range
+//         &:not(.alm-calendar-cell-outside-month)
+//             background-color: $in-range-color
+//     &.alm-calendar-cell-selected
+//         &:not(.alm-calendar-cell-outside-month)
+//             .label
+//                 color: $selected-color
+//             .my-price
+//                 color: $selected-color
+//             background-color: $selected
+//             &.alm-calendar-cell-from
+//                 border-top-left-radius: 2px
+//                 border-bottom-left-radius: 2px
+//             &.alm-calendar-cell-to
+//                 border-top-right-radius: 2px
+//                 border-bottom-right-radius: 2px
 
 
 
 
-.alm-old-host 
-    min-width: 30px
-    min-height: 30px
-    text-align: center
-    display: block
-    line-height: 30px
-    align-items: center
-    
-    &.alm-old-calendar-cell-in-range
-        background-color: rgb(234, 234, 234)
-        &.alm-old-calendar-cell-first
-            background-image: linear-gradient(to right, #fff 50%, #fff 50%, rgb(234, 234, 234) 50%)
-        &.alm-old-calendar-cell-last
-            background-image: linear-gradient(to left, #fff 50%, #fff 50%, rgb(234, 234, 234) 50%)
-        
-    .overlay:hover
-        background-color: transparent !important
-    .label
-        display: block
-        width: 30px
-        height: 30px
-        margin: auto
-        &.alm-old-number-selected
-            border-radius: 50%
-            background-color: blue
-            color: #fff
-        &.alm-old-number-past
-            color: #ccc
 
-.alm-old-host:hover
-    &:not(.alm-old-calendar-cell-past) 
-        text-decoration: underline
-        cursor: pointer
+// .alm-old-host
+//     min-width: 30px
+//     min-height: 30px
+//     text-align: center
+//     display: block
+//     line-height: 30px
+//     align-items: center
+
+//     &.alm-old-calendar-cell-in-range
+//         background-color: rgb(234, 234, 234)
+//         &.alm-old-calendar-cell-first
+//             background-image: linear-gradient(to right, #fff 50%, #fff 50%, rgb(234, 234, 234) 50%)
+//         &.alm-old-calendar-cell-last
+//             background-image: linear-gradient(to left, #fff 50%, #fff 50%, rgb(234, 234, 234) 50%)
+
+//     .overlay:hover
+//         background-color: transparent !important
+//     .label
+//         display: block
+//         width: 30px
+//         height: 30px
+//         margin: auto
+//         &.alm-old-number-selected
+//             border-radius: 50%
+//             background-color: blue
+//             color: #fff
+//         &.alm-old-number-past
+//             color: #ccc
+
+// .alm-old-host:hover
+//     &:not(.alm-old-calendar-cell-past)
+//         text-decoration: underline
+//         cursor: pointer
 
 
 .my-price

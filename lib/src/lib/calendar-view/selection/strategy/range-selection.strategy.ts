@@ -5,53 +5,50 @@ import { parse, compareDesc, addDays, format } from 'date-fns';
 import { CalendarMonthSelection } from '../../calendar-month-selection.class';
 
 export class RangeSelectionStrategy implements ISelectionStrategy {
-    calendarMonthView = new CalendarMonthSelection(true)
-    readonly name = 'range'
+    calendarMonthView = new CalendarMonthSelection(true);
+    readonly name = 'range';
 
-    isInRange(date: string, selection:ICalendarSelection) {
-        const index = selection.selectedDates.findIndex(d => d === date)
+    isInRange(date: string, selection: ICalendarSelection) {
+        const index = selection.selectedDates.findIndex(d => d === date);
 
-        return index > 0 && index < selection.selectedDates.length -1
+        return index > 0 && index < selection.selectedDates.length - 1;
     }
 
-    isSelected(date: string, selection:ICalendarSelection){
-        const index = selection.selectedDates.findIndex(d => d === date)
+    isSelected(date: string, selection: ICalendarSelection) {
+        const index = selection.selectedDates.findIndex(d => d === date);
 
-        return selection.selectedDates.length && (index === 0 || index === selection.selectedDates.length -1)
-        
+        return selection.selectedDates.length && (index === 0 || index === selection.selectedDates.length - 1);
+
     }
 
-    change(date: string, selection:CalendarSelection) {
+    change(date: string, selection: CalendarSelection) {
         if (selection.status === SelectionStatus.unset) {
-            selection.selectedDates.push(date)
-            selection.status = SelectionStatus.startRangeSelected
-        }
-        else if (selection.status === SelectionStatus.startRangeSelected) {
-            let start = parse(selection.selectedDates[0])
-            let end = parse(date)
+            selection.selectedDates.push(date);
+            selection.status = SelectionStatus.startRangeSelected;
+        } else if (selection.status === SelectionStatus.startRangeSelected) {
+            let start = parse(selection.selectedDates[0]);
+            const end = parse(date);
 
-            let diff = compareDesc(start, end)
+            const diff = compareDesc(start, end);
 
             if (diff === 0) {
-                selection.selectedDates = []
-                selection.status = SelectionStatus.unset
-            }
-            else if (diff < 0) {
-                selection.selectedDates = []
-                selection.selectedDates.push(date)
+                selection.selectedDates = [];
+                selection.status = SelectionStatus.unset;
+            } else if (diff < 0) {
+                selection.selectedDates = [];
+                selection.selectedDates.push(date);
             } else if (diff > 0) {
                 do {
-                    start = addDays(start, 1)
-                    selection.selectedDates.push(format(start, 'YYYY-MM-DD'))
-                } while (compareDesc(start, end) > 0)
+                    start = addDays(start, 1);
+                    selection.selectedDates.push(format(start, 'YYYY-MM-DD'));
+                } while (compareDesc(start, end) > 0);
 
-                selection.status = SelectionStatus.rangeSelected
+                selection.status = SelectionStatus.rangeSelected;
             }
 
-        }
-        else {
-            selection.selectedDates = []
-            selection.status = SelectionStatus.unset
+        } else {
+            selection.selectedDates = [];
+            selection.status = SelectionStatus.unset;
         }
     }
 }

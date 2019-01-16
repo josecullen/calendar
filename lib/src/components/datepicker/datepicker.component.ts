@@ -66,10 +66,8 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
         @Inject(PICKER_DATA) public data: DatepickerData,
         public calendarRef: TemplateRef<any>
     ) {
-        console.log(this.data.calendarConfig.month);
         this.data.calendarConfig = Object.assign(DEFAULT_DATEPICKER_DATA.calendarConfig, data.calendarConfig);
         this.data.stylePrefix = data.stylePrefix || DEFAULT_DATEPICKER_DATA.stylePrefix;
-        console.log(this.data);
         this.data.dates = data.dates || DEFAULT_DATEPICKER_DATA.dates;
         this.data.datesSelected = data.datesSelected || DEFAULT_DATEPICKER_DATA.datesSelected;
 

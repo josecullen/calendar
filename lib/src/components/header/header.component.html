@@ -1,9 +1,10 @@
-<trb-calendar-header-buttons 
+<trb-calendar-header-buttons
     [class]="buttonClasses"
-    type="back" 
+    type="back"
     *ngIf="!showTwoMonths || monthIndex === 0 || !linkedMonths"
-    (monthClick)="minusMonth(0)" 
+    (monthClick)="minusMonth(0)"
     (yearClick)="minusYear(0)"
+    [stylePrefix]="context.stylePrefix"
     [showChangeMonthButton]="context.showChangeMonthButton && showPastMonth()"
     [showChangeYearButton]="context.showChangeYearButton">
 </trb-calendar-header-buttons>
@@ -16,12 +17,13 @@
 
 <span class="filler"></span>
 
-<trb-calendar-header-buttons 
+<trb-calendar-header-buttons
     [class]="buttonClasses"
     *ngIf="!showTwoMonths || monthIndex === 1  || !linkedMonths"
-    type="forward" 
-    (monthClick)="addMonth(0)" 
+    type="forward"
+    (monthClick)="addMonth(0)"
     (yearClick)="addYear(0)"
+    [stylePrefix]="context.stylePrefix"
     [showChangeMonthButton]="context.showChangeMonthButton"
     [showChangeYearButton]="context.showChangeYearButton">
 </trb-calendar-header-buttons>

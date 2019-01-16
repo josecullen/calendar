@@ -16,7 +16,7 @@ import { CellData } from '../../cell-data';
     templateUrl: './month.component.html',
     styleUrls: ['../styles.sass', './month.component.scss']
 })
-export class CalendarMonthComponent implements OnChanges, OnInit {
+export class CalendarMonthComponent implements OnChanges {
 
     @HostBinding('class')
     get classes() {
@@ -37,10 +37,6 @@ export class CalendarMonthComponent implements OnChanges, OnInit {
 
     @ContentChild(CalendarHeaderDirective)
     calendarHeader: CalendarHeaderDirective;
-
-    ngOnInit() {
-        // console.log('month init')
-    }
 
     getCellData(day: CellData<any>): CellContext<any> {
         return CellContext.from(day, {

@@ -1,8 +1,8 @@
 export class CalendarHeaderConfig {
 
     constructor(
-        public linkedMonths:boolean = true,
-    ){
+        public linkedMonths: boolean = true,
+    ) {
 
     }
 }

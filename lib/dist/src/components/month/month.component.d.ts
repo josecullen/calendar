@@ -1,4 +1,4 @@
-import { OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 import { ICalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.interface';
 import { Calendar } from '../../lib/calendar/calendar';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
@@ -9,7 +9,7 @@ import { MonthSelection } from '../../lib/calendar-view/calendar-month-selection
 import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CalendarHeaderDirective } from '../../directives/calendar-header.directive';
 import { CellData } from '../../cell-data';
-export declare class CalendarMonthComponent implements OnChanges, OnInit {
+export declare class CalendarMonthComponent implements OnChanges {
     readonly classes: string;
     context: MonthContext;
     calendar: Calendar;
@@ -21,7 +21,6 @@ export declare class CalendarMonthComponent implements OnChanges, OnInit {
     rowClass: any;
     calendarCell: CalendarCellDirective;
     calendarHeader: CalendarHeaderDirective;
-    ngOnInit(): void;
     getCellData(day: CellData<any>): CellContext<any>;
     getHeaderData(): HeaderContext;
     ngOnChanges(changes: SimpleChanges): void;

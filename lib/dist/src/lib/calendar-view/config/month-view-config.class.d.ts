@@ -4,7 +4,7 @@ export declare class MonthViewConfig implements IMonthViewConfig {
     hideDaysOutsideMonth: boolean;
     showTwoCalendarIfNeed: boolean;
     firstDay: number;
-    monthLabels: string[];
+    monthLabels?: string[];
     dayLabels: string[];
     dayLength: number;
     showChangeYearButton: boolean;

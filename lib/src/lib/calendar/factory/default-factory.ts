@@ -9,16 +9,16 @@ import { Day } from '../day/day.class';
 
 export class CalendarDefaultFactory implements ICalendarFactory {
 
-    createYear(value:number, calendar:Calendar):IYear {
-        return new Year(value, calendar)
+    createYear(value: number, calendar: Calendar): IYear {
+        return new Year(value, calendar);
     }
 
-    createMonth(date:Date, year:IYear, calendar:Calendar):IMonth {
-        return new Month(date, year, calendar)
+    createMonth(date: Date, year: IYear, calendar: Calendar): IMonth {
+        return new Month(date, year, calendar);
     }
 
-    createDay(date:Date):IDay {
-        return new Day(date)
+    createDay(date: Date): IDay {
+        return new Day(date);
     }
 
 }

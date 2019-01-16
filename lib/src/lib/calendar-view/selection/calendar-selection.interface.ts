@@ -2,15 +2,15 @@ import { CalendarMonthSelection } from '../calendar-month-selection.class';
 
 export interface ICalendarSelection {
     // strategy:ISelectionStrategy
-    name:string
-    selectedDates: string[]
-    status: SelectionStatus
-    isInRange(date:string):boolean
-    isSelected(date:string):boolean
-    from():string
-    to():string
-    change(date:string): void
-    calendarMonthView:CalendarMonthSelection
+    name: string;
+    selectedDates: string[];
+    status: SelectionStatus;
+    calendarMonthView: CalendarMonthSelection;
+    isInRange(date: string): boolean;
+    isSelected(date: string): boolean;
+    from(): string;
+    to(): string;
+    change(date: string): void;
 }
 
 
