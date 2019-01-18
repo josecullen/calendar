@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       dayLength: 1,
       showChangeYearButton: false
     },
-    selection: 'range',
+    selection: 'simple',
     // stylePrefix: 'alm'
   });
 

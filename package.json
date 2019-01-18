@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:lib": "ng-packagr -p lib/package.json",
-    "publish:lib": "npm publish lib/dist"
+    "publish:lib": "npm publish lib/dist",
+    "patch:lib" : "cd lib && npm version patch"
   },
   "private": true,
   "dependencies": {
