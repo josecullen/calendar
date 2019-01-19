@@ -6,6 +6,7 @@ export declare class CellContext<T> extends CellData<T> {
     selection: ICalendarSelection;
     monthSelection: MonthSelection;
     hideDaysOutsideMonth: boolean;
+    filterDates: (date: Date) => boolean;
     constructor(date: string, payload: T, selected?: boolean, disabled?: boolean);
     static from<T>(cellData: CellData<T>, fields: any): CellContext<T>;
 }

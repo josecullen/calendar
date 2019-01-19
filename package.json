@@ -8,9 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "all:lib": "npm run patch:lib && npm run build:lib && npm run publish:lib",
+    "patch:lib" : "cd lib && npm version patch",
     "build:lib": "ng-packagr -p lib/package.json",
-    "publish:lib": "npm publish lib/dist",
-    "patch:lib" : "cd lib && npm version patch"
+    "publish:lib": "npm publish lib/dist"
   },
   "private": true,
   "dependencies": {

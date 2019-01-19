@@ -31,10 +31,10 @@ export class AppComponent implements OnInit {
       dayLength: 1,
       showChangeYearButton: false
     },
-    filterDates : (date: Date) => {
-      return !['2019-01-20', '2019-01-21', '2019-01-22', '2019-01-23']
-        .some(d => isEqual(format(date, 'YYYY-MM-DD'), d));
-    },
+    // filterDates : (date: Date) => {
+    //   return !['2019-01-20', '2019-01-21', '2019-01-22', '2019-01-23']
+    //     .some(d => isEqual(format(date, 'YYYY-MM-DD'), d));
+    // },
     selection: 'range',
     // stylePrefix: 'alm'
   });

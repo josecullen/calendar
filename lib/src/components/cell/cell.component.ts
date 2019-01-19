@@ -39,7 +39,7 @@ export class CalendarCellComponent implements OnInit {
                 'selection-simple' : this.context.selection.name === 'simple',
                 'selection-range' : this.context.selection.name === 'range',
                 'selection-pick' : this.context.selection.name === 'pick',
-                'disabled' : this.context.disabled || this.context.filterDates(parse(this.context.date)),
+                'disabled' : this.context.disabled || (this.context.filterDates && this.context.filterDates(parse(this.context.date))),
             };
 
             const prefix = this.context.stylePrefix;
