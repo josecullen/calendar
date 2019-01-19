@@ -1,6 +1,6 @@
 {
   "name": "trb-calendar",
-  "version": "0.0.8",
+  "version": "0.0.11",
   "author": "José Cullen <josecullen8@gmail.com>",
   "license": "MIT",
   "peerDependencies": {

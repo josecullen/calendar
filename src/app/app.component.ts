@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ElementRef, TemplateRef } from '@angular/core';
-import { addMonths, addDays, subDays, format } from 'date-fns';
+import { addMonths, addDays, subDays, format, isEqual } from 'date-fns';
 import { CalendarSelection, CalendarViewConfig } from 'lib/public_api';
 import { CellData } from 'lib/src/cell-data';
 import { DatepickerData } from 'lib/public_api';
@@ -31,7 +31,11 @@ export class AppComponent implements OnInit {
       dayLength: 1,
       showChangeYearButton: false
     },
-    selection: 'simple',
+    filterDates : (date: Date) => {
+      return !['2019-01-20', '2019-01-21', '2019-01-22', '2019-01-23']
+        .some(d => isEqual(format(date, 'YYYY-MM-DD'), d));
+    },
+    selection: 'range',
     // stylePrefix: 'alm'
   });
 

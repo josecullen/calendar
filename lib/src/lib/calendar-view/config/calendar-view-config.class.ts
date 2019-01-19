@@ -9,7 +9,8 @@ export class CalendarViewConfig extends CalendarConfig {
         public header: CalendarHeaderConfig = new CalendarHeaderConfig(),
         public month: MonthViewConfig = new MonthViewConfig(),
         public selection: 'simple' | 'picked' | 'range' = 'simple',
-        public stylePrefix: string = 'trb'
+        public stylePrefix: string = 'trb',
+        public filterDates?: (date: Date) => boolean,
     ) {
         super(header, month);
     }
@@ -31,7 +32,7 @@ export class CalendarViewConfig extends CalendarConfig {
     }
 
     private static assign(value, target, key) {
-        if (value instanceof Array) {
+        if (value instanceof Array || value instanceof Function) {
             target[key] = value;
         } else if (value instanceof Object) {
             target[key] = this.copyObject(value, target[key]);
@@ -46,5 +47,6 @@ export class ICalendarViewConfig {
     header?: ICalendarHeaderConfig;
     month?: IMonthViewConfig;
     selection?: 'simple' | 'picked' | 'range';
+    filterDates?: (date: Date) => boolean;
     stylePrefix?: string;
 }

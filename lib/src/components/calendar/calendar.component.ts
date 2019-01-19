@@ -51,19 +51,10 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
         const configChange = changes['config'];
 
         if (this.calendar) {
-            // let change = changes['dates']
-
-            // if (change) {
-
-            // setTimeout(() => {
-            // this.calendar.setDaysPayload(this.dates)
-            // })
             this.calendar.recalculate();
             this.dates.forEach(day => {
                 this.calendar.setDay(day.date, new CellData(day.date, day.payload, day.selected, day.disabled));
             });
-
-            // }
 
             if (configChange) {
 

@@ -9,8 +9,6 @@ import { MonthSelection } from '../../lib/calendar-view/calendar-month-selection
 import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CalendarHeaderDirective } from '../../directives/calendar-header.directive';
 import { CellData } from '../../cell-data';
-
-
 @Component({
     selector: 'trb-calendar-month',
     templateUrl: './month.component.html',
@@ -43,7 +41,8 @@ export class CalendarMonthComponent implements OnChanges {
             selection: this.selection,
             monthSelection: this.monthSelection,
             hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
-            stylePrefix: this.config.stylePrefix
+            stylePrefix: this.config.stylePrefix,
+            filterDates: this.config.filterDates
         });
     }
 

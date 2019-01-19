@@ -31,6 +31,14 @@
     (click)="openPicker(mybutton, monthRef)">open
   </button>
 
+  <input #input
+    trb-datepicker-toggle
+    [config]="datepickerConfig"
+    [dates]="dates"
+    (close)="onClose($event)"
+    (selectionChange)="input.value = $event.from()"
+    (click)="openPicker(mybutton, monthRef)">
+
   <button #mybutton
   trb-datepicker-toggle>open default
   </button>

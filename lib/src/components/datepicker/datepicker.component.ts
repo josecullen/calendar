@@ -41,13 +41,15 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
 
           break;
         case 'range':
-          setTimeout(() => {
-            this.pickerRef.close({
-              from: selection.from(),
-              to: selection.to(),
-              selectedDates: selection.selectedDates
-            });
-          }, 600);
+          if (selection.to()) {
+            setTimeout(() => {
+              this.pickerRef.close({
+                from: selection.from(),
+                to: selection.to(),
+                selectedDates: selection.selectedDates
+              });
+            }, 600);
+          }
           break;
       }
     }

@@ -47,8 +47,11 @@ export class RangeSelectionStrategy implements ISelectionStrategy {
             }
 
         } else {
+            // selection.selectedDates = [];
+            // selection.status = SelectionStatus.unset;
             selection.selectedDates = [];
-            selection.status = SelectionStatus.unset;
+            selection.selectedDates.push(date);
+            selection.status = SelectionStatus.startRangeSelected;
         }
     }
 }
