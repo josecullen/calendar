@@ -35,6 +35,10 @@ $range-radious: 4px
 
 .trb-calendar-month
     margin: 0 10px
+    @media screen and (max-width: 600px)
+      margin: auto
+      padding-top: 24px
+
 
 .trb-calendar-header
     height: 16px
@@ -107,4 +111,29 @@ $range-radious: 4px
             color: rgba(0,0,0,0.1)
 
 
+
+.trb-button-close
+  position: absolute
+  right: 8px
+  top: 8px
+  width: 30px
+  height: 24px
+  opacity: 0.3
+
+.trb-button-close:hover
+  opacity: 1
+
+.trb-button-close:before, .trb-button-close:after
+  position: absolute
+  left: 15px
+  content: ' '
+  height: 24px
+  width: 2px
+  background-color: #333
+
+.trb-button-close:before
+  transform: rotate(45deg)
+
+.trb-button-close:after
+  transform: rotate(-45deg)
 

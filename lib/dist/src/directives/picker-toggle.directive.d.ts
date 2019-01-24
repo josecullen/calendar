@@ -1,4 +1,4 @@
-import { EventEmitter, TemplateRef, ElementRef, SimpleChanges } from "@angular/core";
+import { EventEmitter, TemplateRef, ElementRef, SimpleChanges } from '@angular/core';
 import { PickerService } from '../modules/picker/picker.service';
 import { DatepickerData } from '../components/datepicker/datepicker.component';
 import { CalendarSelection } from '../lib/calendar-view/selection/calendar-selection.class';

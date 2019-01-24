@@ -9,7 +9,9 @@ import { MonthSelection } from '../../lib/calendar-view/calendar-month-selection
 import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CalendarHeaderDirective } from '../../directives/calendar-header.directive';
 import { CellData } from '../../cell-data';
+import { BreakpointObserver } from '@angular/cdk/layout';
 export declare class CalendarMonthComponent implements OnChanges {
+    private breakpointObserver;
     readonly classes: string;
     context: MonthContext;
     calendar: Calendar;
@@ -21,7 +23,9 @@ export declare class CalendarMonthComponent implements OnChanges {
     rowClass: any;
     calendarCell: CalendarCellDirective;
     calendarHeader: CalendarHeaderDirective;
+    constructor(breakpointObserver: BreakpointObserver);
     getCellData(day: CellData<any>): CellContext<any>;
+    isMobile(): boolean;
     getHeaderData(): HeaderContext;
     ngOnChanges(changes: SimpleChanges): void;
 }

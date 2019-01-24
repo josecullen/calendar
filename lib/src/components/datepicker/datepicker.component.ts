@@ -1,6 +1,6 @@
 import {
   Component, Inject, ViewChild, AfterViewInit, TemplateRef,
-  AfterContentInit, HostBinding, ViewEncapsulation
+  AfterContentInit, HostBinding, ViewEncapsulation, HostListener
 } from '@angular/core';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { parse, addMonths } from 'date-fns';
@@ -17,15 +17,37 @@ import { CellData } from '../../cell-data';
   encapsulation: ViewEncapsulation.None
 })
 export class DatepickerComponent implements AfterViewInit, AfterContentInit {
-  @ViewChild(CalendarComponent)
-  calendar: CalendarComponent;
 
   @HostBinding('class')
   get classes() {
     return `${this.data.stylePrefix}-datepicker`;
   }
 
+  constructor(
+    private pickerRef: PickerOverlayRef<DatepickerComponent>,
+    @Inject(PICKER_DATA) public data: DatepickerData,
+    public calendarRef: TemplateRef<any>
+  ) {
+    this.data.calendarConfig = Object.assign(DEFAULT_DATEPICKER_DATA.calendarConfig, data.calendarConfig);
+    this.data.stylePrefix = data.stylePrefix || DEFAULT_DATEPICKER_DATA.stylePrefix;
+    this.data.dates = data.dates || DEFAULT_DATEPICKER_DATA.dates;
+    this.data.datesSelected = data.datesSelected || DEFAULT_DATEPICKER_DATA.datesSelected;
+
+  }
+  @ViewChild(CalendarComponent)
+  calendar: CalendarComponent;
+
   private preventClose = false;
+
+  @HostListener('input.enter')
+  onEnter(): void {
+    this.close();
+  }
+
+  close(): void {
+    console.info('close');
+    this.pickerRef.close();
+  }
 
   onSelectionChange(selection: CalendarSelection) {
     if (!this.preventClose) {
@@ -76,18 +98,6 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
     setTimeout(() => {
       this.preventClose = false;
     });
-  }
-
-  constructor(
-    private pickerRef: PickerOverlayRef<DatepickerComponent>,
-    @Inject(PICKER_DATA) public data: DatepickerData,
-    public calendarRef: TemplateRef<any>
-  ) {
-    this.data.calendarConfig = Object.assign(DEFAULT_DATEPICKER_DATA.calendarConfig, data.calendarConfig);
-    this.data.stylePrefix = data.stylePrefix || DEFAULT_DATEPICKER_DATA.stylePrefix;
-    this.data.dates = data.dates || DEFAULT_DATEPICKER_DATA.dates;
-    this.data.datesSelected = data.datesSelected || DEFAULT_DATEPICKER_DATA.datesSelected;
-
   }
 }
 

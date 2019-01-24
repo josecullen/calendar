@@ -112,8 +112,6 @@ function getRandomDates(): CellData<number>[] {
     );
   }
 
-
-
   return values;
 }
 

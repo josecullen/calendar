@@ -2,6 +2,7 @@ import { Injector, ElementRef, TemplateRef } from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import { PickerOverlayRef } from './picker-overlay-ref';
+import { BreakpointObserver } from '@angular/cdk/layout';
 interface PickerDialogConfig {
     panelClass?: string;
     hasBackdrop?: boolean;
@@ -11,7 +12,8 @@ interface PickerDialogConfig {
 export declare class PickerService {
     private injector;
     private overlay;
-    constructor(injector: Injector, overlay: Overlay);
+    private breakpointObserver;
+    constructor(injector: Injector, overlay: Overlay, breakpointObserver: BreakpointObserver);
     open<T>(config: PickerDialogConfig, elementRef: ElementRef, component: ComponentType<T>, templateRef?: TemplateRef<any>): PickerOverlayRef<T>;
     private createOverlay;
     private getOverlayConfig;

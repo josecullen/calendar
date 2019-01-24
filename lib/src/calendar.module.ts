@@ -13,6 +13,7 @@ import { CalendarHeaderButtonsComponent } from './components/header-buttons/head
 import { PickerModule } from './modules/picker/picker.module';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { PickerToggleDirective } from './directives/picker-toggle.directive';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { PickerToggleDirective } from './directives/picker-toggle.directive';
   ],
   imports: [
     CommonModule,
-    PickerModule
+    PickerModule,
+    LayoutModule,
   ],
   entryComponents: [
     CalendarComponent,

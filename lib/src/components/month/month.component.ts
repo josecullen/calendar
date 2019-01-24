@@ -9,75 +9,95 @@ import { MonthSelection } from '../../lib/calendar-view/calendar-month-selection
 import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CalendarHeaderDirective } from '../../directives/calendar-header.directive';
 import { CellData } from '../../cell-data';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
-    selector: 'trb-calendar-month',
-    templateUrl: './month.component.html',
-    styleUrls: ['../styles.sass', './month.component.scss']
+  selector: 'trb-calendar-month',
+  templateUrl: './month.component.html',
+  styleUrls: ['../styles.sass', './month.component.scss']
 })
 export class CalendarMonthComponent implements OnChanges {
 
-    @HostBinding('class')
-    get classes() {
-        return `${this.config.stylePrefix}-calendar-month`;
+  @HostBinding('class')
+  get classes() {
+    return `${this.config.stylePrefix}-calendar-month`;
+  }
+  @Input() context: MonthContext;
+  @Input() calendar: Calendar;
+  @Input() index: number;
+  @Input() selection: ICalendarSelection;
+  @Input() monthSelection: MonthSelection;
+  @Input() config: CalendarViewConfig;
+
+  dayLabelsRowClass: any;
+  rowClass: any;
+
+  @ContentChild(CalendarCellDirective)
+  calendarCell: CalendarCellDirective;
+
+  @ContentChild(CalendarHeaderDirective)
+  calendarHeader: CalendarHeaderDirective;
+
+  constructor(private breakpointObserver: BreakpointObserver) {
+
+  }
+
+  getCellData(day: CellData<any>): CellContext<any> {
+    return CellContext.from(day, {
+      selection: this.selection,
+      monthSelection: this.monthSelection,
+      hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
+      stylePrefix: this.config.stylePrefix,
+      filterDates: this.config.filterDates
+    });
+  }
+
+  isMobile(): boolean {
+    return this.breakpointObserver.isMatched(Breakpoints.HandsetPortrait);
+  }
+
+  getHeaderData(): HeaderContext {
+    const config = {
+      monthLabels: this.config.month.monthLabels,
+      monthIndex: this.index,
+      pastMonths: this.config.header.pastMonths,
+      showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
+      linkedMonths: this.config.header.linkedMonths,
+      monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to],
+      stylePrefix: this.config.stylePrefix,
+      showChangeMonthButton: this.config.month.showChangeMonthButton,
+      showChangeYearButton: this.config.month.showChangeYearButton
+    } as HeaderContext;
+
+    if (this.isMobile()) {
+      config.showTwoMonths = this.index === 0 ? false : true;
+
+      if (this.index === 1) {
+        config.showChangeYearButton = false;
+        config.showChangeMonthButton = false;
+      }
     }
-    @Input() context: MonthContext;
-    @Input() calendar: Calendar;
-    @Input() index: number;
-    @Input() selection: ICalendarSelection;
-    @Input() monthSelection: MonthSelection;
-    @Input() config: CalendarViewConfig;
 
-    dayLabelsRowClass: any;
-    rowClass: any;
+    return config;
+  }
 
-    @ContentChild(CalendarCellDirective)
-    calendarCell: CalendarCellDirective;
+  ngOnChanges(changes: SimpleChanges) {
+    const contextChange = changes['context'];
 
-    @ContentChild(CalendarHeaderDirective)
-    calendarHeader: CalendarHeaderDirective;
-
-    getCellData(day: CellData<any>): CellContext<any> {
-        return CellContext.from(day, {
-            selection: this.selection,
-            monthSelection: this.monthSelection,
-            hideDaysOutsideMonth: this.calendar.config.month.hideDaysOutsideMonth,
-            stylePrefix: this.config.stylePrefix,
-            filterDates: this.config.filterDates
-        });
+    if (contextChange) {
+      this.calendar = this.context.calendar;
+      this.index = this.context.index;
+      this.selection = this.context.selection;
+      this.monthSelection = this.context.monthSelection;
+      this.config = this.context.config;
     }
 
-    getHeaderData(): HeaderContext {
-        return {
-            monthLabels: this.config.month.monthLabels,
-            monthIndex: this.index,
-            pastMonths: this.config.header.pastMonths,
-            showTwoMonths: this.selection['calendarMonthView'].needTwoMonthView && this.calendar.config.month['showTwoCalendarIfNeed'],
-            linkedMonths: this.config.header.linkedMonths,
-            monthSelections: [this.selection.calendarMonthView.from, this.selection.calendarMonthView.to],
-            stylePrefix: this.config.stylePrefix,
-            showChangeMonthButton: this.config.month.showChangeMonthButton,
-            showChangeYearButton: this.config.month.showChangeYearButton
-        } as HeaderContext;
-    }
+    this.dayLabelsRowClass = {};
+    this.rowClass = {};
 
-    ngOnChanges(changes: SimpleChanges) {
-        const contextChange = changes['context'];
-
-        if (contextChange) {
-            this.calendar = this.context.calendar;
-            this.index = this.context.index;
-            this.selection = this.context.selection;
-            this.monthSelection = this.context.monthSelection;
-            this.config = this.context.config;
-        }
-
-        this.dayLabelsRowClass = {};
-        this.rowClass = {};
-
-        this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-row`] = true;
-        this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-day-labels`] = true;
-        this.rowClass[`${this.config.stylePrefix}-calendar-row`] = true;
-    }
+    this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-row`] = true;
+    this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-day-labels`] = true;
+    this.rowClass[`${this.config.stylePrefix}-calendar-row`] = true;
+  }
 
 }
 

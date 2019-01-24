@@ -1,4 +1,4 @@
-import { EventEmitter, Directive, HostListener, Input, TemplateRef, ElementRef, Output, SimpleChanges } from "@angular/core";
+import { EventEmitter, Directive, HostListener, Input, TemplateRef, ElementRef, Output, SimpleChanges } from '@angular/core';
 import { PickerService } from '../modules/picker/picker.service';
 import { DatepickerData, DatepickerComponent, DEFAULT_DATEPICKER_DATA } from '../components/datepicker/datepicker.component';
 
@@ -10,49 +10,50 @@ import { CellData } from '../cell-data';
     selector: '[trb-datepicker-toggle]'
 })
 export class PickerToggleDirective {
-    private datepicker:DatepickerComponent
+    private datepicker: DatepickerComponent;
 
     @Input('trb-datepicker-toggle')
-    monthRef: TemplateRef<any>
+    monthRef: TemplateRef<any>;
 
     @Input()
-    config: DatepickerData = DEFAULT_DATEPICKER_DATA
+    config: DatepickerData = DEFAULT_DATEPICKER_DATA;
 
     @Input()
-    dates:CellData<any>[]
+    dates: CellData<any>[];
 
     @Output()
-    selectionChange:EventEmitter<CalendarSelection> = new EventEmitter()
-    
-    @Output()
-    monthSelectionChange:EventEmitter<{ previous: Date, current: Date }> = new EventEmitter()
+    selectionChange: EventEmitter<CalendarSelection> = new EventEmitter();
 
     @Output()
-    close:EventEmitter<any> = new EventEmitter()
+    monthSelectionChange: EventEmitter<{ previous: Date, current: Date }> = new EventEmitter();
+
+    @Output()
+    close: EventEmitter<any> = new EventEmitter();
 
     @HostListener('click')
     toggle() {
+
         const ref = this.pickerService.open({
             data: this.config
-        }, this.elementRef, DatepickerComponent, this.monthRef)
-        
-        this.datepicker = ref.instance
-        
-        ref.instance.calendar.selectionChange.subscribe(data => this.selectionChange.emit(data))
-        ref.instance.calendar.monthSelectionChange.subscribe(data => this.monthSelectionChange.emit(data))
-        
+        }, this.elementRef, DatepickerComponent, this.monthRef);
+
+        this.datepicker = ref.instance;
+
+        ref.instance.calendar.selectionChange.subscribe(data => this.selectionChange.emit(data));
+        ref.instance.calendar.monthSelectionChange.subscribe(data => this.monthSelectionChange.emit(data));
+
         // this.monthSelectionChange = ref.instance.calendar.monthSelectionChange
-        
+
         ref.subscribe(result => {
-            this.close.emit(result)
-        })
+            this.close.emit(result);
+        });
     }
 
-    ngOnChanges(changes:SimpleChanges){
-        const datesChange = changes['dates']
+    ngOnChanges(changes: SimpleChanges) {
+        const datesChange = changes['dates'];
 
-        if(datesChange && this.dates && this.datepicker){
-            this.datepicker.data.dates = this.dates
+        if (datesChange && this.dates && this.datepicker) {
+            this.datepicker.data.dates = this.dates;
         }
     }
 
