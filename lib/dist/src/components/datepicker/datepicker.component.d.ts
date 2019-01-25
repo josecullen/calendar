@@ -8,13 +8,15 @@ export declare class DatepickerComponent implements AfterViewInit, AfterContentI
     private pickerRef;
     data: DatepickerData;
     calendarRef: TemplateRef<any>;
-    calendar: CalendarComponent;
     readonly classes: string;
+    constructor(pickerRef: PickerOverlayRef<DatepickerComponent>, data: DatepickerData, calendarRef: TemplateRef<any>);
+    calendar: CalendarComponent;
     private preventClose;
+    onEnter(): void;
+    close(): void;
     onSelectionChange(selection: CalendarSelection): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;
-    constructor(pickerRef: PickerOverlayRef<DatepickerComponent>, data: DatepickerData, calendarRef: TemplateRef<any>);
 }
 export interface DatepickerData {
     calendarConfig?: CalendarViewConfig;

@@ -9,7 +9,7 @@
 </ng-template>
 
 
-<ng-container *ngIf="calendar.getYear(monthSelection.year).months[monthSelection.month].getCalendarView() as calendarView">
+<ng-container *ngIf="calendarView as calendarView">
   <div [ngClass]="dayLabelsRowClass">
     <trb-calendar-day-header-cell class="day-label" *ngFor="let day of [0,1,2,3,4,5,6]" [day]="day" [dayLabels]="config.month.dayLabels"
       [dayLength]="config.month.dayLength">

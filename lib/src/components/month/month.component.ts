@@ -1,4 +1,4 @@
-import { Component, Input, ContentChild, OnChanges, SimpleChanges, HostBinding, OnInit } from '@angular/core';
+import { Component, Input, ContentChild, OnChanges, SimpleChanges, HostBinding, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ICalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.interface';
 import { Calendar } from '../../lib/calendar/calendar';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
@@ -10,12 +10,15 @@ import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CalendarHeaderDirective } from '../../directives/calendar-header.directive';
 import { CellData } from '../../cell-data';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { IDay } from '../../lib/calendar';
+
 @Component({
   selector: 'trb-calendar-month',
   templateUrl: './month.component.html',
-  styleUrls: ['../styles.sass', './month.component.scss']
+  styleUrls: ['../styles.sass', './month.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarMonthComponent implements OnChanges {
+export class CalendarMonthComponent implements OnChanges, OnInit {
 
   @HostBinding('class')
   get classes() {
@@ -37,7 +40,18 @@ export class CalendarMonthComponent implements OnChanges {
   @ContentChild(CalendarHeaderDirective)
   calendarHeader: CalendarHeaderDirective;
 
+  calendarView: IDay[][];
+
   constructor(private breakpointObserver: BreakpointObserver) {
+  }
+
+  ngOnInit(): void {
+    this.calendarView = this.calendar.getYear(this.monthSelection.year).months[this.monthSelection.month].getCalendarView();
+
+    this.monthSelection.selectionChange.subscribe(change => {
+      // console.info('month selection change');
+      this.calendarView = this.calendar.getYear(this.monthSelection.year).months[this.monthSelection.month].getCalendarView();
+    });
 
   }
 
@@ -81,6 +95,7 @@ export class CalendarMonthComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.info('month change', changes);
     const contextChange = changes['context'];
 
     if (contextChange) {

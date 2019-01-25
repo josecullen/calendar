@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, TemplateRef, HostListener } from '@angular/core';
 import { addMonths, addDays, subDays, format, isEqual } from 'date-fns';
 import { CalendarSelection, CalendarViewConfig } from 'lib/public_api';
 import { CellData } from 'lib/src/cell-data';
@@ -87,6 +87,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
+  @HostListener('mousemove')
+  mousemove() {
+
+  }
 
 }
 

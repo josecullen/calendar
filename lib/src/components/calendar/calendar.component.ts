@@ -1,5 +1,5 @@
 import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output,
-  EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit, TemplateRef } from '@angular/core';
+  EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Calendar } from '../../lib/calendar/calendar';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
@@ -16,7 +16,8 @@ import { CalendarMonthDirective } from '../../directives/calendar-month.directiv
     selector: 'trb-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['../styles.sass', './calendar.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     selection: CalendarSelection = new CalendarSelection();
