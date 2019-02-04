@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZone, HostBinding } from "@angular/core";
+import { Component, Input } from '@angular/core';
 @Component({
     selector: 'trb-calendar-day-header-cell',
     template: `
@@ -13,7 +13,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, NgZon
 })
 export class DayHeaderCellComponent {
     @Input() day: number;
-    @Input() dayLabels: string[]
-    @Input() dayLength:number = 3
+    @Input() dayLabels: string[];
+    @Input() dayLength = 3;
     daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }

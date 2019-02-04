@@ -1,6 +1,5 @@
 :host {
-    // flex: 1 1 auto;
-    position: relative;
+  position: relative;
 }
 
 .overlay {
@@ -16,46 +15,3 @@
 .overlay:hover {
     background: #666;
 }
-
-// .date-label {
-//     background: none;
-//     margin: 0;
-// }
-
-// .date-label span {
-//     background: none
-// }
-
-// .day {
-//     box-sizing: border-box;
-//     text-align: center;
-//     position: relative;
-// }
-
-// .day.cell-default  {
-//     min-width:31px; 
-//     min-height:31px; 
-//     padding: 4px;
-//     color: #333;
-// }
-
-// .cell-default-selected {
-//     background: #999;
-// }
-
-// .cell-default-in-range {
-//     background: #ccc;
-// }
-
-// .cell-default-past {
-//     background: #eee;
-// }
-
-// .cell-default-outside-month {
-//     background: transparent;
-//     border: none;
-// }
-
-// .overlay:hover {
-//     opacity: .2;
-// }

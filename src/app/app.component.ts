@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 
   datepickerConfig: DatepickerData = {
     calendarConfig: this.config,
-    datesSelected: ['2019-01-01', '2019-01-10'],
+    datesSelected: ['2019-03-01', '2019-03-10'],
     dates: getRandomDates()
   };
 
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
     // console.log('selection change', selection.from(), selection.to(), selection.calendarMonthView.from.label)
     if (!selection.to()) {
       this.dates = getRandomDates();
-      // console.log(this.dates)
+      console.log(this.dates);
     }
     this.selection = selection;
   }

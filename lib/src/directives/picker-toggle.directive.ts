@@ -1,4 +1,4 @@
-import { EventEmitter, Directive, HostListener, Input, TemplateRef, ElementRef, Output, SimpleChanges } from '@angular/core';
+import { EventEmitter, Directive, HostListener, Input, TemplateRef, ElementRef, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { PickerService } from '../modules/picker/picker.service';
 import { DatepickerData, DatepickerComponent, DEFAULT_DATEPICKER_DATA } from '../components/datepicker/datepicker.component';
 
@@ -9,7 +9,7 @@ import { CellData } from '../cell-data';
 @Directive({
     selector: '[trb-datepicker-toggle]'
 })
-export class PickerToggleDirective {
+export class PickerToggleDirective implements OnChanges {
     private datepicker: DatepickerComponent;
 
     @Input('trb-datepicker-toggle')
@@ -43,7 +43,6 @@ export class PickerToggleDirective {
         ref.instance.calendar.monthSelectionChange.subscribe(data => this.monthSelectionChange.emit(data));
 
         // this.monthSelectionChange = ref.instance.calendar.monthSelectionChange
-
         ref.subscribe(result => {
             this.close.emit(result);
         });

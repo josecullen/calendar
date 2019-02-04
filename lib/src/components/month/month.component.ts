@@ -49,7 +49,6 @@ export class CalendarMonthComponent implements OnChanges, OnInit {
     this.calendarView = this.calendar.getYear(this.monthSelection.year).months[this.monthSelection.month].getCalendarView();
 
     this.monthSelection.selectionChange.subscribe(change => {
-      // console.info('month selection change');
       this.calendarView = this.calendar.getYear(this.monthSelection.year).months[this.monthSelection.month].getCalendarView();
     });
 
@@ -95,7 +94,6 @@ export class CalendarMonthComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.info('month change', changes);
     const contextChange = changes['context'];
 
     if (contextChange) {
@@ -112,11 +110,8 @@ export class CalendarMonthComponent implements OnChanges, OnInit {
     this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-row`] = true;
     this.dayLabelsRowClass[`${this.config.stylePrefix}-calendar-day-labels`] = true;
     this.rowClass[`${this.config.stylePrefix}-calendar-row`] = true;
+
+    this.calendarView = this.calendar.getYear(this.monthSelection.year).months[this.monthSelection.month].getCalendarView();
   }
 
 }
-
-// [monthIndex]="index"
-// [showTwoMonths]="selection.calendarMonthView.needTwoMonthView && calendar.config.month.showTwoCalendarIfNeed"
-// [linkedMonths]="config?.header.linkedMonths"
-// [monthSelections]="[monthSelection]"

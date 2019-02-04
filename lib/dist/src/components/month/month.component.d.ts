@@ -1,4 +1,4 @@
-import { OnChanges, SimpleChanges } from '@angular/core';
+import { OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { ICalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.interface';
 import { Calendar } from '../../lib/calendar/calendar';
 import { CalendarViewConfig } from '../../lib/calendar-view/config/calendar-view-config.class';
@@ -10,7 +10,8 @@ import { CalendarCellDirective } from '../../directives/calendar-cell';
 import { CalendarHeaderDirective } from '../../directives/calendar-header.directive';
 import { CellData } from '../../cell-data';
 import { BreakpointObserver } from '@angular/cdk/layout';
-export declare class CalendarMonthComponent implements OnChanges {
+import { IDay } from '../../lib/calendar';
+export declare class CalendarMonthComponent implements OnChanges, OnInit {
     private breakpointObserver;
     readonly classes: string;
     context: MonthContext;
@@ -23,7 +24,9 @@ export declare class CalendarMonthComponent implements OnChanges {
     rowClass: any;
     calendarCell: CalendarCellDirective;
     calendarHeader: CalendarHeaderDirective;
+    calendarView: IDay[][];
     constructor(breakpointObserver: BreakpointObserver);
+    ngOnInit(): void;
     getCellData(day: CellData<any>): CellContext<any>;
     isMobile(): boolean;
     getHeaderData(): HeaderContext;

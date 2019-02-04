@@ -1,4 +1,4 @@
-import { OnChanges, SimpleChanges, EventEmitter, DoCheck, OnInit } from '@angular/core';
+import { OnChanges, SimpleChanges, EventEmitter, DoCheck, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Calendar } from '../../lib/calendar/calendar';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
@@ -7,6 +7,7 @@ import { MonthContext } from '../../context/month-context';
 import { CellData } from '../../cell-data';
 import { CalendarMonthDirective } from '../../directives/calendar-month.directive';
 export declare class CalendarComponent implements OnChanges, DoCheck, OnInit {
+    cdr: ChangeDetectorRef;
     selection: CalendarSelection;
     dates: CellData<any>[];
     config: CalendarViewConfig;
@@ -18,6 +19,7 @@ export declare class CalendarComponent implements OnChanges, DoCheck, OnInit {
     monthTemplate: any;
     calendarMonth: CalendarMonthDirective;
     calendar: Calendar;
+    constructor(cdr: ChangeDetectorRef);
     readonly classes: string;
     ngDoCheck(): void;
     ngOnInit(): void;

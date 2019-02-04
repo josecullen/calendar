@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, HostBinding, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, HostBinding, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { getMonth, parse, compareDesc, format } from 'date-fns';
 import { CellContext } from '../../context/cell-context';
 import { ICalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.interface';
@@ -12,6 +12,10 @@ export class CalendarCellComponent implements OnInit, OnChanges {
   dateStatus: any;
   styles: any = {};
 
+  constructor (private cdr: ChangeDetectorRef) {
+
+  }
+
   @HostBinding('class')
   get classes() {
     return Object.keys(this.styles).filter(key => this.styles[key]).join(' ');
@@ -24,7 +28,7 @@ export class CalendarCellComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.context) {
       const today = new Date();
       const isToday = this.context.date === format(new Date(), 'YYYY-MM-DD');
@@ -52,6 +56,7 @@ export class CalendarCellComponent implements OnInit, OnChanges {
       Object.keys(this.dateStatus).forEach(key => {
         this.styles[`${prefix}-calendar-cell-${key}`] = this.dateStatus[key];
       });
+
     }
 
   }

@@ -1,5 +1,6 @@
 import { Component, Input, ContentChild, OnChanges, SimpleChanges, Output,
-  EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+  EventEmitter, HostBinding, ViewEncapsulation, DoCheck, OnInit, TemplateRef,
+  ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Calendar } from '../../lib/calendar/calendar';
 import { IDay } from '../../lib/calendar/day/day.interface';
 import { CalendarSelection } from '../../lib/calendar-view/selection/calendar-selection.class';
@@ -33,6 +34,8 @@ export class CalendarComponent implements OnChanges, DoCheck, OnInit {
     calendarMonth: CalendarMonthDirective;
 
     calendar: Calendar;
+
+    constructor(public cdr: ChangeDetectorRef) {}
 
     @HostBinding('class')
     get classes() {

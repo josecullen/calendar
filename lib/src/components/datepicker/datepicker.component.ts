@@ -45,7 +45,6 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
   }
 
   close(): void {
-    console.info('close');
     this.pickerRef.close();
   }
 
@@ -92,6 +91,7 @@ export class DatepickerComponent implements AfterViewInit, AfterContentInit {
         const from = parse(this.data.datesSelected[0]);
         this.calendar.selection.calendarMonthView.from.setMonthAndYear(from);
         this.calendar.selection.calendarMonthView.to.setMonthAndYear(addMonths(from, 1));
+        this.calendar.cdr.markForCheck();
       });
     }
 
